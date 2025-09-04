@@ -3,6 +3,8 @@ using System;
 
 public partial class Player : Sprite2D
 {
-	void Process(float delta) {
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
 	}
 }
