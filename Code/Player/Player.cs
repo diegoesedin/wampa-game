@@ -19,6 +19,11 @@ public partial class Player : CharacterBody2D
 		{
 			vel.X -= 50;
 		}
+
+		if (Input.IsActionJustPressed("jump"))
+		{
+			vel.Y -= 2000;
+		}
 		vel.Y += 400 * (float)delta;
 
 		Velocity = vel;
