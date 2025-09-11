@@ -20,7 +20,7 @@ public partial class Player : CharacterBody2D
 			vel.X -= 50;
 		}
 
-		if (Input.IsActionJustPressed("jump"))
+		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
 			vel.Y -= 2000;
 		}
