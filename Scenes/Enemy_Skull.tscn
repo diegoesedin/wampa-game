@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhc125eawpjl"]
+
+[ext_resource type="Texture2D" uid="uid://87upotc70mst" path="res://Art/Sprites/EnemySkull/skull_shoot.png" id="1_krfkv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mbqtw"]
+height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f80ol"]
+atlas = ExtResource("1_krfkv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyhjs"]
+atlas = ExtResource("1_krfkv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xqwk"]
+atlas = ExtResource("1_krfkv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er1x7"]
+atlas = ExtResource("1_krfkv")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwlox"]
+atlas = ExtResource("1_krfkv")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yvqgj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f80ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyhjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xqwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er1x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwlox")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_mbqtw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yvqgj")
+animation = &"shoot"
+autoplay = "shoot"
+frame_progress = 0.539927
