@@ -329,10 +329,9 @@ script = ExtResource("1_4erl0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Walk"
+animation = &"Crouch"
 autoplay = "Idle"
-frame = 6
-frame_progress = 0.918406
+frame_progress = 0.787247
 speed_scale = 1.7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
