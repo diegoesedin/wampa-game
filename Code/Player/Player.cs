@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Player : CharacterBody2D
 {
@@ -20,9 +19,9 @@ public partial class Player : CharacterBody2D
 		
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 vel = new Vector2(0, 0);
+		Vector2 vel = Vector2.Zero;
 		if (!isDashing)
 		{
 			ApplyGravity(ref vel, delta);
