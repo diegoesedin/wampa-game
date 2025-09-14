@@ -44,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lwlox")
 }],
-"loop": true,
+"loop": false,
 "name": &"shoot",
 "speed": 10.0
 }]
@@ -87,7 +87,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ebtxd")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 15.0
 }]
@@ -100,11 +100,8 @@ shape = SubResource("CapsuleShape2D_mbqtw")
 [node name="Skull Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yvqgj")
 animation = &"shoot"
-autoplay = "shoot"
-frame_progress = 0.088807
 
 [node name="Bone Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(15, 0)
 sprite_frames = SubResource("SpriteFrames_jnmcw")
 animation = &"attack"
-frame_progress = 0.86739

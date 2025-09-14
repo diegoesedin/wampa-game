@@ -326,12 +326,15 @@ height = 15.15
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4erl0")
+SPEED = 3000
+GRAVITY = 3000
+FALL_GRAVITY = 3000
+JUMP_FORCE = 2000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Crouch"
+animation = &"Walk"
 autoplay = "Idle"
-frame_progress = 0.787247
 speed_scale = 1.7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

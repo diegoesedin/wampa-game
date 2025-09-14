@@ -2,21 +2,22 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
-	private const int SPEED = 2000;
-	private const int GRAVITY = 1000;
-	private const int FALL_GRAVITY = 2500;
-	private const float FRICTION = .01f;
-	private const float ACCELERATION = 1.5f;
-	private const float JUMP_FORCE = 1000;
-	private const float DASH_SPEED = 2100;
+
+	[Export] private int SPEED = 2000;
+    [Export] private int GRAVITY = 1000;
+    [Export] private int FALL_GRAVITY = 2500;
+    [Export] private float FRICTION = .01f;
+	[Export] private float ACCELERATION = 1.5f;
+	[Export] private float JUMP_FORCE = 1000;
+	[Export] private float DASH_SPEED = 2100;
 	private const float DASH_TIME = .2f;
 
 	private bool isDashing;
 	private double dashTimer = DASH_TIME;
-	
+
 	public override void _Ready()
 	{
-		
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -60,6 +61,7 @@ public partial class Player : CharacterBody2D
 			vel.X = Mathf.Lerp(vel.X, direction * SPEED, ACCELERATION * (float)delta);
 		else
 			vel.X = Mathf.Lerp(vel.X, 0, FRICTION * (float)delta);
+			
 	}
 
 	private void Jump(ref Vector2 vel, double delta)
