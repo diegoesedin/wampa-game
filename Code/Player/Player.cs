@@ -12,12 +12,15 @@ public partial class Player : CharacterBody2D
 	[Export] private float DASH_SPEED = 2100;
 	private const float DASH_TIME = .2f;
 
+	private bool isInAir = false;
 	private bool isDashing;
 	private double dashTimer = DASH_TIME;
 
+	private AnimatedSprite2D animation;
+
 	public override void _Ready()
 	{
-
+		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -42,6 +45,8 @@ public partial class Player : CharacterBody2D
 	{
 		if (!IsOnFloor())
 			vel.Y += GetGravity(vel) * (float)delta;
+		else
+			isInAir = false;
 	}
 
 	private float GetGravity(Vector2 vel)
@@ -58,9 +63,18 @@ public partial class Player : CharacterBody2D
 			direction -= 1;
 		
 		if (direction != 0)
+		{
 			vel.X = Mathf.Lerp(vel.X, direction * SPEED, ACCELERATION * (float)delta);
+			animation.FlipH = direction < 0;
+			if (!isInAir)
+				animation.Play("Walk");
+		}
 		else
+		{
 			vel.X = Mathf.Lerp(vel.X, 0, FRICTION * (float)delta);
+			if (!isInAir)
+				animation.Play("Idle");
+		}
 			
 	}
 
@@ -73,7 +87,9 @@ public partial class Player : CharacterBody2D
 		
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
+			isInAir = true;
 			vel.Y = -JUMP_FORCE;
+			animation.Play("Jump");
 		}
 	}
 
