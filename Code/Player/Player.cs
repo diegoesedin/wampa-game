@@ -8,7 +8,7 @@ public partial class Player : CharacterBody2D
     [Export] private int FALL_GRAVITY = 2500;
     [Export] private float FRICTION = .01f;
 	[Export] private float ACCELERATION = 1.5f;
-	[Export] private float JUMP_FORCE = 1000;
+	[Export] private float JUMP_FORCE = 1600;
 	[Export] private float DASH_SPEED = 2100;
 	private const float DASH_TIME = .2f;
 
