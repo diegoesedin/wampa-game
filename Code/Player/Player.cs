@@ -4,9 +4,9 @@ public partial class Player : CharacterBody2D
 {
 
 	[Export] private int SPEED = 2000;
-    [Export] private int GRAVITY = 1000;
-    [Export] private int FALL_GRAVITY = 2500;
-    [Export] private float FRICTION = .01f;
+	[Export] private int GRAVITY = 1000;
+	[Export] private int FALL_GRAVITY = 2500;
+	[Export] private float FRICTION = .01f;
 	[Export] private float ACCELERATION = 1.5f;
 	[Export] private float JUMP_FORCE = 1600;
 	[Export] private float DASH_SPEED = 2100;
@@ -15,12 +15,15 @@ public partial class Player : CharacterBody2D
 	private bool isInAir = false;
 	private bool isDashing;
 	private double dashTimer = DASH_TIME;
+	private bool isCrouching = false;
+	private bool isAttacking = false;
 
 	private AnimatedSprite2D animation;
 
 	public override void _Ready()
 	{
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		animation.AnimationFinished += OnAnimationFinished;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -29,14 +32,19 @@ public partial class Player : CharacterBody2D
 		if (!isDashing)
 		{
 			ApplyGravity(ref vel, delta);
-			
+
 			Move(ref vel, delta);
 		}
-		
+
 		Jump(ref vel, delta);
-		
+
 		Dash(ref vel, delta);
-		
+
+		Crouch();
+
+		Attack();
+
+
 		Velocity = vel;
 		MoveAndSlide();
 	}
@@ -61,21 +69,21 @@ public partial class Player : CharacterBody2D
 			direction += 1;
 		else if (Input.IsActionPressed("ui_left"))
 			direction -= 1;
-		
+
 		if (direction != 0)
 		{
 			vel.X = Mathf.Lerp(vel.X, direction * SPEED, ACCELERATION * (float)delta);
 			animation.FlipH = direction < 0;
-			if (!isInAir)
+			if (!isInAir && !isCrouching && !isAttacking)
 				animation.Play("Walk");
 		}
 		else
 		{
 			vel.X = Mathf.Lerp(vel.X, 0, FRICTION * (float)delta);
-			if (!isInAir)
+			if (!isInAir && !isCrouching && !isAttacking)
 				animation.Play("Idle");
 		}
-			
+
 	}
 
 	private void Jump(ref Vector2 vel, double delta)
@@ -84,14 +92,53 @@ public partial class Player : CharacterBody2D
 		{
 			vel.Y = -JUMP_FORCE / 4;
 		}
-		
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
+
+		if (Input.IsActionJustPressed("jump") && IsOnFloor() && !isCrouching)
 		{
 			isInAir = true;
 			vel.Y = -JUMP_FORCE;
 			animation.Play("Jump");
+
 		}
 	}
+
+	private void Crouch()
+	{
+		if (Input.IsActionPressed("crouch"))
+		{
+			isCrouching = true;
+			animation.Play("Crouch");
+
+			/* Estaría bueno que se le aplique más gravedad 
+			   y que sea mas lento cuando este agachado
+			   Además de achicarle la hitbox y que sirva para esquivar o meterse en pasadizos */
+
+		}
+
+		if (Input.IsActionJustReleased("crouch"))
+		{
+			isCrouching = false;
+		}
+	}
+
+	private void Attack()  	
+	{
+        /*  Ahora el movimiento hace que se "flippe" el jugador 
+             entonces ataca apuntando hacia la ultima direccion en la que se movio */
+
+        if (Input.IsActionJustPressed("attack_right"))
+		{
+			isAttacking = true;
+			animation.Play("Attack");
+		}
+
+		if (Input.IsActionJustPressed("attack_left"))
+		{
+            isAttacking = true;
+            animation.Play("Attack");
+		}
+	}
+
 
 	private void Dash(ref Vector2 vel, double delta)
 	{
@@ -126,4 +173,19 @@ public partial class Player : CharacterBody2D
 			}
 		}
 	}
+
+    private void OnAnimationFinished()
+	{
+		if (animation.Animation == "Attack")
+		{
+			isAttacking = false;
+		}
+
+        if (animation.Animation == "Jump" && isInAir)
+		{
+			animation.Play("Fall");
+		}
+
+
+    }
 }

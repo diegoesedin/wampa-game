@@ -408,10 +408,6 @@ tile_set = SubResource("TileSet_o2es2")
 
 [node name="player" parent="." instance=ExtResource("2_uec86")]
 position = Vector2(305, 563)
-SPEED = 2000
-GRAVITY = 1000
-FALL_GRAVITY = 2500
-JUMP_FORCE = 1000.0
 
 [node name="skull_01" parent="." instance=ExtResource("3_gw158")]
 position = Vector2(231, 544)
