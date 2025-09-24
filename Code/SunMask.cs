@@ -23,6 +23,8 @@ public partial class SunMask : Node2D
             playerScript?.PickUpMask();
 
             GD.Print("El jugador llegó al final del nivel");
+
+            QueueFree();
         }
     }
 

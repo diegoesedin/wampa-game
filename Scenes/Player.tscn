@@ -330,7 +330,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Crouch",
-"speed": 3.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -556,8 +556,10 @@ DASH_SPEED = 2000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Mask"
+animation = &"Attack"
 autoplay = "Idle"
+frame = 6
+frame_progress = 1.0
 speed_scale = 1.7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -568,3 +570,8 @@ shape = SubResource("CapsuleShape2D_kyqiw")
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
+polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)
