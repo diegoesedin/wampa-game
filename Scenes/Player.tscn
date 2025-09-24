@@ -313,7 +313,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -546,12 +546,17 @@ animations = [{
 radius = 7.0
 height = 15.15
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_4erl0")
+SPEED = 3000
+GRAVITY = 3000
+FALL_GRAVITY = 6000
+JUMP_FORCE = 2500.0
+DASH_SPEED = 2000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Fall"
+animation = &"Mask"
 autoplay = "Idle"
 speed_scale = 1.7
 

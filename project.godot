@@ -27,6 +27,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="wampa"
 
+[global_group]
+
+Player=""
+
 [input]
 
 ui_left={
