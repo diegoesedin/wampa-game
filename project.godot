@@ -30,6 +30,7 @@ project/assembly_name="wampa"
 [global_group]
 
 Player=""
+Enemy=""
 
 [input]
 

@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cktns4fyiy72p" path="res://Art/Sprites/EnemySkull/skull_bone_attack.png" id="2_sqbxj"]
 [ext_resource type="Texture2D" uid="uid://dmobmswph6ali" path="res://Art/Sprites/EnemySkull/skull_idle.png" id="3_ebtxd"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_cbplc"]
+radius = 10.0499
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnmcw"]
 atlas = ExtResource("1_jc68m")
 region = Rect2(0, 0, 16, 16)
@@ -206,27 +209,24 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cbplc"]
-radius = 10.0499
-
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="EnemySkull" type="Node2D" groups=["Enemy"]]
 script = ExtResource("1_cbplc")
-
-[node name="Skull Sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_yvqgj")
-animation = &"Idle"
-autoplay = "Idle"
-
-[node name="Bone Sprite" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(15, 0)
-sprite_frames = SubResource("SpriteFrames_jnmcw")
-animation = &"attack"
-frame = 4
-frame_progress = 1.0
 
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_cbplc")
+
+[node name="SkullSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yvqgj")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="BoneSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(15, 0)
+sprite_frames = SubResource("SpriteFrames_jnmcw")
+animation = &"attack"
+frame = 4
+frame_progress = 1.0

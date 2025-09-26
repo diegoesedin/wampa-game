@@ -575,3 +575,6 @@ position_smoothing_speed = 4.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
 polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)
+
+[connection signal="area_entered" from="AttackArea" to="." method="OnAttackAreaAreaEntered"]
+[connection signal="body_entered" from="AttackArea" to="." method="OnAttackAreaBodyEntered"]

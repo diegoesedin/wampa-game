@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
@@ -19,16 +20,23 @@ public partial class Player : CharacterBody2D
     private bool isForcedAnimation = false;
 
     private AnimatedSprite2D animation;
+   
+    private Area2D attackArea;
+    private HashSet<Node> hitEnemies = new HashSet<Node>();
 
     public override void _Ready()
     {
         animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         animation.AnimationFinished += OnAnimationFinished;
+
+        attackArea = GetNode<Area2D>("AttackArea");
+        attackArea.Monitoring = false;
+        attackArea.AreaEntered += OnAttackAreaAreaEntered;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (isForcedAnimation) return; // bloquea control normal mientras dure animación prioritaria
+        if (isForcedAnimation) return;
 
         Vector2 vel = Vector2.Zero;
 
@@ -63,10 +71,8 @@ public partial class Player : CharacterBody2D
     private void Move(ref Vector2 vel, double delta)
     {
         int direction = 0;
-        if (Input.IsActionPressed("ui_right"))
-            direction += 1;
-        else if (Input.IsActionPressed("ui_left"))
-            direction -= 1;
+        if (Input.IsActionPressed("ui_right")) direction += 1;
+        if (Input.IsActionPressed("ui_left")) direction -= 1;
 
         if (direction != 0)
         {
@@ -86,9 +92,7 @@ public partial class Player : CharacterBody2D
     private void Jump(ref Vector2 vel, double delta)
     {
         if (Input.IsActionJustReleased("jump") && vel.Y < 0)
-        {
             vel.Y = -JUMP_FORCE / 4;
-        }
 
         if (Input.IsActionJustPressed("jump") && IsOnFloor() && !isCrouching)
         {
@@ -106,8 +110,7 @@ public partial class Player : CharacterBody2D
             animation.Play("Crouch");
             ACCELERATION = 0.5f;
         }
-
-        if (Input.IsActionJustReleased("crouch"))
+        else if (Input.IsActionJustReleased("crouch"))
         {
             isCrouching = false;
             ACCELERATION = 2f;
@@ -118,10 +121,15 @@ public partial class Player : CharacterBody2D
     {
         if (isAttacking || isForcedAnimation) return;
 
+        // Limpiar enemigos golpeados al iniciar un nuevo ataque
+        hitEnemies.Clear();
+
         if (Input.IsActionJustPressed("attack_right"))
         {
             isAttacking = true;
             animation.FlipH = false;
+            attackArea.RotationDegrees = 0;
+            attackArea.Monitoring = true;
             animation.Play("Attack");
         }
 
@@ -129,7 +137,22 @@ public partial class Player : CharacterBody2D
         {
             isAttacking = true;
             animation.FlipH = true;
+            attackArea.RotationDegrees = 180;
+            attackArea.Monitoring = true;
             animation.Play("Attack");
+        }
+    }
+
+    private void OnAttackAreaAreaEntered(Area2D area)
+    {
+        Node enemy = area.GetParent();
+        if (enemy != null && enemy.IsInGroup("Enemy"))
+        {
+            if (!hitEnemies.Contains(enemy))
+            {
+                enemy.Call("TakeDamage", 1);
+                hitEnemies.Add(enemy);
+            }
         }
     }
 
@@ -156,10 +179,8 @@ public partial class Player : CharacterBody2D
                 vel.X = -DASH_SPEED;
                 isDashing = true;
             }
-
             dashTimer = DASH_TIME;
         }
-
         CheckDashing(ref vel, delta);
     }
 
@@ -180,19 +201,15 @@ public partial class Player : CharacterBody2D
     private void OnAnimationFinished()
     {
         if (animation.Animation == "Mask")
-        {
-            isForcedAnimation = false; 
-        }
+            isForcedAnimation = false;
 
         if (animation.Animation == "Attack")
         {
             isAttacking = false;
-            if (animation.FlipH) animation.FlipH = false;
+            attackArea.Monitoring = false;
         }
 
         if (animation.Animation == "Jump" && isInAir && !isAttacking && !isCrouching)
-        {
             animation.Play("Fall");
-        }
     }
 }

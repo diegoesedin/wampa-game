@@ -1,9 +1,8 @@
 using Godot;
 using System;
 
-public partial class EnemySkull : CharacterBody2D
+public partial class EnemySkull : Node2D
 {
-
     [Export] private int MaxHealth = 3;
     private int currentHealth;
 
@@ -12,14 +11,20 @@ public partial class EnemySkull : CharacterBody2D
     public override void _Ready()
     {
         currentHealth = MaxHealth;
-        animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+        animation = GetNode<AnimatedSprite2D>("SkullSprite");
         animation.Play("Idle");
 
         animation.AnimationFinished += OnAnimationFinished;
     }
 
+
     public void TakeDamage(int damage)
     {
+        GD.Print($"Enemy hit! Current health: {currentHealth}");
+
+        if (currentHealth <= 0) return;
+
         currentHealth -= damage;
 
         if (currentHealth > 0)
@@ -32,11 +37,16 @@ public partial class EnemySkull : CharacterBody2D
         }
     }
 
+
     private void OnAnimationFinished()
     {
         if (animation.Animation == "Death")
         {
-            QueueFree();    
+            QueueFree();
+        }
+        else if (animation.Animation == "Hurt")
+        {
+            animation.Play("Idle");
         }
     }
 }

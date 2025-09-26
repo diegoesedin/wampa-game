@@ -415,3 +415,21 @@ position = Vector2(654, 579)
 
 [node name="Sun Mask" parent="." instance=ExtResource("4_v3lif")]
 position = Vector2(672, 480)
+
+[node name="Sun Mask4" parent="." instance=ExtResource("4_v3lif")]
+position = Vector2(263, 575)
+
+[node name="EnemySkull" parent="." instance=ExtResource("3_gw158")]
+position = Vector2(371, 583)
+
+[node name="EnemySkull2" parent="." instance=ExtResource("3_gw158")]
+position = Vector2(261, 520)
+
+[node name="EnemySkull3" parent="." instance=ExtResource("3_gw158")]
+position = Vector2(525, 518)
+
+[node name="EnemySkull4" parent="." instance=ExtResource("3_gw158")]
+position = Vector2(386, 583)
+
+[node name="EnemySkull5" parent="." instance=ExtResource("3_gw158")]
+position = Vector2(420, 583)
