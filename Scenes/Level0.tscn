@@ -412,6 +412,8 @@ position = Vector2(40, 599)
 
 [node name="player" parent="." instance=ExtResource("2_uec86")]
 position = Vector2(305, 563)
+SPEED = 175.0
+ACCELERATION = 80.0
 
 [node name="skull_01" parent="." instance=ExtResource("3_gw158")]
 position = Vector2(654, 579)

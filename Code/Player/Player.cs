@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] private int SPEED = 2000;
-    [Export] private int GRAVITY = 1000;
-    [Export] private int FALL_GRAVITY = 2500;
-    [Export] private float FRICTION = .01f;
-    [Export] private float ACCELERATION = 2f;
-    [Export] private float JUMP_FORCE = 1600;
-    [Export] private float DASH_SPEED = 2100;
-    private const float DASH_TIME = .2f;
+    [Export] private float SPEED = 175f;
+    [Export] private int GRAVITY = 1500;
+    [Export] private int FALL_GRAVITY = 1550;
+    [Export] private float FRICTION = 6f;
+    [Export] private float ACCELERATION = 80f;
+    [Export] private float JUMP_FORCE = 400;
+    [Export] private float DASH_SPEED = 450;
+    private const float DASH_TIME = 0.2f;
+
+    private float currentSpeed;
 
     private bool isInAir = false;
     private bool isDashing;
@@ -20,7 +22,6 @@ public partial class Player : CharacterBody2D
     private bool isForcedAnimation = false;
 
     private AnimatedSprite2D animation;
-   
     private Area2D attackArea;
     private HashSet<Node> hitEnemies = new HashSet<Node>();
 
@@ -32,13 +33,15 @@ public partial class Player : CharacterBody2D
         attackArea = GetNode<Area2D>("AttackArea");
         attackArea.Monitoring = false;
         attackArea.AreaEntered += OnAttackAreaAreaEntered;
+
+        currentSpeed = SPEED;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         if (isForcedAnimation) return;
 
-        Vector2 vel = Vector2.Zero;
+        Vector2 vel = Velocity;
 
         if (!isDashing)
         {
@@ -76,7 +79,7 @@ public partial class Player : CharacterBody2D
 
         if (direction != 0)
         {
-            vel.X = Mathf.Lerp(vel.X, direction * SPEED, ACCELERATION * (float)delta);
+            vel.X = Mathf.Lerp(vel.X, direction * currentSpeed, ACCELERATION * (float)delta);
             if (!isInAir && !isCrouching && !isAttacking)
                 animation.Play("Walk");
             animation.FlipH = direction < 0;
@@ -107,13 +110,13 @@ public partial class Player : CharacterBody2D
         if (Input.IsActionPressed("crouch"))
         {
             isCrouching = true;
+            currentSpeed = SPEED * 0.5f;
             animation.Play("Crouch");
-            ACCELERATION = 0.5f;
         }
         else if (Input.IsActionJustReleased("crouch"))
         {
             isCrouching = false;
-            ACCELERATION = 2f;
+            currentSpeed = SPEED;
         }
     }
 
@@ -121,7 +124,6 @@ public partial class Player : CharacterBody2D
     {
         if (isAttacking || isForcedAnimation) return;
 
-        // Limpiar enemigos golpeados al iniciar un nuevo ataque
         hitEnemies.Clear();
 
         if (Input.IsActionJustPressed("attack_right"))
