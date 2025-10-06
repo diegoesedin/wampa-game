@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://cacvqa3hyf5bt"]
+
+[ext_resource type="Script" uid="uid://i4j1oxu5ul1j" path="res://Code/HUD.cs" id="1_sd512"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_sd512")
+
+[node name="BackGround" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_top = -5.0
+offset_right = 125.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="LivesLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "❤: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "⏱️: 00:00 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemiesLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "💀: 0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaskLabel" type="Label" parent="TopBar"]
+layout_mode = 2
+text = "☀️: no"
+horizontal_alignment = 1
+vertical_alignment = 1

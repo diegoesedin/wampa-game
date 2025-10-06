@@ -12,6 +12,9 @@ public partial class Player : CharacterBody2D
     [Export] private float DASH_SPEED = 450;
     private const float DASH_TIME = 0.2f;
 
+    [Export] public int MaxLives = 3;
+    public int CurrentLives { get; private set; }
+
     private float currentSpeed;
 
     private bool isInAir = false;
@@ -25,6 +28,10 @@ public partial class Player : CharacterBody2D
     private Area2D attackArea;
     private HashSet<Node> hitEnemies = new HashSet<Node>();
 
+    [Signal] public delegate void PlayerDiedEventHandler();
+    [Signal] public delegate void LivesChangedEventHandler(int newLives);
+    [Signal] public delegate void MaskCollectedEventHandler();
+
     public override void _Ready()
     {
         animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -35,6 +42,7 @@ public partial class Player : CharacterBody2D
         attackArea.AreaEntered += OnAttackAreaAreaEntered;
 
         currentSpeed = SPEED;
+        CurrentLives = MaxLives;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -165,6 +173,7 @@ public partial class Player : CharacterBody2D
         isForcedAnimation = true;
         animation.Stop();
         animation.Play("Mask");
+        EmitSignal(nameof(MaskCollected));
     }
 
     private void Dash(ref Vector2 vel, double delta)
@@ -213,5 +222,25 @@ public partial class Player : CharacterBody2D
 
         if (animation.Animation == "Jump" && isInAir && !isAttacking && !isCrouching)
             animation.Play("Fall");
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (CurrentLives <= 0) return;
+
+        CurrentLives -= damage;
+        EmitSignal(nameof(LivesChanged), CurrentLives);
+
+        if (CurrentLives <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        animation.Play("Death");
+        isForcedAnimation = true;
+        EmitSignal(nameof(PlayerDied));
     }
 }

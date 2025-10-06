@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://dwcjuvyolwiq6"]
+[gd_scene load_steps=8 format=4 uid="uid://dwcjuvyolwiq6"]
 
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="1_gw158"]
-[ext_resource type="PackedScene" uid="uid://dveen0x1j6hpc" path="res://Scenes/Player.tscn" id="2_uec86"]
 [ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Enemy_Skull.tscn" id="3_gw158"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/sun_mask.tscn" id="4_v3lif"]
 
@@ -409,11 +408,6 @@ tile_set = SubResource("TileSet_o2es2")
 
 [node name="Sun Mask" parent="TileMap Layers" instance=ExtResource("4_v3lif")]
 position = Vector2(40, 599)
-
-[node name="player" parent="." instance=ExtResource("2_uec86")]
-position = Vector2(305, 563)
-SPEED = 175.0
-ACCELERATION = 80.0
 
 [node name="skull_01" parent="." instance=ExtResource("3_gw158")]
 position = Vector2(654, 579)

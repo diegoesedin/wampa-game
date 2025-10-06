@@ -8,6 +8,8 @@ public partial class EnemySkull : Node2D
 
     private AnimatedSprite2D animation;
 
+    [Signal] public delegate void EnemyDiedEventHandler();
+
     public override void _Ready()
     {
         currentHealth = MaxHealth;
@@ -18,11 +20,8 @@ public partial class EnemySkull : Node2D
         animation.AnimationFinished += OnAnimationFinished;
     }
 
-
     public void TakeDamage(int damage)
     {
-        GD.Print($"Enemy hit! Current health: {currentHealth}");
-
         if (currentHealth <= 0) return;
 
         currentHealth -= damage;
@@ -37,11 +36,11 @@ public partial class EnemySkull : Node2D
         }
     }
 
-
     private void OnAnimationFinished()
     {
         if (animation.Animation == "Death")
         {
+            EmitSignal(nameof(EnemyDied));
             QueueFree();
         }
         else if (animation.Animation == "Hurt")
