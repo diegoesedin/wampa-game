@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://moynt57jq32f" path="res://Art/UI Placeholder/check_square_color.png" id="3_trj04"]
 [ext_resource type="Texture2D" uid="uid://cbbrn56ds6v5b" path="res://Art/UI Placeholder/check_square_color_cross.png" id="4_16hvj"]
 [ext_resource type="Script" uid="uid://d0qw7267umcnj" path="res://Code/LevelSelectButton.cs" id="5_vr1f0"]
-[ext_resource type="PackedScene" uid="uid://dwcjuvyolwiq6" path="res://Scenes/Level0.tscn" id="6_t1dhk"]
+[ext_resource type="PackedScene" uid="uid://dwcjuvyolwiq6" path="res://Scenes/level_00.tscn" id="6_t1dhk"]
 [ext_resource type="Texture2D" uid="uid://c50r1xg4mq3h8" path="res://Art/UI Placeholder/icon_square.png" id="7_5egv6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]

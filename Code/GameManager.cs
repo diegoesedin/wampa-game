@@ -29,7 +29,7 @@ public partial class GameManager : Node2D
         player.Connect(nameof(Player.PlayerDied), new Callable(this, nameof(OnPlayerDied)));
         player.Connect(nameof(Player.MaskCollected), new Callable(this, nameof(OnMaskCollected)));
 
-        
+
         var enemies = GetTree().GetNodesInGroup("Enemy");
         totalEnemies = enemies.Count;
         enemiesKilled = 0;
@@ -42,7 +42,8 @@ public partial class GameManager : Node2D
             }
         }
 
-        hud.InitializeHUD(player.CurrentLives, enemiesKilled, totalEnemies, maskCollected);
+        hud.CallDeferred(nameof(HUD.InitializeHUD), player.CurrentLives, enemiesKilled, totalEnemies, maskCollected);
+        //ejecuta InitializeHUD un frame despues, lo del nameof() en vez del string supuestamente es mas prolijo y seguro
     }
 
     public override void _Process(double delta)

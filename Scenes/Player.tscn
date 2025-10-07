@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://dveen0x1j6hpc"]
+[gd_scene load_steps=83 format=3 uid="uid://dveen0x1j6hpc"]
 
 [ext_resource type="Script" uid="uid://do41wkaiurnpu" path="res://Code/Player/Player.cs" id="1_4erl0"]
 [ext_resource type="Texture2D" uid="uid://c47vwcqoq0hy3" path="res://Art/Sprites/PlayerWampa/wampa_attk.png" id="2_52ee3"]
@@ -544,7 +544,10 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
 radius = 7.0
-height = 15.15
+height = 15.2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoq75"]
+radius = 7.5
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_4erl0")
@@ -552,15 +555,20 @@ SPEED = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Attack"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 6
-frame_progress = 1.0
+frame_progress = 0.490713
 speed_scale = 1.7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8.4)
 shape = SubResource("CapsuleShape2D_kyqiw")
+
+[node name="CollisionCrouch" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 10.9)
+scale = Vector2(0.8, 0.34)
+shape = SubResource("CapsuleShape2D_yoq75")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -45)
