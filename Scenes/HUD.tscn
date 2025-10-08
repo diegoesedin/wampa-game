@@ -17,33 +17,36 @@ grow_vertical = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -124.0
-offset_top = -5.0
-offset_right = 125.0
-offset_bottom = 35.0
+offset_left = -68.5
+offset_right = 68.5
+offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 
 [node name="LivesLabel" type="Label" parent="TopBar"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 text = "❤: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TimeLabel" type="Label" parent="TopBar"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 text = "⏱️: 00:00 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EnemiesLabel" type="Label" parent="TopBar"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 text = "💀: 0/0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MaskLabel" type="Label" parent="TopBar"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 text = "☀️: no"
 horizontal_alignment = 1
 vertical_alignment = 1

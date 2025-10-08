@@ -62,6 +62,8 @@ public partial class Player : CharacterBody2D
         Crouch();
         Attack();
 
+        DevTools();
+
         Velocity = vel;
         MoveAndSlide();
     }
@@ -242,5 +244,15 @@ public partial class Player : CharacterBody2D
         animation.Play("Death");
         isForcedAnimation = true;
         EmitSignal(nameof(PlayerDied));
+    }
+
+    private void DevTools()
+    {
+        if (Input.IsActionJustPressed("reset")) CallDeferred("ResetToMainMenu"); // para que deje terminar el frame actual al apretar "reset" 
+    }
+
+    private void ResetToMainMenu()
+    {
+        GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
     }
 }
