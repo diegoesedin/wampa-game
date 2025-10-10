@@ -24,6 +24,9 @@ public partial class Player : CharacterBody2D
     private bool isAttacking = false;
     private bool isForcedAnimation = false;
 
+    [Export] private CollisionShape2D standigCollision;
+    [Export] private CollisionShape2D crouchingCollision;
+
     private AnimatedSprite2D animation;
     private Area2D attackArea;
     private HashSet<Node> hitEnemies = new HashSet<Node>();
@@ -34,6 +37,9 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        standigCollision.Disabled = false;
+        crouchingCollision.Disabled = true;
+
         animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         animation.AnimationFinished += OnAnimationFinished;
 
@@ -61,6 +67,11 @@ public partial class Player : CharacterBody2D
         Dash(ref vel, delta);
         Crouch();
         Attack();
+
+
+        standigCollision.Disabled = isCrouching;
+        crouchingCollision.Disabled = !isCrouching;
+
 
         DevTools();
 
@@ -180,7 +191,7 @@ public partial class Player : CharacterBody2D
 
     private void Dash(ref Vector2 vel, double delta)
     {
-        if (Input.IsActionJustPressed("dash"))
+        if (Input.IsActionJustPressed("dash") && isInAir)
         {
             if (Input.IsActionPressed("ui_right"))
             {

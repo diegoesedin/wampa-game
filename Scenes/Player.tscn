@@ -543,31 +543,29 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
-radius = 7.0
-height = 15.2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoq75"]
-radius = 7.5
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("standigCollision", "crouchingCollision") groups=["Player"]]
 script = ExtResource("1_4erl0")
 SPEED = 150.0
+standigCollision = NodePath("StandingCollision")
+crouchingCollision = NodePath("CrouchingCollision")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Idle"
+animation = &"Crouch"
 autoplay = "Idle"
-frame_progress = 0.490713
 speed_scale = 1.7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8.4)
+[node name="StandingCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.865)
+scale = Vector2(0.7, 0.526)
 shape = SubResource("CapsuleShape2D_kyqiw")
 
-[node name="CollisionCrouch" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 10.9)
-scale = Vector2(0.8, 0.34)
+[node name="CrouchingCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11.85)
+scale = Vector2(0.6, 0.26)
 shape = SubResource("CapsuleShape2D_yoq75")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -577,6 +575,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
 polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)
