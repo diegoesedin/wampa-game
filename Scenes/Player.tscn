@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://dveen0x1j6hpc"]
+[gd_scene load_steps=88 format=3 uid="uid://dveen0x1j6hpc"]
 
 [ext_resource type="Script" uid="uid://do41wkaiurnpu" path="res://Code/Player/Player.cs" id="1_4erl0"]
 [ext_resource type="Texture2D" uid="uid://c47vwcqoq0hy3" path="res://Art/Sprites/PlayerWampa/wampa_attk.png" id="2_52ee3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d3euannno8c50" path="res://Art/Sprites/PlayerWampa/wampa_fall.png" id="3_bhhdu"]
 [ext_resource type="Texture2D" uid="uid://cvd0wob7kckfy" path="res://Art/Sprites/PlayerWampa/wampa_walk.png" id="3_dewec"]
 [ext_resource type="Texture2D" uid="uid://bwpkav1mlitd6" path="res://Art/Sprites/PlayerWampa/wampa_crouch.png" id="3_megsn"]
+[ext_resource type="Texture2D" uid="uid://by0y728qxeyhb" path="res://Art/Sprites/PlayerWampa/wampa_dance.png" id="4_ksbbd"]
 [ext_resource type="Texture2D" uid="uid://by40rxyth2qfv" path="res://Art/Sprites/PlayerWampa/wampa_hurt.png" id="4_megsn"]
 [ext_resource type="Texture2D" uid="uid://ovcgm2ya4r1w" path="res://Art/Sprites/PlayerWampa/wampa_death.png" id="4_yoq75"]
 [ext_resource type="Texture2D" uid="uid://b5kdias8kjrpe" path="res://Art/Sprites/PlayerWampa/wampa_jump.png" id="6_yoq75"]
@@ -53,6 +54,22 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6y60"]
 atlas = ExtResource("3_megsn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujsok"]
+atlas = ExtResource("4_ksbbd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txwsf"]
+atlas = ExtResource("4_ksbbd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i10l2"]
+atlas = ExtResource("4_ksbbd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgqou"]
+atlas = ExtResource("4_ksbbd")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmcrb"]
@@ -334,6 +351,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ujsok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txwsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i10l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgqou")
+}],
+"loop": true,
+"name": &"Dance",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vmcrb")
 }, {
 "duration": 1.0,
@@ -539,7 +573,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
@@ -556,8 +590,9 @@ crouchingCollision = NodePath("CrouchingCollision")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Crouch"
+animation = &"Idle"
 autoplay = "Idle"
+frame_progress = 0.536347
 speed_scale = 1.7
 
 [node name="StandingCollision" type="CollisionShape2D" parent="."]

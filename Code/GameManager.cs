@@ -10,6 +10,7 @@ public partial class GameManager : Node2D
     private int enemiesKilled = 0;
     private int totalEnemies = 0;
     private bool maskCollected = false;
+    private int coinCount = 0;
 
     public override void _Ready()
     {
@@ -25,11 +26,22 @@ public partial class GameManager : Node2D
             return;
         }
 
+        // CONECTA AL JUGADOR ///////////////////////////////////////////////////////
         player.Connect(nameof(Player.LivesChanged), new Callable(this, nameof(OnLivesChanged)));
         player.Connect(nameof(Player.PlayerDied), new Callable(this, nameof(OnPlayerDied)));
         player.Connect(nameof(Player.MaskCollected), new Callable(this, nameof(OnMaskCollected)));
 
 
+        // CONECTA LAS MONEDAS ///////////////////////////////////////////////////////
+        foreach (Node node in GetTree().GetNodesInGroup("Coins"))
+        {
+            if (node is Coin coin)
+            {
+                coin.Connect(nameof(Coin.CoinCollected), new Callable(this, nameof(OnCoinCollected)));
+            }
+        }
+        
+        // CONECTA LOS ENEMIGOS ///////////////////////////////////////////////////////
         var enemies = GetTree().GetNodesInGroup("Enemy");
         totalEnemies = enemies.Count;
         enemiesKilled = 0;
@@ -52,6 +64,8 @@ public partial class GameManager : Node2D
         hud.UpdateTime(elapsedTime);
     }
 
+
+    // EVENTOS DE JUGADOR ///////////////////////////////////////////////////////
     private void OnLivesChanged(int newLives)
     {
         hud.UpdateLives(newLives);
@@ -68,6 +82,15 @@ public partial class GameManager : Node2D
         hud.SetMaskCollected(maskCollected);
     }
 
+    // EVENTOS DE MONEDAS ///////////////////////////////////////////////////////
+    private void OnCoinCollected()
+    {
+        coinCount++;
+        GD.Print($"Coins: {coinCount}");
+        // después aca le agrego algo asi como hud.UpdateCoins(coinCount); pero todavia no cambié el HUD
+    }
+
+    // EVENTOS DE ENEMIGOS ///////////////////////////////////////////////////////
     private void OnEnemyDied()
     {
         enemiesKilled++;

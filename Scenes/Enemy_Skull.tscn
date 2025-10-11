@@ -211,6 +211,7 @@ animations = [{
 
 [node name="EnemySkull" type="Node2D" groups=["Enemy"]]
 script = ExtResource("1_cbplc")
+MaxHealth = 1
 
 [node name="Hitbox" type="Area2D" parent="."]
 
