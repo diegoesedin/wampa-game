@@ -543,6 +543,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
+radius = 7.14286
+height = 27.1293
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoq75"]
 
@@ -559,7 +561,7 @@ autoplay = "Idle"
 speed_scale = 1.7
 
 [node name="StandingCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7.865)
+position = Vector2(0, 8.62)
 scale = Vector2(0.7, 0.526)
 shape = SubResource("CapsuleShape2D_kyqiw")
 
@@ -575,7 +577,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
 polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)

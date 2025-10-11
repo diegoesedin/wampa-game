@@ -191,7 +191,7 @@ public partial class Player : CharacterBody2D
 
     private void Dash(ref Vector2 vel, double delta)
     {
-        if (Input.IsActionJustPressed("dash") && isInAir)
+        if ( (Input.IsActionJustPressed("attack_right") || Input.IsActionJustPressed("attack_left") ) && isInAir)
         {
             if (Input.IsActionPressed("ui_right"))
             {
