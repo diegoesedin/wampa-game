@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1drstfvcxvfm"]
+
+[ext_resource type="VideoStream" uid="uid://dwwxcm67pmfy7" path="res://Videos/supay_intro.ogv" id="1_d30j0"]
+[ext_resource type="Script" uid="uid://dqiynpqhdjia5" path="res://Scenes/IntroScene.cs" id="1_lim1r"]
+[ext_resource type="AudioStream" uid="uid://cltvcmrasrls1" path="res://Audio/intro-theme.tres" id="2_bbocs"]
+[ext_resource type="PackedScene" uid="uid://dte636jdjrvlb" path="res://Scenes/main_menu.tscn" id="2_m538q"]
+
+[node name="Intro_Scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lim1r")
+SceneToLoad = ExtResource("2_m538q")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.25, 0.25)
+stream = ExtResource("1_d30j0")
+autoplay = true
+loop = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bbocs")
+volume_db = -12.0
+autoplay = true
