@@ -6,6 +6,7 @@ public partial class HUD : CanvasLayer
     private Label timeLabel;
     private Label enemiesLabel;
     private Label maskLabel;
+    private Label coinsLabel;
 
     public override void _Ready()
     {
@@ -13,6 +14,7 @@ public partial class HUD : CanvasLayer
         timeLabel = GetNode<Label>("TopBar/TimeLabel");
         enemiesLabel = GetNode<Label>("TopBar/EnemiesLabel");
         maskLabel = GetNode<Label>("TopBar/MaskLabel");
+        coinsLabel = GetNode<Label>("TopBar/CoinsLabel");
     }
 
     public void InitializeHUD(int lives, int killedEnemies, int totalEnemies, bool maskCollected)
@@ -49,5 +51,11 @@ public partial class HUD : CanvasLayer
     {
         if (maskLabel != null)
             maskLabel.Text = $"☀️: {(collected ? "Sí" : "No")}";
+    }
+
+    public void UpdateCoins(int coins)
+    {
+        if (coinsLabel != null)
+            coinsLabel.Text = $"💰: {coins}";
     }
 }

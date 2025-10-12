@@ -3,8 +3,11 @@ using System.Collections.Generic;
 
 public partial class GameManager : Node2D
 {
+    public static GameManager Instance; //REFE GLOBAL
+
     [Export] public Player player { get; set; }
     [Export] public HUD hud { get; set; }
+    [Export] private AudioStreamPlayer sfxPlayer;
 
     private float elapsedTime = 0f;
     private int enemiesKilled = 0;
@@ -14,6 +17,8 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
+        Instance = this; //REFE GLOBAL (Singleton Manual, supuestamente)
+
         if (player == null)
         {
             GD.PrintErr("GameManager: no player.");
@@ -86,8 +91,8 @@ public partial class GameManager : Node2D
     private void OnCoinCollected()
     {
         coinCount++;
-        GD.Print($"Coins: {coinCount}");
-        // después aca le agrego algo asi como hud.UpdateCoins(coinCount); pero todavia no cambié el HUD
+        PlaySFX("coin_pickup");
+        hud.UpdateCoins(coinCount);
     }
 
     // EVENTOS DE ENEMIGOS ///////////////////////////////////////////////////////
@@ -95,5 +100,21 @@ public partial class GameManager : Node2D
     {
         enemiesKilled++;
         hud.UpdateEnemies(enemiesKilled, totalEnemies);
+    }
+
+
+    // DISPARADOR DE EFECTOS DE SONIDO ////////////////////////////////////////////
+    public void PlaySFX(string soundName)
+    {
+        var path = $"res://Audio/{soundName}.wav";
+        var stream = GD.Load<AudioStream>(path);
+        if (stream == null)
+        {
+            GD.PrintErr($"[GameManager] No se encontró el sonido: {path}");
+            return;
+        }
+
+        sfxPlayer.Stream = stream;
+        sfxPlayer.Play();
     }
 }
