@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1drstfvcxvfm"]
 
-[ext_resource type="VideoStream" uid="uid://dwwxcm67pmfy7" path="res://Videos/supay_intro.ogv" id="1_d30j0"]
+[ext_resource type="VideoStream" uid="uid://dwwxcm67pmfy7" path="res://Media/Video/supay_intro.ogv" id="1_d30j0"]
 [ext_resource type="Script" uid="uid://dqiynpqhdjia5" path="res://Code/IntroScene.cs" id="1_lim1r"]
-[ext_resource type="AudioStream" uid="uid://cltvcmrasrls1" path="res://Audio/intro-theme.tres" id="2_bbocs"]
+[ext_resource type="AudioStream" uid="uid://cltvcmrasrls1" path="res://Media/Audio/intro-theme.tres" id="2_bbocs"]
 [ext_resource type="PackedScene" uid="uid://dte636jdjrvlb" path="res://Scenes/main_menu.tscn" id="2_m538q"]
 
 [node name="Intro_Scene" type="Control"]

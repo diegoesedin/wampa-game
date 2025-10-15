@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0s6wf4k0cr4p"]
 
 [ext_resource type="Texture2D" uid="uid://3kudcnmt5e" path="res://Art/Sprites/Items/Sun_Mask.png" id="1_2qrui"]
-[ext_resource type="Script" uid="uid://bu4r7hwo43p5l" path="res://Code/SunMask.cs" id="1_13csf"]
+[ext_resource type="Script" uid="uid://bu4r7hwo43p5l" path="res://Code/Items/SunMask.cs" id="1_13csf"]
 
 [sub_resource type="Animation" id="Animation_38gjd"]
 resource_name = "floating"

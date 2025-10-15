@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cacvqa3hyf5bt"]
 
 [ext_resource type="Script" uid="uid://i4j1oxu5ul1j" path="res://Code/HUD.cs" id="1_sd512"]
-[ext_resource type="Texture2D" uid="uid://dvjce2uwgf0mn" path="res://Art/hudtile.png" id="2_jo1ms"]
+[ext_resource type="Texture2D" uid="uid://dvjce2uwgf0mn" path="res://Art/Sprites/hudtile.png" id="2_jo1ms"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_sd512")

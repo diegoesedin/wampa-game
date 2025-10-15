@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=4 uid="uid://dwcjuvyolwiq6"]
 
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="1_gw158"]
-[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Enemy_Skull.tscn" id="3_gw158"]
-[ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/sun_mask.tscn" id="4_v3lif"]
+[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Enemy_Skull.tscn" id="3_gw158"]
+[ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="4_v3lif"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rljkc"]
 texture = ExtResource("1_gw158")

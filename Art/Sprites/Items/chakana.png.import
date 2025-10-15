@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvjce2uwgf0mn"
-path="res://.godot/imported/hudtile.png-585699d17e215298640b4f41aeac2838.ctex"
+uid="uid://c6f3n2u3erl6l"
+path="res://.godot/imported/chakana.png-4419d69513a3e04042456e8d86bc5570.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/hudtile.png"
-dest_files=["res://.godot/imported/hudtile.png-585699d17e215298640b4f41aeac2838.ctex"]
+source_file="res://Art/Sprites/Items/chakana.png"
+dest_files=["res://.godot/imported/chakana.png-4419d69513a3e04042456e8d86bc5570.ctex"]
 
 [params]
 

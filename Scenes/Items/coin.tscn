@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://5570xkjchvrm"]
 
 [ext_resource type="Texture2D" uid="uid://dla6122k41kwg" path="res://Art/Sprites/Items/coin.png" id="1_2qo34"]
-[ext_resource type="Script" uid="uid://bbhdi4iru471" path="res://Code/Coin.cs" id="1_jgi06"]
+[ext_resource type="Script" uid="uid://bbhdi4iru471" path="res://Code/Items/Coin.cs" id="1_jgi06"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jgi06"]
 atlas = ExtResource("1_2qo34")
@@ -76,9 +76,10 @@ script = ExtResource("1_jgi06")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7w2r2")
 autoplay = "default"
-frame_progress = 0.572994
+frame_progress = 0.398943
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_g537i")

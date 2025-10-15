@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cdvaa12vddcuc"
-path="res://.godot/imported/wampa-theme.wav-f73687f7e6fef65782090ef72802c4d9.sample"
+uid="uid://krj8lb1st220"
+path="res://.godot/imported/coin_pickup.wav-bd0db7d7fa0d54af95ae248524527583.sample"
 
 [deps]
 
-source_file="res://Audio/wampa-theme.wav"
-dest_files=["res://.godot/imported/wampa-theme.wav-f73687f7e6fef65782090ef72802c4d9.sample"]
+source_file="res://Media/Audio/coin_pickup.wav"
+dest_files=["res://.godot/imported/coin_pickup.wav-bd0db7d7fa0d54af95ae248524527583.sample"]
 
 [params]
 
