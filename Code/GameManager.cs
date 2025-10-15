@@ -106,7 +106,7 @@ public partial class GameManager : Node2D
     // DISPARADOR DE EFECTOS DE SONIDO ////////////////////////////////////////////
     public void PlaySFX(string soundName)
     {
-        var path = $"res://Audio/{soundName}.wav";
+        var path = $"res://Media/Audio/{soundName}.wav";
         var stream = GD.Load<AudioStream>(path);
         if (stream == null)
         {

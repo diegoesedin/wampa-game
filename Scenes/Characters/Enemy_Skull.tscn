@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://dhc125eawpjl"]
 
-[ext_resource type="Script" uid="uid://hg2d4aqgj4jx" path="res://Code/EnemySkull.cs" id="1_cbplc"]
+[ext_resource type="Script" uid="uid://hg2d4aqgj4jx" path="res://Code/Enemies/EnemySkull.cs" id="1_cbplc"]
 [ext_resource type="Texture2D" uid="uid://mrmf8xmklv0p" path="res://Art/Sprites/EnemySkull/skull_death.png" id="1_jc68m"]
 [ext_resource type="Texture2D" uid="uid://87upotc70mst" path="res://Art/Sprites/EnemySkull/skull_shoot.png" id="1_krfkv"]
 [ext_resource type="Texture2D" uid="uid://bceg3k47ekvq8" path="res://Art/Sprites/EnemySkull/skull_hurt.png" id="2_cbplc"]
