@@ -225,9 +225,6 @@ animation = &"Idle"
 autoplay = "Idle"
 
 [node name="BoneSprite" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(15, 0)
 sprite_frames = SubResource("SpriteFrames_jnmcw")
 animation = &"attack"
-frame = 4
-frame_progress = 1.0

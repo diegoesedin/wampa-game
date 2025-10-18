@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
+    // -------------------- MOVIMIENTO --------------------
     [Export] private float SPEED = 175f;
     [Export] private int GRAVITY = 1500;
     [Export] private int FALL_GRAVITY = 1550;
@@ -12,29 +13,45 @@ public partial class Player : CharacterBody2D
     [Export] private float DASH_SPEED = 450;
     private const float DASH_TIME = 0.2f;
 
+    // -------------------- VIDA Y DAÑO --------------------
     [Export] public int MaxLives = 3;
     public int CurrentLives { get; private set; }
 
-    private float currentSpeed;
+    [Export] public float KNOCKBACK_FORCE = 500f;
+    [Export] private float KNOCKBACK_DURATION = 0.4f;
+    [Export] private float INVULNERABILITY_TIME = 0.6f;
 
+    private Area2D hurtbox;
+    private bool isInvulnerable = false;
+
+    // -------------------- ESTADOS --------------------
+    private float currentSpeed;
     private bool isInAir = false;
     private bool isDashing;
     private double dashTimer = DASH_TIME;
     private bool isCrouching = false;
     private bool isAttacking = false;
     private bool isForcedAnimation = false;
+    private bool isHurt = false;
+    private bool isKnockedBack = false;
+    private double knockbackTimer = 0;
 
-    [Export] private CollisionShape2D standigCollision;
-    [Export] private CollisionShape2D crouchingCollision;
-
+    // -------------------- COMPONENTES --------------------
     private AnimatedSprite2D animation;
     private Area2D attackArea;
     private HashSet<Node> hitEnemies = new HashSet<Node>();
 
+    [Export] private CollisionShape2D standigCollision;
+    [Export] private CollisionShape2D crouchingCollision;
+    [Export] private CollisionShape2D standigHurtBox;
+    [Export] private CollisionShape2D crouchingHurtBox;
+
+    // -------------------- SEÑALES --------------------
     [Signal] public delegate void PlayerDiedEventHandler();
     [Signal] public delegate void LivesChangedEventHandler(int newLives);
     [Signal] public delegate void MaskCollectedEventHandler();
 
+    // ==========================================================
     public override void _Ready()
     {
         standigCollision.Disabled = false;
@@ -47,36 +64,67 @@ public partial class Player : CharacterBody2D
         attackArea.Monitoring = false;
         attackArea.AreaEntered += OnAttackAreaAreaEntered;
 
+        hurtbox = GetNode<Area2D>("Hurtbox");
+        hurtbox.BodyEntered += OnHurtboxBodyEntered;
+
         currentSpeed = SPEED;
         CurrentLives = MaxLives;
     }
 
+    // ==========================================================
     public override void _PhysicsProcess(double delta)
     {
         if (isForcedAnimation) return;
 
         Vector2 vel = Velocity;
 
-        if (!isDashing)
+        if (isKnockedBack)
+        {
+            HandleKnockback(ref vel, delta);
+        }
+        else if (!isDashing)
         {
             ApplyGravity(ref vel, delta);
             Move(ref vel, delta);
+            Jump(ref vel, delta);
+            Dash(ref vel, delta);
+            Crouch();
+            Attack();
+        }
+        else
+        {
+            ApplyGravity(ref vel, delta);
+            CheckDashing(ref vel, delta);
         }
 
-        Jump(ref vel, delta);
-        Dash(ref vel, delta);
-        Crouch();
-        Attack();
-
-
         standigCollision.Disabled = isCrouching;
+        standigHurtBox.Disabled = isCrouching;
         crouchingCollision.Disabled = !isCrouching;
-
+        crouchingHurtBox.Disabled = !isCrouching;
 
         DevTools();
 
         Velocity = vel;
         MoveAndSlide();
+    }
+
+    // ==========================================================
+    private void HandleKnockback(ref Vector2 vel, double delta)
+    {
+        knockbackTimer -= delta;
+
+        if (!IsOnFloor())
+        {
+            vel.Y += FALL_GRAVITY * (float)delta;
+        }
+
+        vel.X = Mathf.Lerp(vel.X, 0, 3f * (float)delta);
+
+        if (knockbackTimer <= 0)
+        {
+            isKnockedBack = false;
+            vel.X = 0;
+        }
     }
 
     private void ApplyGravity(ref Vector2 vel, double delta)
@@ -141,9 +189,10 @@ public partial class Player : CharacterBody2D
         }
     }
 
+    // ==========================================================
     private void Attack()
     {
-        if (isAttacking || isForcedAnimation) return;
+        if (isAttacking || isForcedAnimation || isHurt) return;
 
         hitEnemies.Clear();
 
@@ -179,19 +228,10 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    public void PickUpMask()
-    {
-        if (animation == null) return;
-
-        isForcedAnimation = true;
-        animation.Stop();
-        animation.Play("Mask");
-        EmitSignal(nameof(MaskCollected));
-    }
-
+    // ==========================================================
     private void Dash(ref Vector2 vel, double delta)
     {
-        if ( (Input.IsActionJustPressed("attack_right") || Input.IsActionJustPressed("attack_left") ) && isInAir)
+        if ((Input.IsActionJustPressed("attack_right") || Input.IsActionJustPressed("attack_left")) && isInAir)
         {
             if (Input.IsActionPressed("ui_right"))
             {
@@ -205,7 +245,6 @@ public partial class Player : CharacterBody2D
             }
             dashTimer = DASH_TIME;
         }
-        CheckDashing(ref vel, delta);
     }
 
     private void CheckDashing(ref Vector2 vel, double delta)
@@ -222,32 +261,81 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void OnAnimationFinished()
-    {
-        if (animation.Animation == "Mask")
-            isForcedAnimation = false;
-
-        if (animation.Animation == "Attack")
-        {
-            isAttacking = false;
-            attackArea.Monitoring = false;
-        }
-
-        if (animation.Animation == "Jump" && isInAir && !isAttacking && !isCrouching)
-            animation.Play("Fall");
-    }
-
-    public void TakeDamage(int damage)
+    // ==========================================================
+    public void TakeDamage(int damage, Vector2? sourcePosition = null)
     {
         if (CurrentLives <= 0) return;
 
-        CurrentLives -= damage;
-        EmitSignal(nameof(LivesChanged), CurrentLives);
-
-        if (CurrentLives <= 0)
+        if (!isInvulnerable)
         {
-            Die();
+            CurrentLives -= damage;
+            EmitSignal(nameof(LivesChanged), CurrentLives);
+
+            isHurt = true;
+            animation.Play("Hurt");
+
+            isInvulnerable = true;
+            GetTree().CreateTimer(INVULNERABILITY_TIME).Timeout += () => isInvulnerable = false;
+
+            if (CurrentLives <= 0)
+            {
+                Die();
+                return;
+            }
         }
+
+        if (sourcePosition != null)
+            ApplyKnockback(sourcePosition.Value);
+    }
+
+    private void OnHurtboxBodyEntered(Node2D body)
+    {
+        // Ignorar colisiones con el propio player
+        if (body == this || body.GetParent() == this) return;
+
+        if (body is TileMapLayer tileMapLayer && tileMapLayer.Name == "Traps")
+        {
+            Vector2 localPos = tileMapLayer.ToLocal(GlobalPosition);
+            Vector2I tileCoords = tileMapLayer.LocalToMap(localPos);
+            Vector2 tileWorldPos = tileMapLayer.MapToLocal(tileCoords);
+            Vector2 trapPosition = tileMapLayer.ToGlobal(tileWorldPos);
+
+            if (!isInvulnerable)
+            {
+                TakeDamage(1, trapPosition);
+            }
+            else
+            {
+                ApplyKnockback(trapPosition);
+            }
+            return;
+        }
+
+        if (body.IsInGroup("Traps"))
+        {
+            if (!isInvulnerable)
+            {
+                TakeDamage(1, body.GlobalPosition);
+            }
+            else
+            {
+                ApplyKnockback(body.GlobalPosition);
+            }
+        }
+    }
+
+    private void ApplyKnockback(Vector2 sourcePosition)
+    {
+        Vector2 dir = (GlobalPosition - sourcePosition).Normalized();
+
+        Velocity = dir * KNOCKBACK_FORCE;
+
+        isKnockedBack = true;
+        knockbackTimer = KNOCKBACK_DURATION;
+
+        isDashing = false;
+        isAttacking = false;
+        isCrouching = false;
     }
 
     private void Die()
@@ -257,9 +345,46 @@ public partial class Player : CharacterBody2D
         EmitSignal(nameof(PlayerDied));
     }
 
+    // ==========================================================
+    public void PickUpMask()
+    {
+        if (animation == null) return;
+
+        isForcedAnimation = true;
+        animation.Stop();
+        animation.Play("Mask");
+        EmitSignal(nameof(MaskCollected));
+    }
+
+    private void OnAnimationFinished()
+    {
+        if (animation.Animation == "Hurt")
+        {
+            isHurt = false;
+        }
+
+        if (animation.Animation == "Mask")
+        {
+            isForcedAnimation = false;
+        }
+
+        if (animation.Animation == "Attack")
+        {
+            isAttacking = false;
+            attackArea.Monitoring = false;
+        }
+
+        if (animation.Animation == "Jump" && isInAir && !isAttacking && !isCrouching)
+        {
+            animation.Play("Fall");
+        }
+    }
+
+    // ==========================================================
     private void DevTools()
     {
-        if (Input.IsActionJustPressed("reset")) CallDeferred("ResetToMainMenu"); // para que deje terminar el frame actual al apretar "reset" 
+        if (Input.IsActionJustPressed("reset"))
+            CallDeferred("ResetToMainMenu");
     }
 
     private void ResetToMainMenu()
