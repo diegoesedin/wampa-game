@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://byefbn4qc6ud5"]
+[gd_scene load_steps=16 format=4 uid="uid://byefbn4qc6ud5"]
 
 [ext_resource type="PackedScene" uid="uid://c1xq008qlc83q" path="res://Scenes/game_manager.tscn" id="1_te52m"]
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="2_2r1lj"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dveen0x1j6hpc" path="res://Scenes/Characters/Player.tscn" id="5_ytgkf"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="6_jhvdk"]
 [ext_resource type="PackedScene" uid="uid://5570xkjchvrm" path="res://Scenes/Items/coin.tscn" id="7_16l12"]
+[ext_resource type="PackedScene" uid="uid://s1iv7pyyyyj7" path="res://Scenes/Items/Goal.tscn" id="9_yy3vv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2r1lj"]
 texture = ExtResource("3_yy3vv")
@@ -540,40 +541,43 @@ position = Vector2(626, 517)
 [node name="Sun Mask" parent="." instance=ExtResource("6_jhvdk")]
 position = Vector2(692, 672)
 
-[node name="pick ups" type="Node2D" parent="."]
+[node name="Coins" type="Node" parent="."]
 
-[node name="Coin" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(750, 529)
 
-[node name="Coin2" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin2" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(770, 529)
 
-[node name="Coin3" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin3" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(823, 548)
 
-[node name="Coin4" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin4" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(855, 468)
 
-[node name="Coin5" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin5" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(856, 580)
 
-[node name="Coin6" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin6" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(824, 649)
 
-[node name="Coin7" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin7" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(825, 669)
 
-[node name="Coin8" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin8" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(862, 681)
 
-[node name="Coin9" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin9" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(889, 681)
 
-[node name="Coin10" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin10" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(915, 681)
 
-[node name="Coin11" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin11" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(942, 680)
 
-[node name="Coin12" parent="pick ups" instance=ExtResource("7_16l12")]
+[node name="Coin12" parent="Coins" instance=ExtResource("7_16l12")]
 position = Vector2(967, 680)
+
+[node name="Goal" parent="." instance=ExtResource("9_yy3vv")]
+position = Vector2(696, 389)

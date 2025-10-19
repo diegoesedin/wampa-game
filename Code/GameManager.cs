@@ -14,6 +14,7 @@ public partial class GameManager : Node2D
     private int totalEnemies = 0;
     private bool maskCollected = false;
     private int coinCount = 0;
+    private bool stopTimer = false;
 
     public override void _Ready()
     {
@@ -35,6 +36,7 @@ public partial class GameManager : Node2D
         player.Connect(nameof(Player.LivesChanged), new Callable(this, nameof(OnLivesChanged)));
         player.Connect(nameof(Player.PlayerDied), new Callable(this, nameof(OnPlayerDied)));
         player.Connect(nameof(Player.MaskCollected), new Callable(this, nameof(OnMaskCollected)));
+        player.Connect(nameof(Player.LevelCompleted), new Callable(this, nameof(OnLevelCompleted)));
 
 
         // CONECTA LAS MONEDAS ///////////////////////////////////////////////////////
@@ -65,7 +67,8 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
-        elapsedTime += (float)delta;
+        if (!stopTimer) { elapsedTime += (float)delta; }
+
         hud.UpdateTime(elapsedTime);
     }
 
@@ -85,6 +88,11 @@ public partial class GameManager : Node2D
     {
         maskCollected = true;
         hud.SetMaskCollected(maskCollected);
+    }
+
+    private void OnLevelCompleted()
+    {
+        stopTimer = true;
     }
 
     // EVENTOS DE MONEDAS ///////////////////////////////////////////////////////

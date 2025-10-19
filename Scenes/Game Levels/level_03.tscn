@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://b1rndr4f5dpsd"]
+[gd_scene load_steps=16 format=4 uid="uid://b1rndr4f5dpsd"]
 
 [ext_resource type="PackedScene" uid="uid://c1xq008qlc83q" path="res://Scenes/game_manager.tscn" id="1_gyxvk"]
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="2_wj7o5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://5570xkjchvrm" path="res://Scenes/Items/coin.tscn" id="6_lmld8"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="7_ekib6"]
 [ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Enemy_Skull.tscn" id="8_tr7da"]
+[ext_resource type="PackedScene" uid="uid://s1iv7pyyyyj7" path="res://Scenes/Items/Goal.tscn" id="9_g0biq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mj4mp"]
 texture = ExtResource("3_mn87n")
@@ -537,109 +538,114 @@ tile_set = SubResource("TileSet_14nh1")
 [node name="Player" parent="." instance=ExtResource("5_cri7j")]
 position = Vector2(77, 576)
 
-[node name="PickUps" type="Node2D" parent="."]
+[node name="Coins" type="Node" parent="."]
 
-[node name="coin_1" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_1" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(140, 585)
 
-[node name="coin_2" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_2" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-112, 576)
 
-[node name="coin_3" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_3" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-128, 544)
 
-[node name="coin_4" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_4" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-112, 544)
 
-[node name="coin_5" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_5" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-112, 560)
 
-[node name="coin_6" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_6" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-112, 592)
 
-[node name="coin_7" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_7" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-144, 560)
 
-[node name="coin_8" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_8" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-80, 560)
 
-[node name="coin_9" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_9" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-112, 528)
 
-[node name="coin_10" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_10" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-128, 576)
 
-[node name="coin_11" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_11" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-128, 560)
 
-[node name="coin_12" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_12" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-96, 560)
 
-[node name="coin_13" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_13" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-96, 576)
 
-[node name="coin_14" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_14" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(-96, 544)
 
-[node name="coin_15" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_15" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(160, 585)
 
-[node name="coin_16" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_16" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(180, 585)
 
-[node name="coin_17" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_17" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(384, 495)
 
-[node name="coin_18" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_18" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(432, 480)
 
-[node name="coin_19" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_19" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(480, 500)
 
-[node name="coin_20" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_20" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(255, 498)
 
-[node name="coin_21" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_21" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(303, 483)
 
-[node name="coin_22" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_22" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(351, 503)
 
-[node name="coin_23" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_23" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(120, 585)
 
-[node name="coin_24" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_24" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(512, 500)
 
-[node name="coin_25" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_25" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(560, 480)
 
-[node name="coin_26" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_26" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(608, 496)
 
-[node name="coin_27" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_27" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(656, 512)
 
-[node name="coin_28" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_28" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(536, 625)
 
-[node name="coin_29" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_29" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(536, 593)
 
-[node name="coin_30" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_30" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(536, 561)
 
-[node name="coin_31" parent="PickUps" instance=ExtResource("6_lmld8")]
+[node name="coin_31" parent="Coins" instance=ExtResource("6_lmld8")]
 position = Vector2(537, 529)
 
-[node name="Sun Mask" parent="PickUps" instance=ExtResource("7_ekib6")]
+[node name="Sun Mask" parent="." instance=ExtResource("7_ekib6")]
 position = Vector2(408, 632)
 
-[node name="EnemySkull" parent="." instance=ExtResource("8_tr7da")]
+[node name="Goal" parent="." instance=ExtResource("9_g0biq")]
+position = Vector2(784, 689)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="EnemySkull" parent="Enemies" instance=ExtResource("8_tr7da")]
 position = Vector2(-176, 561)
 
-[node name="EnemySkull2" parent="." instance=ExtResource("8_tr7da")]
+[node name="EnemySkull2" parent="Enemies" instance=ExtResource("8_tr7da")]
 position = Vector2(623, 692)
 
-[node name="EnemySkull3" parent="." instance=ExtResource("8_tr7da")]
+[node name="EnemySkull3" parent="Enemies" instance=ExtResource("8_tr7da")]
 position = Vector2(792, 615)

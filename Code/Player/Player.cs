@@ -31,7 +31,6 @@ public partial class Player : CharacterBody2D
     private bool isAttacking = false;
     private bool isForcedAnimation = false;
     private bool blockPlayerControl = false;
-    private bool isHurt = false;
     private bool isInvulnerable = false;
     private bool isKnockedBack = false;
     private double knockbackTimer = 0;
@@ -52,6 +51,7 @@ public partial class Player : CharacterBody2D
     [Signal] public delegate void PlayerDiedEventHandler();
     [Signal] public delegate void LivesChangedEventHandler(int newLives);
     [Signal] public delegate void MaskCollectedEventHandler();
+    [Signal] public delegate void LevelCompletedEventHandler();
 
     // ==========================================================
     public override void _Ready()
@@ -77,6 +77,8 @@ public partial class Player : CharacterBody2D
     // ==========================================================
     public override void _PhysicsProcess(double delta)
     {
+        DevTools();
+
         if (isForcedAnimation) return;
 
         Vector2 vel = Velocity;
@@ -104,8 +106,6 @@ public partial class Player : CharacterBody2D
         standigHurtBox.Disabled = isCrouching;
         crouchingCollision.Disabled = !isCrouching;
         crouchingHurtBox.Disabled = !isCrouching;
-
-        DevTools();
 
         Velocity = vel;
         MoveAndSlide();
@@ -165,7 +165,7 @@ public partial class Player : CharacterBody2D
             isInAir = true;
             vel.Y = -JUMP_FORCE;
             animation.Play("Jump");
-            coyoteTimer = 0; // se usa el tiempo de gracia
+            coyoteTimer = 0;
         }
     }
 
@@ -219,7 +219,7 @@ public partial class Player : CharacterBody2D
     // ========= ATAQUES =================================================
     private void Attack()
     {
-        if (isAttacking || isForcedAnimation || isHurt) return;
+        if (isAttacking || isForcedAnimation || isInvulnerable) return;
 
         hitEnemies.Clear();
 
@@ -264,8 +264,6 @@ public partial class Player : CharacterBody2D
         {
             CurrentLives -= damage;
             EmitSignal(nameof(LivesChanged), CurrentLives);
-
-            isHurt = true;
             animation.Play("Hurt");
 
             isInvulnerable = true;
@@ -359,20 +357,23 @@ public partial class Player : CharacterBody2D
 
     public void PickUpMask()
     {
-        if (animation == null) return;
-
         isForcedAnimation = true;
-        animation.Stop();
         animation.Play("Mask");
         EmitSignal(nameof(MaskCollected));
     }
 
+    public void CompleteLevel()
+    {
+        GD.Print("Level Completed");
+
+        isForcedAnimation = true;
+        animation.Play("Dance");
+        EmitSignal(nameof(LevelCompleted));
+    }
+
+    // ==========================================================
     private void OnAnimationFinished()
     {
-        if (animation.Animation == "Hurt")
-        {
-            isHurt = false;
-        }
 
         if (animation.Animation == "Mask")
         {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://diku3hxndpqdw"]
+[gd_scene load_steps=15 format=4 uid="uid://diku3hxndpqdw"]
 
 [ext_resource type="PackedScene" uid="uid://c1xq008qlc83q" path="res://Scenes/game_manager.tscn" id="1_2iw4v"]
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="3_ct1kl"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dveen0x1j6hpc" path="res://Scenes/Characters/Player.tscn" id="4_mj4mp"]
 [ext_resource type="PackedScene" uid="uid://5570xkjchvrm" path="res://Scenes/Items/coin.tscn" id="6_ct1kl"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="7_mj4mp"]
+[ext_resource type="PackedScene" uid="uid://s1iv7pyyyyj7" path="res://Scenes/Items/Goal.tscn" id="8_4bq2q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mj4mp"]
 texture = ExtResource("3_tbcua")
@@ -534,19 +535,22 @@ tile_set = SubResource("TileSet_uw01k")
 [node name="Player" parent="." instance=ExtResource("4_mj4mp")]
 position = Vector2(76, 553)
 
-[node name="PickUps" type="Node2D" parent="."]
+[node name="Coins" type="Node" parent="."]
 
-[node name="Coin" parent="PickUps" instance=ExtResource("6_ct1kl")]
+[node name="Coin" parent="Coins" instance=ExtResource("6_ct1kl")]
 position = Vector2(140, 580)
 
-[node name="Coin2" parent="PickUps" instance=ExtResource("6_ct1kl")]
+[node name="Coin2" parent="Coins" instance=ExtResource("6_ct1kl")]
 position = Vector2(160, 580)
 
-[node name="Coin3" parent="PickUps" instance=ExtResource("6_ct1kl")]
+[node name="Coin3" parent="Coins" instance=ExtResource("6_ct1kl")]
 position = Vector2(180, 580)
 
-[node name="Coin4" parent="PickUps" instance=ExtResource("6_ct1kl")]
+[node name="Coin4" parent="Coins" instance=ExtResource("6_ct1kl")]
 position = Vector2(120, 580)
 
-[node name="Sun Mask" parent="PickUps" instance=ExtResource("7_mj4mp")]
+[node name="Sun Mask" parent="." instance=ExtResource("7_mj4mp")]
 position = Vector2(10, 580)
+
+[node name="Goal" parent="." instance=ExtResource("8_4bq2q")]
+position = Vector2(-90, 580)
