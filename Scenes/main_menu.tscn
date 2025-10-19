@@ -184,7 +184,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
-LevelScene = ExtResource("8_trj04")
+IsLocked = true
 
 [node name="x_06" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)

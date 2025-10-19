@@ -626,6 +626,6 @@ shape = SubResource("CapsuleShape2D_yoq75")
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
-polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)
+polygon = PackedVector2Array(0, -12, 14, -12, 22, 0, 15, 19, 0, 19)
 
 [connection signal="area_entered" from="AttackArea" to="." method="OnAttackAreaAreaEntered"]

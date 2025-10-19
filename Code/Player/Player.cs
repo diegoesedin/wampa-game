@@ -10,6 +10,8 @@ public partial class Player : CharacterBody2D
     [Export] private float FRICTION = 6f;
     [Export] private float ACCELERATION = 80f;
     [Export] private float JUMP_FORCE = 400;
+    [Export] private float COYOTE_TIME = 0.15f; 
+    private float coyoteTimer = 0f;
     [Export] private float DASH_SPEED = 450;
     private const float DASH_TIME = 0.2f;
     [Export] public float KNOCKBACK_FORCE = 500f;
@@ -112,10 +114,17 @@ public partial class Player : CharacterBody2D
     // ==========================================================
     private void ApplyGravity(ref Vector2 vel, double delta)
     {
-        if (!IsOnFloor())
+        if (!IsOnFloor()) // si esta en el aire
+        {
             vel.Y += GetGravity(vel) * (float)delta;
+            coyoteTimer -= (float)delta; 
+            
+        }
         else
+        {
             isInAir = false;
+            coyoteTimer = COYOTE_TIME;
+        }
     }
 
     private float GetGravity(Vector2 vel)
@@ -151,11 +160,12 @@ public partial class Player : CharacterBody2D
         if (Input.IsActionJustReleased("jump") && vel.Y < 0)
             vel.Y = -JUMP_FORCE / 4;
 
-        if (Input.IsActionJustPressed("jump") && IsOnFloor() && !isCrouching)
+        if (Input.IsActionJustPressed("jump") && coyoteTimer > 0 && !isCrouching)
         {
             isInAir = true;
             vel.Y = -JUMP_FORCE;
             animation.Play("Jump");
+            coyoteTimer = 0; // se usa el tiempo de gracia
         }
     }
 
