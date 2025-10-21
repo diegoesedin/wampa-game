@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
     [Export] private float FRICTION = 6f;
     [Export] private float ACCELERATION = 80f;
     [Export] private float JUMP_FORCE = 400;
-    [Export] private float COYOTE_TIME = 0.15f; 
+    [Export] private float COYOTE_TIME = 0.15f;
     private float coyoteTimer = 0f;
     [Export] private float DASH_SPEED = 450;
     private const float DASH_TIME = 0.2f;
@@ -40,11 +40,11 @@ public partial class Player : CharacterBody2D
     private Area2D attackArea;
     private HashSet<Node> hitEnemies = new HashSet<Node>();
 
-    private CollisionShape2D standigCollision;
+    private CollisionShape2D standingCollision;
     private CollisionShape2D crouchingCollision;
-    
+
     private Area2D hurtbox;
-    private CollisionShape2D standigHurtBox;
+    private CollisionShape2D standingHurtBox;
     private CollisionShape2D crouchingHurtBox;
 
     // -------------------- SEÑALES --------------------
@@ -64,11 +64,11 @@ public partial class Player : CharacterBody2D
         attackArea.AreaEntered += OnAttackAreaAreaEntered;
 
         hurtbox = GetNode<Area2D>("Hurtbox");
-        standigHurtBox = GetNode<CollisionShape2D>("Hurtbox/StandingHurtbox");
+        standingHurtBox = GetNode<CollisionShape2D>("Hurtbox/StandingHurtbox");
         crouchingHurtBox = GetNode<CollisionShape2D>("Hurtbox/CrouchingHurtbox");
         hurtbox.BodyEntered += OnHurtboxBodyEntered;
 
-        standigCollision = GetNode<CollisionShape2D>("StandingCollision");
+        standingCollision = GetNode<CollisionShape2D>("StandingCollision");
         crouchingCollision = GetNode<CollisionShape2D>("CrouchingCollision");
 
         currentSpeed = SPEED;
@@ -79,7 +79,7 @@ public partial class Player : CharacterBody2D
     {
         DevTools();
 
-        if (isForcedAnimation) return;
+        if (blockPlayerControl) return;
 
         Vector2 vel = Velocity;
 
@@ -102,10 +102,6 @@ public partial class Player : CharacterBody2D
             CheckDashing(ref vel, delta);
         }
 
-        standigCollision.Disabled = isCrouching;
-        standigHurtBox.Disabled = isCrouching;
-        crouchingCollision.Disabled = !isCrouching;
-        crouchingHurtBox.Disabled = !isCrouching;
 
         Velocity = vel;
         MoveAndSlide();
@@ -114,11 +110,11 @@ public partial class Player : CharacterBody2D
     // ==========================================================
     private void ApplyGravity(ref Vector2 vel, double delta)
     {
-        if (!IsOnFloor()) // si esta en el aire
+        if (!IsOnFloor()) 
         {
             vel.Y += GetGravity(vel) * (float)delta;
-            coyoteTimer -= (float)delta; 
-            
+            coyoteTimer -= (float)delta;
+
         }
         else
         {
@@ -132,7 +128,7 @@ public partial class Player : CharacterBody2D
         return vel.Y < 0 ? GRAVITY : FALL_GRAVITY;
     }
 
-    
+
     // ========= MOVIMIENTOS =================================================
     private void Move(ref Vector2 vel, double delta)
     {
@@ -208,11 +204,21 @@ public partial class Player : CharacterBody2D
             isCrouching = true;
             currentSpeed = SPEED * 0.5f;
             animation.Play("Crouch");
+
+            standingCollision.Disabled = isCrouching;
+            standingHurtBox.Disabled = isCrouching;
+            crouchingCollision.Disabled = !isCrouching;
+            crouchingHurtBox.Disabled = !isCrouching;
         }
         else if (Input.IsActionJustReleased("crouch"))
         {
             isCrouching = false;
             currentSpeed = SPEED;
+
+            standingCollision.Disabled = isCrouching;
+            standingHurtBox.Disabled = isCrouching;
+            crouchingCollision.Disabled = !isCrouching;
+            crouchingHurtBox.Disabled = !isCrouching;
         }
     }
 
@@ -221,10 +227,10 @@ public partial class Player : CharacterBody2D
     {
         if (isAttacking || isForcedAnimation || isInvulnerable) return;
 
-        hitEnemies.Clear();
-
         if (Input.IsActionJustPressed("attack_right"))
         {
+            hitEnemies.Clear();
+
             isAttacking = true;
             animation.FlipH = false;
             attackArea.RotationDegrees = 0;
@@ -234,6 +240,8 @@ public partial class Player : CharacterBody2D
 
         if (Input.IsActionJustPressed("attack_left"))
         {
+            hitEnemies.Clear();
+
             isAttacking = true;
             animation.FlipH = true;
             attackArea.RotationDegrees = 180;
@@ -264,11 +272,11 @@ public partial class Player : CharacterBody2D
         {
             CurrentLives -= damage;
             EmitSignal(nameof(LivesChanged), CurrentLives);
+
             animation.Play("Hurt");
-
+            isForcedAnimation = true;
             isInvulnerable = true;
-            GetTree().CreateTimer(INVULNERABILITY_TIME).Timeout += () => isInvulnerable = false;
-
+            
             if (CurrentLives <= 0)
             {
                 Die();
@@ -293,7 +301,7 @@ public partial class Player : CharacterBody2D
         isAttacking = false;
         isCrouching = false;
     }
-    
+
     private void HandleKnockback(ref Vector2 vel, double delta)
     {
         knockbackTimer -= delta;
@@ -350,8 +358,9 @@ public partial class Player : CharacterBody2D
     // ==========================================================
     private void Die()
     {
-        animation.Play("Death");
         isForcedAnimation = true;
+        animation.Play("Death");
+        blockPlayerControl = true;
         EmitSignal(nameof(PlayerDied));
     }
 
@@ -359,6 +368,7 @@ public partial class Player : CharacterBody2D
     {
         isForcedAnimation = true;
         animation.Play("Mask");
+        blockPlayerControl = true;
         EmitSignal(nameof(MaskCollected));
     }
 
@@ -368,6 +378,7 @@ public partial class Player : CharacterBody2D
 
         isForcedAnimation = true;
         animation.Play("Dance");
+        blockPlayerControl = true;
         EmitSignal(nameof(LevelCompleted));
     }
 
@@ -378,6 +389,7 @@ public partial class Player : CharacterBody2D
         if (animation.Animation == "Mask")
         {
             isForcedAnimation = false;
+            blockPlayerControl = false;
         }
 
         if (animation.Animation == "Attack")
@@ -389,6 +401,12 @@ public partial class Player : CharacterBody2D
         if (animation.Animation == "Jump" && isInAir && !isAttacking && !isCrouching)
         {
             animation.Play("Fall");
+        }
+
+        if(animation.Animation == "Hurt")
+        {
+            isForcedAnimation = false;
+            isInvulnerable = false;
         }
     }
 
