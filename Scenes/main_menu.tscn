@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dte636jdjrvlb"]
+[gd_scene load_steps=17 format=3 uid="uid://dte636jdjrvlb"]
 
 [ext_resource type="Texture2D" uid="uid://bi6ie1r3vbwjc" path="res://Art/UI Placeholder/button_rectangle_flat.png" id="1_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://cwlr6p3ybaoae" path="res://Art/UI Placeholder/button_rectangle_depth_border.png" id="2_yhxw7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c50r1xg4mq3h8" path="res://Art/UI Placeholder/icon_square.png" id="7_5egv6"]
 [ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/level_01.tscn" id="7_yhxw7"]
 [ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/level_03.tscn" id="8_trj04"]
+[ext_resource type="PackedScene" uid="uid://cu8nxipjk23wt" path="res://Scenes/Game Levels/level_04.tscn" id="9_16hvj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("3_trj04")
@@ -184,7 +185,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
-IsLocked = true
+LevelScene = ExtResource("9_16hvj")
 
 [node name="x_06" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
