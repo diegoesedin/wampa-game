@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cu8nxipjk23wt"]
+[gd_scene load_steps=19 format=4 uid="uid://cu8nxipjk23wt"]
 
 [ext_resource type="PackedScene" uid="uid://c1xq008qlc83q" path="res://Scenes/game_manager.tscn" id="1_d4kyk"]
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="2_of8qi"]
@@ -522,6 +522,8 @@ _data = {
 }
 point_count = 21
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5yar0"]
+
 [node name="Gameplay" type="Node2D"]
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("player", "hud") instance=ExtResource("1_d4kyk")]
@@ -617,3 +619,10 @@ position = Vector2(272, 104)
 
 [node name="Goal" parent="." instance=ExtResource("8_0b73e")]
 position = Vector2(272, 266)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(272, 600)
+shape = SubResource("WorldBoundaryShape2D_5yar0")
+debug_color = Color(0, 0.592157, 0, 0.666667)
