@@ -1,6 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://cacvqa3hyf5bt"]
+[gd_scene load_steps=13 format=3 uid="uid://cacvqa3hyf5bt"]
 
 [ext_resource type="Script" uid="uid://i4j1oxu5ul1j" path="res://Code/HUD.cs" id="1_sd512"]
+[ext_resource type="Texture2D" uid="uid://sewr4gbdsbtj" path="res://Art/Sprites/Items/heart_full.png" id="2_jo1ms"]
+[ext_resource type="Texture2D" uid="uid://d3ld2g728mcsw" path="res://Art/Sprites/Items/heart_empty.png" id="2_psnte"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3jbq"]
+atlas = ExtResource("2_psnte")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3eba"]
+atlas = ExtResource("2_psnte")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8s2e"]
+atlas = ExtResource("2_psnte")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t385i"]
+atlas = ExtResource("2_psnte")
+region = Rect2(21, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfm57"]
+atlas = ExtResource("2_psnte")
+region = Rect2(28, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5b84"]
+atlas = ExtResource("2_psnte")
+region = Rect2(35, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbb48"]
+atlas = ExtResource("2_psnte")
+region = Rect2(42, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psnte"]
+atlas = ExtResource("2_jo1ms")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s3jbq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3jbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3eba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8s2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t385i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfm57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5b84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbb48")
+}],
+"loop": false,
+"name": &"empty",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psnte")
+}],
+"loop": false,
+"name": &"full",
+"speed": 5.0
+}]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_sd512")
@@ -22,6 +93,31 @@ offset_right = 69.0
 offset_bottom = 30.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
+
+[node name="HeartContainers" type="HBoxContainer" parent="TopBar"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Heart_01" type="AnimatedSprite2D" parent="TopBar/HeartContainers"]
+position = Vector2(6.5, 15)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_s3jbq")
+animation = &"full"
+autoplay = "full"
+
+[node name="Heart_02" type="AnimatedSprite2D" parent="TopBar/HeartContainers"]
+position = Vector2(24.5, 15)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_s3jbq")
+animation = &"full"
+autoplay = "full"
+
+[node name="Heart_03" type="AnimatedSprite2D" parent="TopBar/HeartContainers"]
+position = Vector2(42.5, 15)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_s3jbq")
+animation = &"full"
+autoplay = "full"
 
 [node name="LivesLabel" type="Label" parent="TopBar"]
 layout_mode = 2

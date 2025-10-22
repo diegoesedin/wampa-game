@@ -585,6 +585,11 @@ radius = 8.33333
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_b4kmf")
+SPEED = 150.0
+GRAVITY = 1400
+FALL_GRAVITY = 1400
+FRICTION = 10.0
+ACCELERATION = 60.0
 MaxLives = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -624,6 +629,7 @@ scale = Vector2(0.62, 0.268)
 shape = SubResource("CapsuleShape2D_yoq75")
 
 [node name="AttackArea" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
 polygon = PackedVector2Array(0, -12, 14, -12, 22, 0, 15, 19, 0, 19)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://didfm10rc7xqc"]
 
-[ext_resource type="Script" uid="uid://dm3nnyfye0hdd" path="res://MovingPlatform.cs" id="1_ffg1o"]
+[ext_resource type="Script" uid="uid://dm3nnyfye0hdd" path="res://Code/Tools/MovingPlatform.cs" id="1_ffg1o"]
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="2_34oui"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbc1i"]
