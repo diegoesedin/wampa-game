@@ -2,19 +2,25 @@ using Godot;
 
 public partial class HUD : CanvasLayer
 {
-    private Label livesLabel;
     private Label timeLabel;
     private Label enemiesLabel;
     private Label maskLabel;
     private Label coinsLabel;
+    
+    private AnimatedSprite2D heart1;
+    private AnimatedSprite2D heart2;
+    private AnimatedSprite2D heart3;
 
     public override void _Ready()
     {
-        livesLabel = GetNode<Label>("TopBar/LivesLabel");
         timeLabel = GetNode<Label>("TopBar/TimeLabel");
         enemiesLabel = GetNode<Label>("TopBar/EnemiesLabel");
         maskLabel = GetNode<Label>("TopBar/MaskLabel");
         coinsLabel = GetNode<Label>("TopBar/CoinsLabel");
+        
+        heart1 = GetNode<AnimatedSprite2D>("TopBar/HeartContainers/Heart_01");
+        heart2 = GetNode<AnimatedSprite2D>("TopBar/HeartContainers/Heart_02");
+        heart3 = GetNode<AnimatedSprite2D>("TopBar/HeartContainers/Heart_03");
     }
 
     public void InitializeHUD(int lives, int killedEnemies, int totalEnemies, bool maskCollected)
@@ -28,17 +34,23 @@ public partial class HUD : CanvasLayer
     public void UpdateTime(float time)
     {
         if (timeLabel == null)
-            return;
+        return;
 
-        int minutes = (int)(time / 60);
-        float seconds = time % 60;
-        timeLabel.Text = $"⏱️: {minutes:00}:{seconds:00.00}";
-    }
+        int seconds = (int)time;
+        int milliseconds = (int)((time - seconds) * 100);
+        timeLabel.Text = $"{seconds:00}.{milliseconds:00}";
+    }   
 
     public void UpdateLives(int lives)
     {
-        if (livesLabel != null)
-            livesLabel.Text = $"❤: {lives}";
+        if (lives >= 1) heart1.Play("full");
+        else heart1.Play("empty");
+        
+        if (lives >= 2) heart2.Play("full");
+        else heart2.Play("empty");
+        
+        if (lives >= 3) heart3.Play("full");
+        else heart3.Play("empty");
     }
 
     public void UpdateEnemies(int killed, int total)

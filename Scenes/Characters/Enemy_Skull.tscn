@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dhc125eawpjl"]
+[gd_scene load_steps=38 format=3 uid="uid://dhc125eawpjl"]
 
 [ext_resource type="Script" uid="uid://hg2d4aqgj4jx" path="res://Code/Enemies/EnemySkull.cs" id="1_cbplc"]
 [ext_resource type="Texture2D" uid="uid://mrmf8xmklv0p" path="res://Art/Sprites/EnemySkull/skull_death.png" id="1_jc68m"]
@@ -248,7 +248,9 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_en38v"]
 
-[node name="EnemySkull" type="Node2D" groups=["Enemy"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5i7ck"]
+
+[node name="EnemySkull" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_cbplc")
 MaxHealth = 1
 attackCooldown = 0.5
@@ -280,3 +282,10 @@ position = Vector2(9, -2)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_en38v")
 debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+rotation = 2.26893
+scale = Vector2(0.45, 0.45)
+shape = SubResource("CapsuleShape2D_5i7ck")
+debug_color = Color(0.9, 0.405, 0, 0.419608)

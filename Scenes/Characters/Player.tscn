@@ -361,8 +361,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fgqou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujsok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txwsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i10l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgqou")
 }],
-"loop": true,
+"loop": false,
 "name": &"Dance",
 "speed": 3.0
 }, {
@@ -588,15 +600,16 @@ script = ExtResource("1_b4kmf")
 SPEED = 150.0
 GRAVITY = 1400
 FALL_GRAVITY = 1400
-FRICTION = 10.0
-ACCELERATION = 60.0
-MaxLives = 100
+FRICTION = 15.0
+ACCELERATION = 50.0
+DASH_SPEED = 300.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Idle"
+animation = &"Dance"
 autoplay = "Idle"
-frame_progress = 0.868673
+frame = 7
+frame_progress = 1.0
 speed_scale = 1.7
 
 [node name="StandingCollision" type="CollisionShape2D" parent="."]

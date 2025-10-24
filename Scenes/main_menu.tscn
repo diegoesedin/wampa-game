@@ -1,15 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://dte636jdjrvlb"]
+[gd_scene load_steps=16 format=3 uid="uid://dte636jdjrvlb"]
 
 [ext_resource type="Texture2D" uid="uid://bi6ie1r3vbwjc" path="res://Art/UI Placeholder/button_rectangle_flat.png" id="1_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://cwlr6p3ybaoae" path="res://Art/UI Placeholder/button_rectangle_depth_border.png" id="2_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://moynt57jq32f" path="res://Art/UI Placeholder/check_square_color.png" id="3_trj04"]
 [ext_resource type="Texture2D" uid="uid://cbbrn56ds6v5b" path="res://Art/UI Placeholder/check_square_color_cross.png" id="4_16hvj"]
 [ext_resource type="Script" uid="uid://d0qw7267umcnj" path="res://Code/Tools/LevelSelectButton.cs" id="5_vr1f0"]
-[ext_resource type="PackedScene" uid="uid://dfbleyiio3dfm" path="res://Scenes/Game Levels/level_00.tscn" id="6_yhxw7"]
+[ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/lvl_01.tscn" id="6_trj04"]
 [ext_resource type="Texture2D" uid="uid://c50r1xg4mq3h8" path="res://Art/UI Placeholder/icon_square.png" id="7_5egv6"]
-[ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/level_01.tscn" id="7_yhxw7"]
-[ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/level_03.tscn" id="8_trj04"]
-[ext_resource type="PackedScene" uid="uid://cu8nxipjk23wt" path="res://Scenes/Game Levels/level_04.tscn" id="9_16hvj"]
+[ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/lvl_02.tscn" id="7_trj04"]
+[ext_resource type="PackedScene" uid="uid://dxkiimqqlly0p" path="res://Scenes/Game Levels/lvl_03.tscn" id="8_vr1f0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("3_trj04")
@@ -130,7 +129,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
-LevelScene = ExtResource("6_yhxw7")
+IsLocked = true
 
 [node name="x_03" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
@@ -161,7 +160,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
-LevelScene = ExtResource("7_yhxw7")
+LevelScene = ExtResource("6_trj04")
 
 [node name="Level_03" type="Button" parent="LevelMap/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -172,7 +171,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
-LevelScene = ExtResource("8_trj04")
+LevelScene = ExtResource("7_trj04")
 
 [node name="Level_04" type="Button" parent="LevelMap/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -185,7 +184,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
-LevelScene = ExtResource("9_16hvj")
+LevelScene = ExtResource("8_vr1f0")
 
 [node name="x_06" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)

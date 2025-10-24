@@ -16,7 +16,7 @@ public partial class Player : CharacterBody2D
     private const float DASH_TIME = 0.2f;
     [Export] public float KNOCKBACK_FORCE = 500f;
     [Export] private float KNOCKBACK_DURATION = 0.4f;
-    [Export] private float INVULNERABILITY_TIME = 0.6f;
+    
 
     // -------------------- VIDA --------------------
     [Export] public int MaxLives = 3;
@@ -72,6 +72,7 @@ public partial class Player : CharacterBody2D
         crouchingCollision = GetNode<CollisionShape2D>("CrouchingCollision");
 
         currentSpeed = SPEED;
+
         CurrentLives = MaxLives;
     }
     // ==========================================================
@@ -122,7 +123,6 @@ public partial class Player : CharacterBody2D
             coyoteTimer = COYOTE_TIME;
         }
     }
-
     private float GetGravity(Vector2 vel)
     {
         return vel.Y < 0 ? GRAVITY : FALL_GRAVITY;
@@ -403,10 +403,20 @@ public partial class Player : CharacterBody2D
             animation.Play("Fall");
         }
 
-        if(animation.Animation == "Hurt")
+        if (animation.Animation == "Hurt")
         {
             isForcedAnimation = false;
             isInvulnerable = false;
+        }
+
+        if (animation.Animation == "Death")
+        {
+            CallDeferred("ResetToMainMenu");
+        }
+        
+        if (animation.Animation == "Dance")
+        {
+            CallDeferred("ResetToMainMenu");
         }
     }
 

@@ -61,7 +61,7 @@ public partial class GameManager : Node2D
             }
         }
 
-        hud.CallDeferred(nameof(HUD.InitializeHUD), player.CurrentLives, enemiesKilled, totalEnemies, maskCollected);
+        hud.CallDeferred(nameof(HUD.InitializeHUD), player.MaxLives, enemiesKilled, totalEnemies, maskCollected);
         //ejecuta InitializeHUD un frame despues, lo del nameof() en vez del string supuestamente es mas prolijo y seguro
     }
 
