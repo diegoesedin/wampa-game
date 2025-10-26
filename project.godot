@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="wampa"
-run/main_scene="uid://dte636jdjrvlb"
+run/main_scene="uid://c1drstfvcxvfm"
+run/print_header=false
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
+boot_splash/use_filter=false
+boot_splash/image="uid://d3rc8vq1avqer"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1000
 
 [display]
 
@@ -22,6 +26,7 @@ window/size/viewport_height=270
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://bpq71ebmbth5m"
 
 [dotnet]
 
