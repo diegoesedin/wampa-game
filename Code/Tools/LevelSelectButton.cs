@@ -4,6 +4,7 @@ public partial class LevelSelectButton : Button
 {
     [Export] public PackedScene LevelScene { get; set; }
     [Export] public bool IsLocked { get; set; } = false;
+    [Export] public bool IsFirstButton { get; set; } = false;
 
     public override void _Ready()
     {
@@ -16,6 +17,11 @@ public partial class LevelSelectButton : Button
         else
         {
             Disabled = false;
+            
+            if (IsFirstButton)
+            {
+                CallDeferred("grab_focus");
+            }
         }
     }
 
@@ -38,4 +44,3 @@ public partial class LevelSelectButton : Button
         }
     }
 }
-

@@ -1,14 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://dte636jdjrvlb"]
+[gd_scene load_steps=17 format=3 uid="uid://dte636jdjrvlb"]
 
 [ext_resource type="Texture2D" uid="uid://bi6ie1r3vbwjc" path="res://Art/UI Placeholder/button_rectangle_flat.png" id="1_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://cwlr6p3ybaoae" path="res://Art/UI Placeholder/button_rectangle_depth_border.png" id="2_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://moynt57jq32f" path="res://Art/UI Placeholder/check_square_color.png" id="3_trj04"]
 [ext_resource type="Texture2D" uid="uid://cbbrn56ds6v5b" path="res://Art/UI Placeholder/check_square_color_cross.png" id="4_16hvj"]
+[ext_resource type="Texture2D" uid="uid://bpq71ebmbth5m" path="res://Media/cursor_wampa.png" id="4_vr1f0"]
 [ext_resource type="Script" uid="uid://d0qw7267umcnj" path="res://Code/Tools/LevelSelectButton.cs" id="5_vr1f0"]
 [ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/lvl_01.tscn" id="6_trj04"]
-[ext_resource type="Texture2D" uid="uid://c50r1xg4mq3h8" path="res://Art/UI Placeholder/icon_square.png" id="7_5egv6"]
 [ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/lvl_02.tscn" id="7_trj04"]
 [ext_resource type="PackedScene" uid="uid://dxkiimqqlly0p" path="res://Scenes/Game Levels/lvl_03.tscn" id="8_vr1f0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t1dhk"]
+texture = ExtResource("4_vr1f0")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("3_trj04")
@@ -16,7 +19,7 @@ modulate_color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dy7ct"]
 texture = ExtResource("3_trj04")
-modulate_color = Color(0.47, 0.47, 0.47, 1)
+modulate_color = Color(1, 0.9, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0o4t1"]
 texture = ExtResource("4_16hvj")
@@ -49,22 +52,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.062457, 0, 0.000810734, 1)
 
-[node name="LevelMap" type="VBoxContainer" parent="."]
+[node name="CenterPanel" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -190.0
+offset_left = -87.5
 offset_top = -109.0
-offset_right = -15.0
+offset_right = 87.5
 offset_bottom = 109.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -1
 
-[node name="Title" type="NinePatchRect" parent="LevelMap"]
+[node name="Title" type="NinePatchRect" parent="CenterPanel"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("1_cp0ys")
@@ -73,7 +76,7 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="Label" type="Label" parent="LevelMap/Title"]
+[node name="LevelName" type="Label" parent="CenterPanel/Title"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,7 +88,7 @@ text = "- mapa -"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="NinePatchRect" parent="LevelMap"]
+[node name="Panel" type="NinePatchRect" parent="CenterPanel"]
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 texture = ExtResource("2_yhxw7")
@@ -93,7 +96,7 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="LevelGrid" type="GridContainer" parent="LevelMap/Panel"]
+[node name="LevelGrid" type="GridContainer" parent="CenterPanel/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,22 +111,23 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 5
 
-[node name="x_01" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_01" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="x_02" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_02" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="Level_01" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_01" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_glbon")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -131,28 +135,29 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="x_03" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_03" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="x_04" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_04" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="x_05" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_05" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="Level_02" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_02" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -161,11 +166,13 @@ text = "
 "
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("6_trj04")
+IsFirstButton = true
 
-[node name="Level_03" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_03" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -173,10 +180,11 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("7_trj04")
 
-[node name="Level_04" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_04" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -186,16 +194,17 @@ text = "
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("8_vr1f0")
 
-[node name="x_06" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_06" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="Level_05" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_05" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -205,10 +214,11 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="Level_06" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_06" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -218,16 +228,17 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="x_07" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_07" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="Level_07" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_07" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -237,10 +248,11 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="Level_08" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_08" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -250,16 +262,17 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="x_08" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_08" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="Level_09" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_09" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -269,10 +282,11 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="Level_10" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_10" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -282,10 +296,11 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="Level_11" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_11" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -295,28 +310,29 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="x_09" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_09" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="x_10" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_10" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="x_11" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_11" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="Level_12" type="Button" parent="LevelMap/Panel/LevelGrid"]
+[node name="Level_12" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
 theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
@@ -326,138 +342,122 @@ text = "
 script = ExtResource("5_vr1f0")
 IsLocked = true
 
-[node name="x_12" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_12" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="x_13" type="TextureRect" parent="LevelMap/Panel/LevelGrid"]
+[node name="x_13" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
 layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="LevelInfo" type="VBoxContainer" parent="."]
+[node name="RightPanel" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-offset_left = 277.0
-offset_top = 26.0
-offset_right = 452.0
-offset_bottom = 240.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -1
-
-[node name="Title" type="NinePatchRect" parent="LevelInfo"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-texture = ExtResource("1_cp0ys")
+offset_left = 330.0
+offset_top = 100.0
+offset_right = 429.0
+offset_bottom = 200.0
+texture = ExtResource("2_yhxw7")
 patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
-[node name="Label" type="Label" parent="LevelInfo/Title"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 15
-text = "- info -"
-horizontal_alignment = 1
+[node name="Stats" type="VBoxContainer" parent="RightPanel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 82.0
+offset_bottom = 81.0
+
+[node name="HeartsLabel" type="Label" parent="RightPanel/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "❤️: 0"
 vertical_alignment = 1
 
-[node name="Panel" type="NinePatchRect" parent="LevelInfo"]
-custom_minimum_size = Vector2(0, 175)
+[node name="TimeLabel" type="Label" parent="RightPanel/Stats"]
 layout_mode = 2
-texture = ExtResource("2_yhxw7")
-patch_margin_top = 20
-patch_margin_right = 20
-patch_margin_bottom = 20
+theme_override_font_sizes/font_size = 7
+text = " ⏳ 00:00 "
+vertical_alignment = 1
 
-[node name="MedalsGrid" type="GridContainer" parent="LevelInfo/Panel"]
+[node name="EnemiesLabel" type="Label" parent="RightPanel/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "💀: 0/0"
+vertical_alignment = 1
+
+[node name="MaskLabel" type="Label" parent="RightPanel/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "☀️: no"
+vertical_alignment = 1
+
+[node name="CoinsLabel" type="Label" parent="RightPanel/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 7
+text = "💰: 00"
+vertical_alignment = 1
+
+[node name="Medals" type="HBoxContainer" parent="RightPanel"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -16.5
-offset_top = -91.0
-offset_right = 16.5
-offset_bottom = -58.0
+offset_left = -33.5
+offset_top = -14.0
+offset_right = 33.5
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(3.5, 3.5)
-pivot_offset = Vector2(16.5, 16.5)
-theme_override_constants/h_separation = 1
-theme_override_constants/v_separation = 1
-columns = 2
 
-[node name="TextureRect" type="TextureRect" parent="LevelInfo/Panel/MedalsGrid"]
+[node name="HeartsMedal" type="Label" parent="RightPanel/Medals"]
 layout_mode = 2
-texture = ExtResource("7_5egv6")
-
-[node name="❤" type="Label" parent="LevelInfo/Panel/MedalsGrid/TextureRect"]
-layout_mode = 0
-offset_left = 3.21429
-offset_top = 3.21429
-offset_right = 13.2143
-offset_bottom = 14.2143
-theme_override_font_sizes/font_size = 7
-text = "❤"
-
-[node name="TextureRect2" type="TextureRect" parent="LevelInfo/Panel/MedalsGrid"]
-layout_mode = 2
-texture = ExtResource("7_5egv6")
-
-[node name="⏱️" type="Label" parent="LevelInfo/Panel/MedalsGrid/TextureRect2"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 3.0
-offset_right = 12.0
-offset_bottom = 14.0
-theme_override_font_sizes/font_size = 7
-text = "⏱️"
-
-[node name="TextureRect3" type="TextureRect" parent="LevelInfo/Panel/MedalsGrid"]
-layout_mode = 2
-texture = ExtResource("7_5egv6")
-
-[node name="💀" type="Label" parent="LevelInfo/Panel/MedalsGrid/TextureRect3"]
-layout_mode = 0
-offset_left = 3.21429
-offset_top = 3.21429
-offset_right = 13.2143
-offset_bottom = 14.2143
-theme_override_font_sizes/font_size = 7
-text = "💀"
-
-[node name="TextureRect4" type="TextureRect" parent="LevelInfo/Panel/MedalsGrid"]
-layout_mode = 2
-texture = ExtResource("7_5egv6")
-
-[node name="☀️" type="Label" parent="LevelInfo/Panel/MedalsGrid/TextureRect4"]
-layout_mode = 0
-offset_left = 3.21429
-offset_top = 3.21429
-offset_right = 13.2143
-offset_bottom = 14.2143
-theme_override_font_sizes/font_size = 7
-text = "☀️"
-
-[node name="LevelName" type="Label" parent="LevelInfo/Panel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -47.5
-offset_top = 17.0
-offset_right = 47.5
-offset_bottom = 40.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 10
-text = "- nombre del nivel -"
+text = "❤️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeMedal" type="Label" parent="RightPanel/Medals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "⏳"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemiesMedal" type="Label" parent="RightPanel/Medals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "💀"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaskMedal" type="Label" parent="RightPanel/Medals"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "☀️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeftPanel" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 52.0
+offset_top = -35.0
+offset_right = 151.0
+offset_bottom = 65.0
+grow_vertical = 2
+texture = ExtResource("2_yhxw7")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
