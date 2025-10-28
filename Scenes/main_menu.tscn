@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dte636jdjrvlb"]
+[gd_scene load_steps=18 format=3 uid="uid://dte636jdjrvlb"]
 
 [ext_resource type="Texture2D" uid="uid://bi6ie1r3vbwjc" path="res://Art/UI Placeholder/button_rectangle_flat.png" id="1_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://cwlr6p3ybaoae" path="res://Art/UI Placeholder/button_rectangle_depth_border.png" id="2_yhxw7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/lvl_01.tscn" id="6_trj04"]
 [ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/lvl_02.tscn" id="7_trj04"]
 [ext_resource type="PackedScene" uid="uid://dxkiimqqlly0p" path="res://Scenes/Game Levels/lvl_03.tscn" id="8_vr1f0"]
+[ext_resource type="Script" uid="uid://bq4erb737xaw" path="res://Code/Tools/LevelInfoDisplay.cs" id="10_16hvj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t1dhk"]
 texture = ExtResource("4_vr1f0")
@@ -167,6 +168,12 @@ text = "
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("6_trj04")
 IsFirstButton = true
+LevelName = "Templo"
+Timer = 3.33
+Coins = 15
+EnemiesKilled = 1
+HeartsRemaining = 2
+HasMaskMedal = true
 
 [node name="Level_03" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -179,6 +186,14 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("7_trj04")
+LevelName = "Desierto"
+Timer = 4.56
+Coins = 10
+EnemiesKilled = 3
+MaskCollected = true
+HeartsRemaining = 1
+HasHeartsMedal = true
+HasEnemiesMedal = true
 
 [node name="Level_04" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -193,6 +208,15 @@ text = "
 "
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("8_vr1f0")
+LevelName = "Mal Viaje"
+Timer = 11.11
+Coins = 3
+EnemiesKilled = 1
+HeartsRemaining = 3
+HasHeartsMedal = true
+HasTimeMedal = true
+HasEnemiesMedal = true
+HasMaskMedal = true
 
 [node name="x_06" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
@@ -354,7 +378,7 @@ layout_mode = 2
 texture = ExtResource("3_trj04")
 expand_mode = 2
 
-[node name="RightPanel" type="NinePatchRect" parent="."]
+[node name="LevelInfoDisplay" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 offset_left = 330.0
@@ -366,45 +390,46 @@ patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
+script = ExtResource("10_16hvj")
 
-[node name="Stats" type="VBoxContainer" parent="RightPanel"]
+[node name="Stats" type="VBoxContainer" parent="LevelInfoDisplay"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 10.0
 offset_right = 82.0
 offset_bottom = 81.0
 
-[node name="HeartsLabel" type="Label" parent="RightPanel/Stats"]
+[node name="HeartsLabel" type="Label" parent="LevelInfoDisplay/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "❤️: 0"
 vertical_alignment = 1
 
-[node name="TimeLabel" type="Label" parent="RightPanel/Stats"]
+[node name="TimeLabel" type="Label" parent="LevelInfoDisplay/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = " ⏳ 00:00 "
 vertical_alignment = 1
 
-[node name="EnemiesLabel" type="Label" parent="RightPanel/Stats"]
+[node name="EnemiesLabel" type="Label" parent="LevelInfoDisplay/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "💀: 0/0"
 vertical_alignment = 1
 
-[node name="MaskLabel" type="Label" parent="RightPanel/Stats"]
+[node name="MaskLabel" type="Label" parent="LevelInfoDisplay/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "☀️: no"
 vertical_alignment = 1
 
-[node name="CoinsLabel" type="Label" parent="RightPanel/Stats"]
+[node name="CoinsLabel" type="Label" parent="LevelInfoDisplay/Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 7
 text = "💰: 00"
 vertical_alignment = 1
 
-[node name="Medals" type="HBoxContainer" parent="RightPanel"]
+[node name="Medals" type="HBoxContainer" parent="LevelInfoDisplay"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -417,28 +442,28 @@ offset_right = 33.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HeartsMedal" type="Label" parent="RightPanel/Medals"]
+[node name="HeartsMedal" type="Label" parent="LevelInfoDisplay/Medals"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "❤️"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimeMedal" type="Label" parent="RightPanel/Medals"]
+[node name="TimeMedal" type="Label" parent="LevelInfoDisplay/Medals"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "⏳"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnemiesMedal" type="Label" parent="RightPanel/Medals"]
+[node name="EnemiesMedal" type="Label" parent="LevelInfoDisplay/Medals"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "💀"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MaskMedal" type="Label" parent="RightPanel/Medals"]
+[node name="MaskMedal" type="Label" parent="LevelInfoDisplay/Medals"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "☀️"
