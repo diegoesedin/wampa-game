@@ -1,13 +1,18 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class EnemySkull : CharacterBody2D
 {
     [Export] private PackedScene projectile;
     [Export] private int MaxHealth = 3;
+    [Export] private float attackCooldown = 2.0f;
+    
     private int currentHealth;
-
     private AnimatedSprite2D animation;
+    private Area2D attackArea;
+    private AnimatedSprite2D weapon;
+    private bool isAttacking = false;
+    private float attackTimer = 0f;
 
     private Player player;
     private Rid playerAttackArea;
@@ -28,16 +33,32 @@ public partial class EnemySkull : CharacterBody2D
 
         animation = GetNode<AnimatedSprite2D>("SkullSprite");
         animation.Play("Idle");
-
         animation.AnimationFinished += OnAnimationFinished;
 
         var area = GetNode<Area2D>("DetectionArea");
         area.BodyEntered += _OnDetectionAreaBodyEntered;
         area.BodyExited += _OnDetectionAreaBodyExited;
+        weapon = GetNode<AnimatedSprite2D>("AttackArea/BoneSprite");
+        weapon.AnimationFinished += OnAnimationFinished;
+        attackArea = GetNode<Area2D>("AttackArea");
+        //attackArea.Visible = false;
+        attackArea.Monitoring = false;
+        attackArea.BodyEntered += OnAttackAreaBodyEntered;
+        
+        attackTimer = attackCooldown;
     }
 
     public override void _Process(double delta)
     {
+        /*if (currentHealth <= 0 || isAttacking) return;
+
+        attackTimer -= (float)delta;
+
+        if (attackTimer <= 0)
+        {
+            Attack();
+        }*/
+        
         if (playerOnRange)
         {
             // dependiendo de que lado está el jugador, flipeamos al enemigo
@@ -56,7 +77,9 @@ public partial class EnemySkull : CharacterBody2D
                     CollideWithAreas = true,
                     CollideWithBodies = true,
                     Exclude = new Godot.Collections.Array<Rid> { this.GetRid() },
-                    CollisionMask = 1 << 1
+                    // (1u << 0) es Capa 1 (world)
+                    // (1u << 1) es Capa 2 (player)
+                    CollisionMask = (1u << 0) | (1u << 1)
                 });
                 
                 if (rayResult.Count > 0 && rayResult.TryGetValue("collider", out var colliderValue))
@@ -84,6 +107,24 @@ public partial class EnemySkull : CharacterBody2D
         else
         {
             canShoot = true;
+        }
+    }
+
+    private void Attack()
+    {
+        //attackArea.Visible = true;
+        
+        isAttacking = true;
+        attackArea.Monitoring = true;
+        weapon.Play("attack");
+        attackTimer = attackCooldown;
+    }
+
+    private void OnAttackAreaBodyEntered(Node2D body)
+    {
+        if (body is Player player)
+        {
+            player.TakeDamage(1, GlobalPosition);
         }
     }
 
@@ -139,6 +180,16 @@ public partial class EnemySkull : CharacterBody2D
         if (body is Player)
         {
             playerOnRange = false;
+        }
+
+        if (weapon.Animation == "attack")
+        {
+            //attackArea.Visible = false;
+            
+            isAttacking = false;
+            attackArea.Monitoring = false;
+            animation.Play("Idle");
+            weapon.Play("prepare");
         }
     }
 }

@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://x5e58w1orbau"]
+
+[ext_resource type="Texture2D" uid="uid://c1yl61s3jntr" path="res://Art/Sprites/EnemySkull/skull_tooth.png" id="1_bdvhq"]
+[ext_resource type="Script" uid="uid://c1mfmbbefra4r" path="res://Code/Items/Tooth.cs" id="1_uq3g5"]
+
+[sub_resource type="Animation" id="Animation_bdvhq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uq3g5"]
+resource_name = "flying"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [7.76672, 7.85398, 7.94125]
+}
+
+[sub_resource type="Animation" id="Animation_6n2fg"]
+resource_name = "rotate"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 7.27802, 7.85398, 7.76672]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2peqa"]
+_data = {
+&"RESET": SubResource("Animation_bdvhq"),
+&"fly": SubResource("Animation_uq3g5"),
+&"shoot": SubResource("Animation_6n2fg")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bdvhq"]
+radius = 3.0
+
+[node name="Tooth" type="Node2D"]
+script = ExtResource("1_uq3g5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.004, -0.005)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("1_bdvhq")
+offset = Vector2(0, 1.81818)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2peqa")
+}
+autoplay = "shoot"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_bdvhq")

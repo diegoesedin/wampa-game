@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\usuario\\Documents\\GitHub\\wampa-game\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2B78FEFE-F2CC-4AD8-8173-A6957714AB59}|wampa.csproj|c:\\users\\usuario\\documents\\github\\wampa-game\\code\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B78FEFE-F2CC-4AD8-8173-A6957714AB59}|wampa.csproj|solutionrelative:code\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2B78FEFE-F2CC-4AD8-8173-A6957714AB59}|wampa.csproj|c:\\users\\usuario\\documents\\github\\wampa-game\\code\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2B78FEFE-F2CC-4AD8-8173-A6957714AB59}|wampa.csproj|solutionrelative:code\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,6 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\wampa-game\\Code\\GameManager.cs",
+              "RelativeDocumentMoniker": "Code\\GameManager.cs",
+              "ToolTip": "C:\\Users\\usuario\\Documents\\GitHub\\wampa-game\\Code\\GameManager.cs",
+              "RelativeToolTip": "Code\\GameManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T12:44:16.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\usuario\\Documents\\GitHub\\wampa-game\\Code\\Player\\Player.cs",
               "RelativeDocumentMoniker": "Code\\Player\\Player.cs",
@@ -26,8 +43,11 @@
               "RelativeToolTip": "Code\\Player\\Player.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T12:53:26.022Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-14T12:53:26.022Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

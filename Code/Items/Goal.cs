@@ -1,6 +1,7 @@
 using Godot;
+using System;
 
-public partial class SunMask : Node2D
+public partial class Goal : Node2D
 {
     private Area2D area;
 
@@ -15,10 +16,11 @@ public partial class SunMask : Node2D
         if (body.IsInGroup("Player"))
         {
             var playerScript = body as Player;
-            playerScript?.PickUpMask();
+            playerScript?.CompleteLevel();
 
             QueueFree();
         }
     }
+
 
 }

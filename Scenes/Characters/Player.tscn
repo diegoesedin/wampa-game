@@ -361,8 +361,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fgqou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujsok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txwsf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i10l2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgqou")
 }],
-"loop": true,
+"loop": false,
 "name": &"Dance",
 "speed": 3.0
 }, {
@@ -544,7 +556,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Mask",
-"speed": 6.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -581,25 +593,30 @@ radius = 7.14286
 height = 27.1293
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoq75"]
+radius = 8.33333
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("standigCollision", "crouchingCollision") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_b4kmf")
 SPEED = 150.0
-standigCollision = NodePath("StandingCollision")
-crouchingCollision = NodePath("CrouchingCollision")
+GRAVITY = 1400
+FALL_GRAVITY = 1400
+FRICTION = 15.0
+ACCELERATION = 50.0
+DASH_SPEED = 300.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
 animation = &"Dance"
 autoplay = "Idle"
-frame_progress = 0.840468
+frame = 7
+frame_progress = 1.0
 speed_scale = 1.7
 
 [node name="StandingCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8.62)
-scale = Vector2(0.7, 0.526)
+scale = Vector2(0.7, 0.525)
 shape = SubResource("CapsuleShape2D_kyqiw")
 
 [node name="CrouchingCollision" type="CollisionShape2D" parent="."]
@@ -613,12 +630,27 @@ zoom = Vector2(1.25, 1.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+input_pickable = false
+
+[node name="StandingHurtbox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 8.62)
+scale = Vector2(0.72, 0.541)
+shape = SubResource("CapsuleShape2D_kyqiw")
+
+[node name="CrouchingHurtbox" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 11.85)
+scale = Vector2(0.62, 0.268)
+shape = SubResource("CapsuleShape2D_yoq75")
+
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
-polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)
+polygon = PackedVector2Array(0, -12, 14, -12, 22, 0, 15, 19, 0, 19)
 
 [connection signal="area_entered" from="AttackArea" to="." method="OnAttackAreaAreaEntered"]
