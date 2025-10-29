@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cbbrn56ds6v5b" path="res://Art/UI Placeholder/check_square_color_cross.png" id="4_16hvj"]
 [ext_resource type="Texture2D" uid="uid://bpq71ebmbth5m" path="res://Media/cursor_wampa.png" id="4_vr1f0"]
 [ext_resource type="Script" uid="uid://d0qw7267umcnj" path="res://Code/Tools/LevelSelectButton.cs" id="5_vr1f0"]
-[ext_resource type="PackedScene" path="res://Scenes/Game Levels/level_01.tscn" id="6_trj04"]
+[ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/lvl_01.tscn" id="6_trj04"]
 [ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/lvl_02.tscn" id="7_trj04"]
 [ext_resource type="PackedScene" uid="uid://dxkiimqqlly0p" path="res://Scenes/Game Levels/lvl_03.tscn" id="8_vr1f0"]
 [ext_resource type="Script" uid="uid://bq4erb737xaw" path="res://Code/Tools/LevelInfoDisplay.cs" id="10_16hvj"]

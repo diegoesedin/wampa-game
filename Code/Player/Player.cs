@@ -3,6 +3,16 @@ using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
+    enum State
+    {
+        Idle,
+        Move,
+        Attack,
+        Hurt,
+        Crouch,
+        Frozen
+    }
+    
     // -------------------- MOVIMIENTO --------------------
     [Export] private float SPEED = 175f;
     [Export] private int GRAVITY = 1500;
@@ -16,6 +26,7 @@ public partial class Player : CharacterBody2D
     private const float DASH_TIME = 0.2f;
     [Export] public float KNOCKBACK_FORCE = 500f;
     [Export] private float KNOCKBACK_DURATION = 0.4f;
+    [Export] private float INVULNERABLE_TIMER = 1f;
     
 
     // -------------------- VIDA --------------------
@@ -23,6 +34,7 @@ public partial class Player : CharacterBody2D
     public int CurrentLives { get; private set; }
 
     // -------------------- ESTADOS --------------------
+    private State state = State.Idle;
     private float currentSpeed;
     private bool isInAir = false;
     private bool isDashing;
@@ -34,6 +46,7 @@ public partial class Player : CharacterBody2D
     private bool isInvulnerable = false;
     private bool isKnockedBack = false;
     private double knockbackTimer = 0;
+    private double invulnerableTimer = 1;
 
     // -------------------- COMPONENTES --------------------
     private AnimatedSprite2D animation;
@@ -79,6 +92,7 @@ public partial class Player : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         DevTools();
+        HandleInvulnerability(delta);
 
         if (blockPlayerControl) return;
 
@@ -269,6 +283,7 @@ public partial class Player : CharacterBody2D
     // ========= RECIBIR DAÑO =================================================
     public void TakeDamage(int damage, Vector2? sourcePosition = null)
     {
+        GD.Print($"Player damage {damage} - {CurrentLives}/{MaxLives}");
         if (CurrentLives <= 0) return;
 
         if (!isInvulnerable)
@@ -279,6 +294,7 @@ public partial class Player : CharacterBody2D
             animation.Play("Hurt");
             isForcedAnimation = true;
             isInvulnerable = true;
+            invulnerableTimer = INVULNERABLE_TIMER;
             
             if (CurrentLives <= 0)
             {
@@ -358,6 +374,19 @@ public partial class Player : CharacterBody2D
             }
         }
     }
+
+    private void HandleInvulnerability(double delta)
+    {
+        if (isInvulnerable)
+        {
+            invulnerableTimer -= delta;
+            if (invulnerableTimer < 0)
+            {
+                isInvulnerable = false;
+            }
+        }
+    }
+    
     // ==========================================================
     private void Die()
     {
@@ -409,7 +438,6 @@ public partial class Player : CharacterBody2D
         if (animation.Animation == "Hurt")
         {
             isForcedAnimation = false;
-            isInvulnerable = false;
         }
 
         if (animation.Animation == "Death")

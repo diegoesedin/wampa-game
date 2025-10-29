@@ -6,6 +6,7 @@ public partial class EnemySkull : CharacterBody2D
     [Export] private PackedScene projectile;
     [Export] private int MaxHealth = 3;
     [Export] private float attackCooldown = 2.0f;
+    [Export] private bool meeleEnemy;
     
     private int currentHealth;
     private AnimatedSprite2D animation;
@@ -50,70 +51,77 @@ public partial class EnemySkull : CharacterBody2D
 
     public override void _Process(double delta)
     {
-        /*if (currentHealth <= 0 || isAttacking) return;
-
-        attackTimer -= (float)delta;
-
-        if (attackTimer <= 0)
+        // dependiendo de que lado está el jugador, flipeamos al enemigo
+        if (raycastToPosition != null)
         {
-            Attack();
-        }*/
-        
-        if (playerOnRange)
-        {
-            // dependiendo de que lado está el jugador, flipeamos al enemigo
             var angle = GlobalPosition.AngleToPoint(raycastToPosition.GlobalPosition);
             var scale = Mathf.Abs(angle) < Math.PI / 2 ? 1 : -1;
             Scale = new Vector2(scale, 1);
-            
-            if (canShoot)
-            {
-                //animation.Play("Shoot");
-                var spaceState = GetWorld2D().DirectSpaceState;
-                var rayResult = spaceState.IntersectRay(new PhysicsRayQueryParameters2D()
-                {
-                    From = this.GlobalPosition,
-                    To = raycastToPosition.GlobalPosition,
-                    CollideWithAreas = true,
-                    CollideWithBodies = true,
-                    Exclude = new Godot.Collections.Array<Rid> { this.GetRid() },
-                    // (1u << 0) es Capa 1 (world)
-                    // (1u << 1) es Capa 2 (player)
-                    CollisionMask = (1u << 0) | (1u << 1)
-                });
-                
-                if (rayResult.Count > 0 && rayResult.TryGetValue("collider", out var colliderValue))
-                {
-                    projectileSpawn.LookAt(raycastToPosition.GlobalPosition);
-                    var hitCollider = colliderValue.As<GodotObject>();
-                    if (ReferenceEquals(hitCollider, player))
-                    {
-                        var bullet = projectile.Instantiate<Projectile>();
-                        Owner.AddChild(bullet);
-                        bullet.GlobalTransform = projectileSpawn.GlobalTransform;
-                        canShoot = false;
-                        shootCooldownTimer = shootCooldown;
-                        animation.Play("Shoot");
-                    }
-                }
-                
-            }
         }
-
-        if (shootCooldownTimer > 0f)
+        
+        if (meeleEnemy)
         {
-            shootCooldownTimer -= (float)delta;
+            if (currentHealth <= 0 || isAttacking) return;
+        
+            attackTimer -= (float)delta;
+
+            if (attackTimer <= 0)
+            {
+                Attack();
+            }
         }
         else
         {
-            canShoot = true;
+            if (playerOnRange)
+            {
+                if (canShoot && raycastToPosition != null)
+                {
+                    //animation.Play("Shoot");
+                    var spaceState = GetWorld2D().DirectSpaceState;
+                    var rayResult = spaceState.IntersectRay(new PhysicsRayQueryParameters2D()
+                    {
+                        From = this.GlobalPosition,
+                        To = raycastToPosition.GlobalPosition,
+                        CollideWithAreas = true,
+                        CollideWithBodies = true,
+                        Exclude = new Godot.Collections.Array<Rid> { this.GetRid() },
+                        // (1u << 0) es Capa 1 (world)
+                        // (1u << 1) es Capa 2 (player)
+                        CollisionMask = (1u << 0) | (1u << 1)
+                    });
+                
+                    if (rayResult.Count > 0 && rayResult.TryGetValue("collider", out var colliderValue))
+                    {
+                        projectileSpawn.LookAt(raycastToPosition.GlobalPosition);
+                        var hitCollider = colliderValue.As<GodotObject>();
+                        if (ReferenceEquals(hitCollider, player))
+                        {
+                            var bullet = projectile.Instantiate<Projectile>();
+                            Owner.AddChild(bullet);
+                            bullet.GlobalTransform = projectileSpawn.GlobalTransform;
+                            canShoot = false;
+                            shootCooldownTimer = shootCooldown;
+                            animation.Play("Shoot");
+                        }
+                    }
+                
+                }
+            }
+
+            if (shootCooldownTimer > 0f)
+            {
+                shootCooldownTimer -= (float)delta;
+            }
+            else
+            {
+                canShoot = true;
+            }
         }
     }
 
     private void Attack()
     {
         //attackArea.Visible = true;
-        
         isAttacking = true;
         attackArea.Monitoring = true;
         weapon.Play("attack");
@@ -159,6 +167,16 @@ public partial class EnemySkull : CharacterBody2D
         {
             animation.Play("Idle");
         }
+        
+        if (weapon.Animation == "attack")
+        {
+            //attackArea.Visible = false;
+            
+            isAttacking = false;
+            attackArea.Monitoring = false;
+            animation.Play("Idle");
+            weapon.Play("prepare");
+        }
     }
 
     private void _OnDetectionAreaBodyEntered(object body)
@@ -182,14 +200,6 @@ public partial class EnemySkull : CharacterBody2D
             playerOnRange = false;
         }
 
-        if (weapon.Animation == "attack")
-        {
-            //attackArea.Visible = false;
-            
-            isAttacking = false;
-            attackArea.Monitoring = false;
-            animation.Play("Idle");
-            weapon.Play("prepare");
-        }
+        
     }
 }

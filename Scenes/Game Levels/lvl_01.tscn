@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="2_2r1lj"]
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="3_yy3vv"]
 [ext_resource type="Texture2D" uid="uid://dimnpfj1dfkno" path="res://Art/Sprites/Tiles/cactus_tiles.png" id="4_2r1lj"]
-[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Enemy_Skull.tscn" id="4_ujohf"]
+[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Skull/Enemy_Skull.tscn" id="4_ujohf"]
 [ext_resource type="PackedScene" uid="uid://dveen0x1j6hpc" path="res://Scenes/Characters/Player.tscn" id="5_ytgkf"]
 [ext_resource type="PackedScene" uid="uid://didfm10rc7xqc" path="res://Scenes/MovingPlataform.tscn" id="5_yy3vv"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="6_jhvdk"]
@@ -514,7 +514,8 @@ texture = ExtResource("4_2r1lj")
 8:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 5, 0, 2, 0, -2, -3.5, -5, -8, -5, -8, 5)
 
 [sub_resource type="TileSet" id="TileSet_ujohf"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 36
 sources/1 = SubResource("TileSetAtlasSource_ujohf")
 
 [node name="Level01" type="Node2D"]
@@ -554,12 +555,13 @@ position = Vector2(692, 672)
 
 [node name="EnemySkull" parent="." instance=ExtResource("4_ujohf")]
 position = Vector2(314, 377)
-rotation = -0.575959
+attackCooldown = 1.0
+meeleEnemy = true
 
 [node name="EnemySkull2" parent="." instance=ExtResource("4_ujohf")]
 position = Vector2(1197, 433)
-rotation = 2.79253
-scale = Vector2(1, -1)
+attackCooldown = 1.0
+meeleEnemy = true
 
 [node name="Coins" type="Node" parent="."]
 

@@ -30,7 +30,7 @@ public partial class Projectile : Node2D
         {
             if (bodyEntered is Player player)
             {
-                player.TakeDamage(1);
+                player.TakeDamage(1, this.GlobalPosition);
             }
         }
     }

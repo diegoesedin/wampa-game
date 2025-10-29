@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="3_rn235"]
 [ext_resource type="Texture2D" uid="uid://dimnpfj1dfkno" path="res://Art/Sprites/Tiles/cactus_tiles.png" id="4_xm61w"]
 [ext_resource type="PackedScene" uid="uid://dveen0x1j6hpc" path="res://Scenes/Characters/Player.tscn" id="5_ua33s"]
-[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Enemy_Skull.tscn" id="6_rawbs"]
+[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Skull/Enemy_Skull.tscn" id="6_rawbs"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="7_42kyp"]
 [ext_resource type="PackedScene" uid="uid://s1iv7pyyyyj7" path="res://Scenes/Items/Goal.tscn" id="8_0b73e"]
 [ext_resource type="PackedScene" uid="uid://5570xkjchvrm" path="res://Scenes/Items/coin.tscn" id="8_6aip0"]
@@ -260,7 +260,8 @@ texture = ExtResource("4_xm61w")
 8:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 5, 0, 2, 0, -2, -3.5, -5, -8, -5, -8, 5)
 
 [sub_resource type="TileSet" id="TileSet_3dynl"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 34
 sources/1 = SubResource("TileSetAtlasSource_fim85")
 
 [sub_resource type="Curve2D" id="Curve2D_wqxd1"]
@@ -1047,11 +1048,9 @@ position = Vector2(272, 300)
 
 [node name="EnemySkull" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(144, 336)
-scale = Vector2(-1, 1)
 
 [node name="EnemySkull3" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(-176, 208)
-scale = Vector2(-1, 1)
 
 [node name="EnemySkull2" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(400, 336)
@@ -1060,6 +1059,7 @@ position = Vector2(400, 336)
 position = Vector2(720, 208)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
 script = ExtResource("10_jdq1x")
 respawnY = -100.0
 
