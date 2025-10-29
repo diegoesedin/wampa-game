@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c1xq008qlc83q" path="res://Scenes/game_manager.tscn" id="1_te52m"]
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="2_2r1lj"]
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="3_yy3vv"]
-[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Enemy_Skull.tscn" id="4_ujohf"]
+[ext_resource type="PackedScene" uid="uid://dhc125eawpjl" path="res://Scenes/Characters/Skull/Enemy_Skull.tscn" id="4_ujohf"]
 [ext_resource type="PackedScene" uid="uid://dveen0x1j6hpc" path="res://Scenes/Characters/Player.tscn" id="5_ytgkf"]
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="6_jhvdk"]
 [ext_resource type="PackedScene" uid="uid://5570xkjchvrm" path="res://Scenes/Items/coin.tscn" id="7_16l12"]

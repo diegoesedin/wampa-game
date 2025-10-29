@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3ywxatckvm3q"]
 
-[ext_resource type="Script" uid="uid://b3kv0ox73dx3d" path="res://Code/SkullProjectile.cs" id="1_wq0wk"]
-[ext_resource type="Texture2D" uid="uid://c1yl61s3jntr" path="res://Art/Sprites/EnemySkull/skull_tooth.png" id="2_wq0wk"]
+[ext_resource type="Script" uid="uid://dxelpjuo6vvyq" path="res://Code/Enemies/Projectile.cs" id="1_q35cw"]
+[ext_resource type="Texture2D" uid="uid://c1yl61s3jntr" path="res://Art/Sprites/EnemySkull/skull_tooth.png" id="2_ikdgj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_woftu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5enr"]
-atlas = ExtResource("2_wq0wk")
+atlas = ExtResource("2_ikdgj")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vn0pr"]
@@ -21,14 +21,18 @@ animations = [{
 }]
 
 [node name="SkullProjectile" type="Node2D"]
-script = ExtResource("1_wq0wk")
+script = ExtResource("1_q35cw")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_woftu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.55, 0.55)
 sprite_frames = SubResource("SpriteFrames_vn0pr")
 autoplay = "default"
 frame_progress = 0.811953

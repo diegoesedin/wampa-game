@@ -168,6 +168,9 @@ public partial class Player : CharacterBody2D
 
     private void OnAttackAreaAreaEntered(Area2D area)
     {
+        if (area.Name != "Hitbox")
+            return;
+        
         Node enemy = area.GetParent();
         if (enemy != null && enemy.IsInGroup("Enemy"))
         {

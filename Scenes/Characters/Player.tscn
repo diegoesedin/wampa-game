@@ -583,6 +583,8 @@ height = 27.1293
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoq75"]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("standigCollision", "crouchingCollision") groups=["Player"]]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_b4kmf")
 SPEED = 150.0
 standigCollision = NodePath("StandingCollision")
@@ -612,6 +614,9 @@ position_smoothing_enabled = true
 position_smoothing_speed = 4.0
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
 polygon = PackedVector2Array(0, -19, 15, -19, 22, 0, 15, 19, 0, 19)
