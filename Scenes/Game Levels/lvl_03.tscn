@@ -612,6 +612,8 @@ modulate = Color(0.611765, 0.858824, 0.262745, 1)
 position = Vector2(-160, 338)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_01" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
@@ -620,12 +622,16 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_02" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
 position = Vector2(608, 338)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_03" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
@@ -634,12 +640,16 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_04" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
 position = Vector2(-160, 72)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_05" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
@@ -648,12 +658,16 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_06" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
 position = Vector2(608, 72)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Middle_Platform_07" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
@@ -662,6 +676,8 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 curve = SubResource("Curve2D_2gev0")
 speed = 75.0
+loop = true
+pingPong = false
 spriteFrame = 3
 
 [node name="Center_Platform_00" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
