@@ -1048,12 +1048,14 @@ position = Vector2(272, 300)
 
 [node name="EnemySkull" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(144, 336)
+meeleEnemy = true
 
 [node name="EnemySkull3" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(-176, 208)
 
 [node name="EnemySkull2" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(400, 336)
+meeleEnemy = true
 
 [node name="EnemySkull4" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(720, 208)

@@ -193,7 +193,6 @@ public partial class EnemySkull : CharacterBody2D
 
     private void _OnDetectionAreaBodyExited(object body)
     {
-        GD.Print($"Exit");
         // Player left enemy range
         if (body is Player)
         {
