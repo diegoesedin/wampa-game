@@ -516,6 +516,7 @@ sources/0 = SubResource("TileSetAtlasSource_q2pvs")
 [node name="GameManager" parent="." node_paths=PackedStringArray("player", "hud") instance=ExtResource("1_gyxvk")]
 player = NodePath("../Player")
 hud = NodePath("../HUD")
+currentLevelPath = "res://Scenes/Game Levels/lvl_02.tscn"
 
 [node name="HUD" parent="." instance=ExtResource("2_wj7o5")]
 

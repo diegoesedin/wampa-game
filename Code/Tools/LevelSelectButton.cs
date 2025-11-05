@@ -5,44 +5,44 @@ public partial class LevelSelectButton : Button
     [Export] public PackedScene LevelScene { get; set; }
     [Export] public bool IsLocked { get; set; } = false;
     [Export] public bool IsFirstButton { get; set; } = false;
-    [Export] public string LevelName { get; set; } = "Level Name";
-    [Export] private float Timer;
-    [Export] private int Coins;
-    [Export] private int EnemiesKilled;
-    [Export] private bool MaskCollected = false;
-    [Export] private int HeartsRemaining;
-
-    [Export] private bool HasHeartsMedal = false;
-    [Export] private bool HasTimeMedal = false;
-    [Export] private bool HasEnemiesMedal = false;
-    [Export] private bool HasMaskMedal = false;
+    [Export] public string LevelName { get; set; } = "Level 1";
     
     private LevelInfoDisplay infoDisplay;
     private Label levelNameLabel;
+    private string levelPath = "";
 
     public override void _Ready()
+{
+    Pressed += OnPressed;
+    FocusEntered += OnFocusEntered;
+    
+    infoDisplay = Owner.GetNode<LevelInfoDisplay>("LevelInfoDisplay");
+levelNameLabel = Owner.GetNode<Label>("CenterPanel/Title/LevelName");
+
+    if (LevelScene != null)
     {
-        Pressed += OnPressed;
-        FocusEntered += OnFocusEntered;
+        levelPath = LevelScene.ResourcePath;
+    }
+
+    if (SessionManager.Instance != null && !string.IsNullOrEmpty(levelPath))
+    {
+        IsLocked = !SessionManager.Instance.IsLevelUnlocked(levelPath);
+    }
+
+    if (IsLocked)
+    {
+        Disabled = true;  
+    }
+    else
+    {
+        Disabled = false;
         
-
-        infoDisplay = GetTree().Root.GetNode<LevelInfoDisplay>("MainMenu/LevelInfoDisplay");
-        levelNameLabel = GetTree().Root.GetNode<Label>("MainMenu/CenterPanel/Title/LevelName");
-
-        if (IsLocked)
+        if (IsFirstButton)
         {
-            Disabled = true;  
-        }
-        else
-        {
-            Disabled = false;
-            
-            if (IsFirstButton)
-            {
-                CallDeferred("grab_focus");
-            }
+            CallDeferred("grab_focus");
         }
     }
+}
     
     private void OnFocusEntered()
     {
@@ -56,8 +56,19 @@ public partial class LevelSelectButton : Button
         }
         else
         {
-            var stats = GetLevelStats();
-            var medals = GetLevelMedals();
+            var data = SessionManager.Instance.GetLevelData(levelPath);
+            var medals = SessionManager.Instance.GetLevelMedals(levelPath);
+            
+            // Convertir LevelData a LevelStats
+            var stats = new LevelStats
+            {
+                BestTime = data.BestTime,
+                Coins = data.Coins,
+                EnemiesKilled = data.EnemiesKilled,
+                MaskCollected = data.MaskCollected,
+                HeartsRemaining = data.HeartsRemaining
+            };
+            
             infoDisplay.ShowLevelInfo(LevelName, stats, medals);
         }
     }
@@ -79,30 +90,5 @@ public partial class LevelSelectButton : Button
         {
             GD.PrintErr("No scene");
         }
-    }
-    
-    // TODO: Conectar con SessionManager para obtener stats reales AHORA HARDCODEADO
-    private LevelStats GetLevelStats()
-    {
-        
-        return new LevelStats
-        {
-            Timer = Timer,
-            Coins = Coins,
-            EnemiesKilled = EnemiesKilled,
-            MaskCollected = MaskCollected,
-            HeartsRemaining = HeartsRemaining
-        };
-    }
-    
-    private LevelMedals GetLevelMedals()
-    {
-        return new LevelMedals
-        {
-            HasHeartsMedal = HasHeartsMedal,
-            HasTimeMedal = HasTimeMedal,
-            HasEnemiesMedal = HasEnemiesMedal,
-            HasMaskMedal = HasMaskMedal
-        };
     }
 }

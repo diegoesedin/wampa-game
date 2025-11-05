@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 public partial class GameManager : Node2D
 {
-    public static GameManager Instance; //REFE GLOBAL
+    public static GameManager Instance;
 
     [Export] public Player player { get; set; }
     [Export] public HUD hud { get; set; }
     [Export] private AudioStreamPlayer sfxPlayer;
+    [Export] private string currentLevelPath = ""; 
 
     private float elapsedTime = 0f;
     private int enemiesKilled = 0;
@@ -18,7 +19,7 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
-        Instance = this; //REFE GLOBAL (Singleton Manual, supuestamente)
+        Instance = this;
 
         if (player == null)
         {
@@ -32,14 +33,13 @@ public partial class GameManager : Node2D
             return;
         }
 
-        // CONECTA AL JUGADOR ///////////////////////////////////////////////////////
+        // CONECTA AL JUGADOR
         player.Connect(nameof(Player.LivesChanged), new Callable(this, nameof(OnLivesChanged)));
         player.Connect(nameof(Player.PlayerDied), new Callable(this, nameof(OnPlayerDied)));
         player.Connect(nameof(Player.MaskCollected), new Callable(this, nameof(OnMaskCollected)));
         player.Connect(nameof(Player.LevelCompleted), new Callable(this, nameof(OnLevelCompleted)));
 
-
-        // CONECTA LAS MONEDAS ///////////////////////////////////////////////////////
+        // CONECTA LAS MONEDAS
         foreach (Node node in GetTree().GetNodesInGroup("Coins"))
         {
             if (node is Coin coin)
@@ -48,7 +48,7 @@ public partial class GameManager : Node2D
             }
         }
         
-        // CONECTA LOS ENEMIGOS ///////////////////////////////////////////////////////
+        // CONECTA LOS ENEMIGOS
         var enemies = GetTree().GetNodesInGroup("Enemy");
         totalEnemies = enemies.Count;
         enemiesKilled = 0;
@@ -62,18 +62,19 @@ public partial class GameManager : Node2D
         }
 
         hud.CallDeferred(nameof(HUD.InitializeHUD), player.MaxLives, enemiesKilled, totalEnemies, maskCollected);
-        //ejecuta InitializeHUD un frame despues, lo del nameof() en vez del string supuestamente es mas prolijo y seguro
     }
 
     public override void _Process(double delta)
     {
-        if (!stopTimer) { elapsedTime += (float)delta; }
+        if (!stopTimer)
+        {
+            elapsedTime += (float)delta;
+        }
 
         hud.UpdateTime(elapsedTime);
     }
 
-
-    // EVENTOS DE JUGADOR ///////////////////////////////////////////////////////
+    // EVENTOS DE JUGADOR
     private void OnLivesChanged(int newLives)
     {
         hud.UpdateLives(newLives);
@@ -93,9 +94,29 @@ public partial class GameManager : Node2D
     private void OnLevelCompleted()
     {
         stopTimer = true;
+        
+        // GUARDAR STATS EN SESSION MANAGER
+        if (!string.IsNullOrEmpty(currentLevelPath))
+        {
+            SessionManager.Instance.SaveLevelStats(
+                currentLevelPath,
+                elapsedTime,
+                coinCount,
+                enemiesKilled,
+                totalEnemies,
+                maskCollected,
+                player.CurrentLives
+            );
+            
+            GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
+        }
+        else
+        {
+            GD.PrintErr("[GameManager] currentLevelPath no configurado!");
+        }
     }
 
-    // EVENTOS DE MONEDAS ///////////////////////////////////////////////////////
+    // EVENTOS DE MONEDAS
     private void OnCoinCollected()
     {
         coinCount++;
@@ -103,15 +124,14 @@ public partial class GameManager : Node2D
         hud.UpdateCoins(coinCount);
     }
 
-    // EVENTOS DE ENEMIGOS ///////////////////////////////////////////////////////
+    // EVENTOS DE ENEMIGOS
     private void OnEnemyDied()
     {
         enemiesKilled++;
         hud.UpdateEnemies(enemiesKilled, totalEnemies);
     }
 
-
-    // DISPARADOR DE EFECTOS DE SONIDO ////////////////////////////////////////////
+    // DISPARADOR DE EFECTOS DE SONIDO
     public void PlaySFX(string soundName)
     {
         var path = $"res://Media/Audio/{soundName}.wav";

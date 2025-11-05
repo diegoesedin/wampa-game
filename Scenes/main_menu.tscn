@@ -169,11 +169,6 @@ script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("6_trj04")
 IsFirstButton = true
 LevelName = "Templo"
-Timer = 3.33
-Coins = 15
-EnemiesKilled = 1
-HeartsRemaining = 2
-HasMaskMedal = true
 
 [node name="Level_03" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -187,13 +182,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("7_trj04")
 LevelName = "Desierto"
-Timer = 4.56
-Coins = 10
-EnemiesKilled = 3
-MaskCollected = true
-HeartsRemaining = 1
-HasHeartsMedal = true
-HasEnemiesMedal = true
 
 [node name="Level_04" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -209,14 +197,6 @@ text = "
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("8_vr1f0")
 LevelName = "Mal Viaje"
-Timer = 11.11
-Coins = 3
-EnemiesKilled = 1
-HeartsRemaining = 3
-HasHeartsMedal = true
-HasTimeMedal = true
-HasEnemiesMedal = true
-HasMaskMedal = true
 
 [node name="x_06" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)

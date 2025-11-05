@@ -19,6 +19,10 @@ boot_splash/image="uid://d3rc8vq1avqer"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000
 
+[autoload]
+
+SessionManager="*res://Code/SessionManager.cs"
+
 [display]
 
 window/size/viewport_width=480

@@ -17,26 +17,31 @@ public partial class LevelInfoDisplay : NinePatchRect
     // ==========================================================
     public override void _Ready()
     {
-        
+        // Stats
         heartsLabel = GetNode<Label>("Stats/HeartsLabel");
         timeLabel = GetNode<Label>("Stats/TimeLabel");
         enemiesLabel = GetNode<Label>("Stats/EnemiesLabel");
         maskLabel = GetNode<Label>("Stats/MaskLabel");
         coinsLabel = GetNode<Label>("Stats/CoinsLabel");
         
+        // Medals
         heartsMedal = GetNode<Label>("Medals/HeartsMedal");
         timeMedal = GetNode<Label>("Medals/TimeMedal");
         enemiesMedal = GetNode<Label>("Medals/EnemiesMedal");
         maskMedal = GetNode<Label>("Medals/MaskMedal");
+        
+        // Mostrar mensaje por defecto
+        ShowDefaultMessage();
     }
     
     // ==========================================================
     public void ShowLevelInfo(string levelName, LevelStats stats, LevelMedals medals)
     {
+        // Stats
         heartsLabel.Text = $"❤️: {stats.HeartsRemaining}";
         
-        int seconds = (int)stats.Timer;
-        int milliseconds = (int)((stats.Timer % 1) * 100);
+        int seconds = (int)stats.BestTime;
+        int milliseconds = (int)((stats.BestTime % 1) * 100);
         timeLabel.Text = $"⏳: {seconds:00}.{milliseconds:00}";
         
         enemiesLabel.Text = $"💀: {stats.EnemiesKilled}";
@@ -49,21 +54,38 @@ public partial class LevelInfoDisplay : NinePatchRect
         UpdateMedalDisplay(enemiesMedal, medals.HasEnemiesMedal);
         UpdateMedalDisplay(maskMedal, medals.HasMaskMedal);
     }
-
-    public void ShowLockedLevel()  // Cuando el nivel esta bloqueado
+    
+    public void ShowLockedLevel()
     {
         heartsLabel.Text = "❤️: --";
         timeLabel.Text = "⏳: --:--";
         enemiesLabel.Text = "💀: --";
         maskLabel.Text = "☀️: --";
         coinsLabel.Text = "💰: --";
-
+        
+        // Todas las medallas bloqueadas
         UpdateMedalDisplay(heartsMedal, false);
         UpdateMedalDisplay(timeMedal, false);
         UpdateMedalDisplay(enemiesMedal, false);
         UpdateMedalDisplay(maskMedal, false);
     }
     
+    public void ShowDefaultMessage()
+    {
+        heartsLabel.Text = "❤️: -";
+        timeLabel.Text = "⏳: -";
+        enemiesLabel.Text = "💀: -";
+        maskLabel.Text = "☀️: -";
+        coinsLabel.Text = "💰: -";
+        
+        // Ocultar medallas
+        heartsMedal.Modulate = new Color(1, 1, 1, 0.2f);
+        timeMedal.Modulate = new Color(1, 1, 1, 0.2f);
+        enemiesMedal.Modulate = new Color(1, 1, 1, 0.2f);
+        maskMedal.Modulate = new Color(1, 1, 1, 0.2f);
+    }
+    
+    // ==========================================================
     private void UpdateMedalDisplay(Label medal, bool unlocked)
     {
         if (unlocked)
@@ -85,7 +107,7 @@ public partial class LevelInfoDisplay : NinePatchRect
 // ==========================================================
 public class LevelStats
 {
-    public float Timer { get; set; } = 0f;
+    public float BestTime { get; set; } = 0f;
     public int Coins { get; set; } = 0;
     public int EnemiesKilled { get; set; } = 0;
     public bool MaskCollected { get; set; } = false;
@@ -94,8 +116,8 @@ public class LevelStats
 
 public class LevelMedals
 {
-    public bool HasHeartsMedal { get; set; } = false;  
-    public bool HasTimeMedal { get; set; } = false;      
-    public bool HasEnemiesMedal { get; set; } = false;   
-    public bool HasMaskMedal { get; set; } = false;      
+    public bool HasHeartsMedal { get; set; } = false;    // Completar sin perder vida
+    public bool HasTimeMedal { get; set; } = false;      // Completar bajo tiempo récord
+    public bool HasEnemiesMedal { get; set; } = false;   // Matar todos los enemigos
+    public bool HasMaskMedal { get; set; } = false;      // Conseguir la máscara
 }
