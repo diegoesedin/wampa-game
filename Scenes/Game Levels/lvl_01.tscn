@@ -555,16 +555,15 @@ position = Vector2(696, 535)
 position = Vector2(696, 672)
 
 [node name="EnemySkull" parent="." instance=ExtResource("4_ujohf")]
-position = Vector2(314, 377)
+position = Vector2(314, 373)
 attackCooldown = 1.0
 meeleEnemy = true
 
 [node name="EnemySkull3" parent="." instance=ExtResource("4_ujohf")]
-position = Vector2(856, 409)
-rotation = -0.575959
+position = Vector2(856, 405)
 
 [node name="EnemySkull2" parent="." instance=ExtResource("4_ujohf")]
-position = Vector2(1197, 433)
+position = Vector2(1197, 429)
 attackCooldown = 1.0
 meeleEnemy = true
 

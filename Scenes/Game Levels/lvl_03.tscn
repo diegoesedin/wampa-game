@@ -1064,18 +1064,18 @@ position = Vector2(272, 104)
 position = Vector2(272, 300)
 
 [node name="EnemySkull" parent="." instance=ExtResource("6_rawbs")]
-position = Vector2(144, 336)
+position = Vector2(144, 330)
 meeleEnemy = true
 
 [node name="EnemySkull3" parent="." instance=ExtResource("6_rawbs")]
-position = Vector2(-176, 208)
+position = Vector2(-176, 203)
 
 [node name="EnemySkull2" parent="." instance=ExtResource("6_rawbs")]
-position = Vector2(400, 336)
+position = Vector2(401, 329)
 meeleEnemy = true
 
 [node name="EnemySkull4" parent="." instance=ExtResource("6_rawbs")]
-position = Vector2(720, 208)
+position = Vector2(720, 203)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2

@@ -543,18 +543,18 @@ position = Vector2(83, 576)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="EnemySkull" parent="Enemies" instance=ExtResource("8_tr7da")]
-position = Vector2(-167, 553)
+position = Vector2(-164, 548)
 
 [node name="EnemySkull2" parent="Enemies" instance=ExtResource("8_tr7da")]
-position = Vector2(727, 696)
+position = Vector2(728, 692)
 meeleEnemy = true
 
 [node name="EnemySkull3" parent="Enemies" instance=ExtResource("8_tr7da")]
-position = Vector2(681, 584)
+position = Vector2(681, 579)
 meeleEnemy = true
 
 [node name="EnemySkull4" parent="Enemies" instance=ExtResource("8_tr7da")]
-position = Vector2(466, 507)
+position = Vector2(456, 500)
 meeleEnemy = true
 
 [node name="Coins" type="Node" parent="."]

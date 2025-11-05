@@ -42,7 +42,7 @@ public partial class EnemySkull : CharacterBody2D
         weapon = GetNode<AnimatedSprite2D>("AttackArea/BoneSprite");
         weapon.AnimationFinished += OnAnimationFinished;
         attackArea = GetNode<Area2D>("AttackArea");
-        //attackArea.Visible = false;
+        if (meeleEnemy) attackArea.Visible = true;
         attackArea.Monitoring = false;
         attackArea.BodyEntered += OnAttackAreaBodyEntered;
         
@@ -121,9 +121,9 @@ public partial class EnemySkull : CharacterBody2D
 
     private void Attack()
     {
-        //attackArea.Visible = true;
         isAttacking = true;
         attackArea.Monitoring = true;
+        animation.Play("Shoot");
         weapon.Play("attack");
         attackTimer = attackCooldown;
     }
@@ -149,6 +149,7 @@ public partial class EnemySkull : CharacterBody2D
         else
         {
             animation.Play("Death");
+            attackArea.Visible = false;
         }
     }
 
@@ -169,12 +170,9 @@ public partial class EnemySkull : CharacterBody2D
         }
         
         if (weapon.Animation == "attack")
-        {
-            //attackArea.Visible = false;
-            
+        {        
             isAttacking = false;
             attackArea.Monitoring = false;
-            animation.Play("Idle");
             weapon.Play("prepare");
         }
     }
