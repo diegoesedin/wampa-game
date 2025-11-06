@@ -12,37 +12,38 @@ public partial class LevelSelectButton : Button
     private string levelPath = "";
 
     public override void _Ready()
-{
-    Pressed += OnPressed;
-    FocusEntered += OnFocusEntered;
-    
-    infoDisplay = Owner.GetNode<LevelInfoDisplay>("LevelInfoDisplay");
-levelNameLabel = Owner.GetNode<Label>("CenterPanel/Title/LevelName");
-
-    if (LevelScene != null)
     {
-        levelPath = LevelScene.ResourcePath;
-    }
-
-    if (SessionManager.Instance != null && !string.IsNullOrEmpty(levelPath))
-    {
-        IsLocked = !SessionManager.Instance.IsLevelUnlocked(levelPath);
-    }
-
-    if (IsLocked)
-    {
-        Disabled = true;  
-    }
-    else
-    {
-        Disabled = false;
+        Pressed += OnPressed;
+        FocusEntered += OnFocusEntered;
         
-        if (IsFirstButton)
+        // Buscar nodos usando Owner (más confiable)
+        infoDisplay = Owner.GetNode<LevelInfoDisplay>("LevelInfoDisplay");
+        levelNameLabel = Owner.GetNode<Label>("CenterPanel/Title/LevelName");
+
+        if (LevelScene != null)
         {
-            CallDeferred("grab_focus");
+            levelPath = LevelScene.ResourcePath;
+        }
+
+        if (SessionManager.Instance != null && !string.IsNullOrEmpty(levelPath))
+        {
+            IsLocked = !SessionManager.Instance.IsLevelUnlocked(levelPath);
+        }
+
+        if (IsLocked)
+        {
+            Disabled = true;  
+        }
+        else
+        {
+            Disabled = false;
+            
+            if (IsFirstButton)
+            {
+                CallDeferred("grab_focus");
+            }
         }
     }
-}
     
     private void OnFocusEntered()
     {
@@ -59,14 +60,14 @@ levelNameLabel = Owner.GetNode<Label>("CenterPanel/Title/LevelName");
             var data = SessionManager.Instance.GetLevelData(levelPath);
             var medals = SessionManager.Instance.GetLevelMedals(levelPath);
             
-            // Convertir LevelData a LevelStats
+            // Convertir LevelData a LevelStats usando los datos de la ÚLTIMA partida
             var stats = new LevelStats
             {
-                BestTime = data.BestTime,
-                Coins = data.Coins,
-                EnemiesKilled = data.EnemiesKilled,
-                MaskCollected = data.MaskCollected,
-                HeartsRemaining = data.HeartsRemaining
+                BestTime = data.LastTime,  // Stats de la última partida
+                Coins = data.LastCoins,
+                EnemiesKilled = data.LastEnemiesKilled,
+                MaskCollected = data.LastMaskCollected,
+                HeartsRemaining = data.LastHeartsRemaining
             };
             
             infoDisplay.ShowLevelInfo(LevelName, stats, medals);

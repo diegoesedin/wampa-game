@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public partial class SessionManager : Node
 {
     public static SessionManager Instance { get; private set; }
-    [Export] private string currentLevelPath = "";
     
     // -------------------- DATOS DE NIVELES --------------------
     private Dictionary<string, LevelData> levelsData = new Dictionary<string, LevelData>();
@@ -46,12 +45,17 @@ public partial class SessionManager : Node
             
             levelsData[key.ToString()] = new LevelData
             {
+                LastTime = (float)levelDict["LastTime"],
+                LastCoins = (int)levelDict["LastCoins"],
+                LastEnemiesKilled = (int)levelDict["LastEnemiesKilled"],
+                LastTotalEnemies = (int)levelDict["LastTotalEnemies"],
+                LastMaskCollected = (bool)levelDict["LastMaskCollected"],
+                LastHeartsRemaining = (int)levelDict["LastHeartsRemaining"],
                 BestTime = (float)levelDict["BestTime"],
-                Coins = (int)levelDict["Coins"],
-                EnemiesKilled = (int)levelDict["EnemiesKilled"],
-                TotalEnemies = (int)levelDict["TotalEnemies"],
-                MaskCollected = (bool)levelDict["MaskCollected"],
-                HeartsRemaining = (int)levelDict["HeartsRemaining"],
+                HeartsMedalUnlocked = (bool)levelDict["HeartsMedalUnlocked"],
+                TimeMedalUnlocked = (bool)levelDict["TimeMedalUnlocked"],
+                EnemiesMedalUnlocked = (bool)levelDict["EnemiesMedalUnlocked"],
+                MaskMedalUnlocked = (bool)levelDict["MaskMedalUnlocked"],
                 Completed = (bool)levelDict["Completed"]
             };
         }
@@ -67,12 +71,17 @@ public partial class SessionManager : Node
         {
             var levelDict = new Godot.Collections.Dictionary
             {
+                { "LastTime", kvp.Value.LastTime },
+                { "LastCoins", kvp.Value.LastCoins },
+                { "LastEnemiesKilled", kvp.Value.LastEnemiesKilled },
+                { "LastTotalEnemies", kvp.Value.LastTotalEnemies },
+                { "LastMaskCollected", kvp.Value.LastMaskCollected },
+                { "LastHeartsRemaining", kvp.Value.LastHeartsRemaining },
                 { "BestTime", kvp.Value.BestTime },
-                { "Coins", kvp.Value.Coins },
-                { "EnemiesKilled", kvp.Value.EnemiesKilled },
-                { "TotalEnemies", kvp.Value.TotalEnemies },
-                { "MaskCollected", kvp.Value.MaskCollected },
-                { "HeartsRemaining", kvp.Value.HeartsRemaining },
+                { "HeartsMedalUnlocked", kvp.Value.HeartsMedalUnlocked },
+                { "TimeMedalUnlocked", kvp.Value.TimeMedalUnlocked },
+                { "EnemiesMedalUnlocked", kvp.Value.EnemiesMedalUnlocked },
+                { "MaskMedalUnlocked", kvp.Value.MaskMedalUnlocked },
                 { "Completed", kvp.Value.Completed }
             };
             data[kvp.Key] = levelDict;
@@ -97,21 +106,36 @@ public partial class SessionManager : Node
         
         var level = levelsData[levelPath];
         
-        // Solo guardar si es mejor tiempo o primera vez
-        if (!level.Completed || time < level.BestTime)
+        // SIEMPRE guardar stats de la última partida
+        level.LastTime = time;
+        level.LastCoins = coins;
+        level.LastEnemiesKilled = enemiesKilled;
+        level.LastTotalEnemies = totalEnemies;
+        level.LastMaskCollected = maskCollected;
+        level.LastHeartsRemaining = heartsRemaining;
+        level.Completed = true;
+        
+        // Actualizar mejor tiempo
+        if (level.BestTime == 0 || time < level.BestTime)
         {
             level.BestTime = time;
-            level.Coins = coins;
-            level.EnemiesKilled = enemiesKilled;
-            level.TotalEnemies = totalEnemies;
-            level.MaskCollected = maskCollected;
-            level.HeartsRemaining = heartsRemaining;
-            level.Completed = true;
-            
-            SaveProgress();
-            
-            GD.Print($"[SessionManager] Stats guardadas para: {levelPath}");
         }
+        
+        // MEDALLAS PERMANENTES - Una vez conseguidas, nunca se pierden
+        if (heartsRemaining == 3)
+            level.HeartsMedalUnlocked = true;
+        
+        if (time < 15f) // Ajusta este valor según tu juego
+            level.TimeMedalUnlocked = true;
+        
+        if (enemiesKilled == totalEnemies && totalEnemies > 0)
+            level.EnemiesMedalUnlocked = true;
+        
+        if (maskCollected)
+            level.MaskMedalUnlocked = true;
+        
+        SaveProgress();
+        
     }
     
     public LevelData GetLevelData(string levelPath)
@@ -152,17 +176,18 @@ public partial class SessionManager : Node
         
         var data = levelsData[levelPath];
         
+        // Devolver las medallas PERMANENTES guardadas
         return new LevelMedals
         {
-            HasHeartsMedal = data.HeartsRemaining == 3,           // Sin perder vida
-            HasTimeMedal = data.BestTime > 0 && data.BestTime < 15f, // Menos de 15 (ajustable)
-            HasEnemiesMedal = data.EnemiesKilled == data.TotalEnemies && data.TotalEnemies > 0, // Todos los enemigos
-            HasMaskMedal = data.MaskCollected                     // Máscara conseguida
+            HasHeartsMedal = data.HeartsMedalUnlocked,
+            HasTimeMedal = data.TimeMedalUnlocked,
+            HasEnemiesMedal = data.EnemiesMedalUnlocked,
+            HasMaskMedal = data.MaskMedalUnlocked
         };
     }
     
     // ==========================================================
-    // RESET 
+    // RESET (para testing)
     // ==========================================================
     public void ResetProgress()
     {
@@ -182,11 +207,22 @@ public partial class SessionManager : Node
 // ==========================================================
 public class LevelData
 {
+    // Stats de la ÚLTIMA partida (siempre se sobrescriben)
+    public float LastTime { get; set; } = 0f;
+    public int LastCoins { get; set; } = 0;
+    public int LastEnemiesKilled { get; set; } = 0;
+    public int LastTotalEnemies { get; set; } = 0;
+    public bool LastMaskCollected { get; set; } = false;
+    public int LastHeartsRemaining { get; set; } = 0;
+    
+    // Mejor tiempo (para referencia interna)
     public float BestTime { get; set; } = 0f;
-    public int Coins { get; set; } = 0;
-    public int EnemiesKilled { get; set; } = 0;
-    public int TotalEnemies { get; set; } = 0;
-    public bool MaskCollected { get; set; } = false;
-    public int HeartsRemaining { get; set; } = 0;
+    
+    // Medallas (permanentes - una vez conseguidas, para siempre)
+    public bool HeartsMedalUnlocked { get; set; } = false;
+    public bool TimeMedalUnlocked { get; set; } = false;
+    public bool EnemiesMedalUnlocked { get; set; } = false;
+    public bool MaskMedalUnlocked { get; set; } = false;
+    
     public bool Completed { get; set; } = false;
 }
