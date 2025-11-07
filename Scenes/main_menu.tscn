@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cwlr6p3ybaoae" path="res://Art/UI Placeholder/button_rectangle_depth_border.png" id="2_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://moynt57jq32f" path="res://Art/UI Placeholder/check_square_color.png" id="3_trj04"]
 [ext_resource type="Texture2D" uid="uid://cbbrn56ds6v5b" path="res://Art/UI Placeholder/check_square_color_cross.png" id="4_16hvj"]
-[ext_resource type="Texture2D" uid="uid://bpq71ebmbth5m" path="res://Media/cursor_wampa.png" id="4_vr1f0"]
+[ext_resource type="Texture2D" uid="uid://bm0lhquslnjyv" path="res://Art/Sprites/chakana-export.png" id="4_vr1f0"]
 [ext_resource type="Script" uid="uid://d0qw7267umcnj" path="res://Code/Tools/LevelSelectButton.cs" id="5_vr1f0"]
 [ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/lvl_01.tscn" id="6_trj04"]
 [ext_resource type="PackedScene" uid="uid://b1rndr4f5dpsd" path="res://Scenes/Game Levels/lvl_02.tscn" id="7_trj04"]
@@ -14,6 +14,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t1dhk"]
 texture = ExtResource("4_vr1f0")
+axis_stretch_vertical = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("3_trj04")

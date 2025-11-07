@@ -553,6 +553,7 @@ curve = SubResource("Curve2D_70gml")
 speed = 75.0
 loop = true
 pingPong = false
+spriteFrame = 2
 
 [node name="Player" parent="." instance=ExtResource("5_koko0")]
 position = Vector2(72, 576)
@@ -632,7 +633,7 @@ position = Vector2(-15, 529)
 position = Vector2(5, 529)
 
 [node name="EnemySkull" parent="." instance=ExtResource("7_ap3ea")]
-position = Vector2(50, 582)
+position = Vector2(43, 582)
 attackCooldown = 1000.0
 meeleEnemy = true
 
@@ -642,12 +643,12 @@ attackCooldown = 1000.0
 meeleEnemy = true
 
 [node name="EnemySkull3" parent="." instance=ExtResource("7_ap3ea")]
-position = Vector2(62, 548)
+position = Vector2(60, 548)
 attackCooldown = 1000.0
 meeleEnemy = true
 
 [node name="EnemySkull4" parent="." instance=ExtResource("7_ap3ea")]
-position = Vector2(93, 582)
+position = Vector2(100, 582)
 scale = Vector2(-1, 1)
 attackCooldown = 1000.0
 meeleEnemy = true
@@ -659,7 +660,7 @@ attackCooldown = 1000.0
 meeleEnemy = true
 
 [node name="EnemySkull6" parent="." instance=ExtResource("7_ap3ea")]
-position = Vector2(84, 548)
+position = Vector2(83, 548)
 scale = Vector2(-1, 1)
 attackCooldown = 1000.0
 meeleEnemy = true

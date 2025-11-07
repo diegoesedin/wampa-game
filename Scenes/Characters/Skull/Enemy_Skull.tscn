@@ -294,7 +294,7 @@ shape = SubResource("CircleShape2D_cbplc")
 
 [node name="SkullSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yvqgj")
-animation = &"Idle"
+animation = &"Death"
 autoplay = "Idle"
 
 [node name="AttackArea" type="Area2D" parent="."]

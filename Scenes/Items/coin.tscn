@@ -76,7 +76,7 @@ script = ExtResource("1_jgi06")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7w2r2")
 autoplay = "default"
-frame_progress = 0.398943
+frame_progress = 0.087482
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

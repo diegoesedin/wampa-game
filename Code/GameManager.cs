@@ -108,7 +108,6 @@ public partial class GameManager : Node2D
                 player.CurrentLives
             );
             
-            GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
         }
         else
         {
