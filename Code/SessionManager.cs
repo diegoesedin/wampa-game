@@ -136,6 +136,8 @@ public partial class SessionManager : Node
         
         SaveProgress();
         
+        GD.Print($"[SessionManager] Stats guardadas para: {levelPath}");
+       
     }
     
     public LevelData GetLevelData(string levelPath)

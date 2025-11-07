@@ -168,7 +168,7 @@ public partial class Player : CharacterBody2D
                 state = State.Move;
                 animation.Play("Walk");
             }
-            animation.FlipH = direction < 0;
+            //animation.FlipH = direction < 0;
         }
         else
         {
