@@ -589,11 +589,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyqiw"]
-radius = 7.14286
+radius = 6.94444
 height = 27.1293
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoq75"]
-radius = 8.33333
+radius = 6.45161
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
@@ -608,10 +608,8 @@ DASH_SPEED = 300.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_52ee3")
-animation = &"Dance"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 7
-frame_progress = 1.0
 speed_scale = 1.7
 
 [node name="StandingCollision" type="CollisionShape2D" parent="."]

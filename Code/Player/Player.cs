@@ -3,16 +3,6 @@ using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
-    enum State
-    {
-        Idle,
-        Move,
-        Attack,
-        Hurt,
-        Crouch,
-        Frozen
-    }
-    
     // -------------------- MOVIMIENTO --------------------
     [Export] private float SPEED = 175f;
     [Export] private int GRAVITY = 1500;
@@ -26,38 +16,23 @@ public partial class Player : CharacterBody2D
     private const float DASH_TIME = 0.2f;
     [Export] public float KNOCKBACK_FORCE = 500f;
     [Export] private float KNOCKBACK_DURATION = 0.4f;
-    [Export] private float INVULNERABLE_TIMER = 1f;
-    
 
     // -------------------- VIDA --------------------
     [Export] public int MaxLives = 3;
     public int CurrentLives { get; private set; }
 
     // -------------------- ESTADOS --------------------
-    private State _state = State.Idle;
-    private State state
-    {
-        get => _state;
-        set
-        {
-            previousState = _state;
-            _state = value;
-        }
-    }
-    private State previousState;
     private float currentSpeed;
-    //private bool isInAir = false;
+    private bool isInAir = false;
     private bool isDashing;
     private double dashTimer = DASH_TIME;
     private bool isCrouching = false;
-    //private bool isAttacking = false;
-    //private bool isForcedAnimation = false;
+    private bool isAttacking = false;
+    private bool isForcedAnimation = false;
     private bool blockPlayerControl = false;
     private bool isInvulnerable = false;
     private bool isKnockedBack = false;
     private double knockbackTimer = 0;
-    private double invulnerableTimer = 1;
-    private bool isAttacking => state == State.Attack;
 
     // -------------------- COMPONENTES --------------------
     private AnimatedSprite2D animation;
@@ -96,14 +71,13 @@ public partial class Player : CharacterBody2D
         crouchingCollision = GetNode<CollisionShape2D>("CrouchingCollision");
 
         currentSpeed = SPEED;
-
         CurrentLives = MaxLives;
     }
+
     // ==========================================================
     public override void _PhysicsProcess(double delta)
     {
         DevTools();
-        HandleInvulnerability(delta);
 
         if (blockPlayerControl) return;
 
@@ -128,7 +102,6 @@ public partial class Player : CharacterBody2D
             CheckDashing(ref vel, delta);
         }
 
-
         Velocity = vel;
         MoveAndSlide();
     }
@@ -136,22 +109,22 @@ public partial class Player : CharacterBody2D
     // ==========================================================
     private void ApplyGravity(ref Vector2 vel, double delta)
     {
-        if (!IsOnFloor()) 
+        if (!IsOnFloor())
         {
             vel.Y += GetGravity(vel) * (float)delta;
             coyoteTimer -= (float)delta;
-
         }
         else
         {
+            isInAir = false;
             coyoteTimer = COYOTE_TIME;
         }
     }
+
     private float GetGravity(Vector2 vel)
     {
         return vel.Y < 0 ? GRAVITY : FALL_GRAVITY;
     }
-
 
     // ========= MOVIMIENTOS =================================================
     private void Move(ref Vector2 vel, double delta)
@@ -163,41 +136,34 @@ public partial class Player : CharacterBody2D
         if (direction != 0)
         {
             vel.X = Mathf.Lerp(vel.X, direction * currentSpeed, ACCELERATION * (float)delta);
-            if (IsOnFloor() && !isCrouching && !isAttacking)
-            {
-                state = State.Move;
+            if (!isInAir && !isCrouching && !isAttacking)
                 animation.Play("Walk");
-            }
-            //animation.FlipH = direction < 0;
+            animation.FlipH = direction < 0;
         }
         else
         {
             vel.X = Mathf.Lerp(vel.X, 0, FRICTION * (float)delta);
-            if (IsOnFloor() && !isCrouching && !isAttacking)
-            {
-                state = State.Idle;
+            if (!isInAir && !isCrouching && !isAttacking)
                 animation.Play("Idle");
-            }
         }
     }
 
     private void Jump(ref Vector2 vel, double delta)
+{
+    if (Input.IsActionJustPressed("jump") && coyoteTimer > 0 && !isCrouching)
     {
-        if (Input.IsActionJustReleased("jump") && vel.Y < 0)
-            vel.Y = -JUMP_FORCE / 4;
-
-        if (Input.IsActionJustPressed("jump") && coyoteTimer > 0 && !isCrouching)
-        {
-            state = State.Move;
-            vel.Y = -JUMP_FORCE;
-            animation.Play("Jump");
-            coyoteTimer = 0;
-        }
+        isInAir = true;
+        vel.Y = -JUMP_FORCE;
+        animation.Play("Jump");
+        coyoteTimer = 0;
+        
+        AudioManager.Instance.PlaySFX("player_jump"); 
     }
+}
 
     private void Dash(ref Vector2 vel, double delta)
     {
-        if ((Input.IsActionJustPressed("attack_right") || Input.IsActionJustPressed("attack_left")) && !IsOnFloor())
+        if ((Input.IsActionJustPressed("attack_right") || Input.IsActionJustPressed("attack_left")) && isInAir)
         {
             if (Input.IsActionPressed("ui_right"))
             {
@@ -229,6 +195,8 @@ public partial class Player : CharacterBody2D
 
     private void Crouch()
     {
+        if (Input.IsActionJustPressed("crouch")) AudioManager.Instance.PlaySFX("player_crouch");
+
         if (Input.IsActionPressed("crouch"))
         {
             isCrouching = true;
@@ -255,36 +223,35 @@ public partial class Player : CharacterBody2D
     // ========= ATAQUES =================================================
     private void Attack()
     {
-        if (isAttacking || isInvulnerable) return;
+        if (isAttacking || isForcedAnimation || isInvulnerable) return;
 
         if (Input.IsActionJustPressed("attack_right"))
         {
             hitEnemies.Clear();
 
-            state = State.Attack;
+            isAttacking = true;
             animation.FlipH = false;
             attackArea.RotationDegrees = 0;
             attackArea.Monitoring = true;
             animation.Play("Attack");
+            AudioManager.Instance.PlaySFX("player_attack"); 
         }
 
         if (Input.IsActionJustPressed("attack_left"))
         {
             hitEnemies.Clear();
 
-            state = State.Attack;
+            isAttacking = true;
             animation.FlipH = true;
             attackArea.RotationDegrees = 180;
             attackArea.Monitoring = true;
             animation.Play("Attack");
+            AudioManager.Instance.PlaySFX("player_attack"); 
         }
     }
 
     private void OnAttackAreaAreaEntered(Area2D area)
     {
-        if (area.Name != "Hitbox")
-            return;
-        
         Node enemy = area.GetParent();
         if (enemy != null && enemy.IsInGroup("Enemy"))
         {
@@ -306,11 +273,11 @@ public partial class Player : CharacterBody2D
             CurrentLives -= damage;
             EmitSignal(nameof(LivesChanged), CurrentLives);
 
-            state = State.Hurt;
             animation.Play("Hurt");
+            AudioManager.Instance.PlaySFX("player_hurt"); 
+            isForcedAnimation = true;
             isInvulnerable = true;
-            invulnerableTimer = INVULNERABLE_TIMER;
-            
+
             if (CurrentLives <= 0)
             {
                 Die();
@@ -332,6 +299,7 @@ public partial class Player : CharacterBody2D
         knockbackTimer = KNOCKBACK_DURATION;
 
         isDashing = false;
+        isAttacking = false;
         isCrouching = false;
     }
 
@@ -355,7 +323,6 @@ public partial class Player : CharacterBody2D
 
     private void OnHurtboxBodyEntered(Node2D body)
     {
-        // Ignorar colisiones con el propio player
         if (body == this || body.GetParent() == this) return;
 
         if (body is TileMapLayer tileMapLayer && tileMapLayer.Name == "Traps")
@@ -389,31 +356,22 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void HandleInvulnerability(double delta)
-    {
-        if (isInvulnerable)
-        {
-            invulnerableTimer -= delta;
-            if (invulnerableTimer < 0)
-            {
-                isInvulnerable = false;
-            }
-        }
-    }
-    
     // ==========================================================
     private void Die()
     {
-        state = State.Frozen;
+        isForcedAnimation = true;
         animation.Play("Death");
+        AudioManager.Instance.PlaySFX("player_death");
         blockPlayerControl = true;
+        
         EmitSignal(nameof(PlayerDied));
     }
 
     public void PickUpMask()
     {
-        state = State.Frozen;
+        isForcedAnimation = true;
         animation.Play("Mask");
+        AudioManager.Instance.PlaySFX("mask_pickup");
         blockPlayerControl = true;
         EmitSignal(nameof(MaskCollected));
     }
@@ -422,8 +380,9 @@ public partial class Player : CharacterBody2D
     {
         GD.Print("Level Completed");
 
-        state = State.Frozen;
+        isForcedAnimation = true;
         animation.Play("Dance");
+        AudioManager.Instance.PlaySFX("player_dance");
         blockPlayerControl = true;
         EmitSignal(nameof(LevelCompleted));
     }
@@ -431,34 +390,34 @@ public partial class Player : CharacterBody2D
     // ==========================================================
     private void OnAnimationFinished()
     {
-
         if (animation.Animation == "Mask")
         {
-            state = previousState;
+            isForcedAnimation = false;
             blockPlayerControl = false;
         }
 
         if (animation.Animation == "Attack")
         {
-            state = previousState;
+            isAttacking = false;
             attackArea.Monitoring = false;
         }
 
-        if (animation.Animation == "Jump" && !IsOnFloor() && !isAttacking && !isCrouching)
+        if (animation.Animation == "Jump" && isInAir && !isAttacking && !isCrouching)
         {
             animation.Play("Fall");
         }
 
         if (animation.Animation == "Hurt")
         {
-            state = previousState;
+            isForcedAnimation = false;
+            isInvulnerable = false;
         }
 
         if (animation.Animation == "Death")
         {
             CallDeferred("ResetToMainMenu");
         }
-        
+
         if (animation.Animation == "Dance")
         {
             CallDeferred("ResetToMainMenu");

@@ -7,8 +7,7 @@ public partial class GameManager : Node2D
 
     [Export] public Player player { get; set; }
     [Export] public HUD hud { get; set; }
-    [Export] private AudioStreamPlayer sfxPlayer;
-    [Export] private string currentLevelPath = ""; 
+    [Export] private string currentLevelPath = "";
 
     private float elapsedTime = 0f;
     private int enemiesKilled = 0;
@@ -82,18 +81,28 @@ public partial class GameManager : Node2D
 
     private void OnPlayerDied()
     {
-        GD.Print("GAMEOVER");
+        GD.Print("[GameManager] Player murió - NO se guardan stats");
+        
+        // Esperar 2 segundos y volver al menu
+        GetTree().CreateTimer(2.0f).Timeout += () => 
+        {
+            GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+        };
     }
 
     private void OnMaskCollected()
     {
         maskCollected = true;
         hud.SetMaskCollected(maskCollected);
+        
+        AudioManager.Instance.PlaySFX("mask_pickup");
     }
 
     private void OnLevelCompleted()
     {
         stopTimer = true;
+        
+        AudioManager.Instance.PlaySFX("level_complete");
         
         // GUARDAR STATS EN SESSION MANAGER
         if (!string.IsNullOrEmpty(currentLevelPath))
@@ -108,6 +117,7 @@ public partial class GameManager : Node2D
                 player.CurrentLives
             );
             
+            GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
         }
         else
         {
@@ -119,7 +129,7 @@ public partial class GameManager : Node2D
     private void OnCoinCollected()
     {
         coinCount++;
-        PlaySFX("coin_pickup");
+        AudioManager.Instance.PlaySFX("coin_pickup");
         hud.UpdateCoins(coinCount);
     }
 
@@ -127,21 +137,7 @@ public partial class GameManager : Node2D
     private void OnEnemyDied()
     {
         enemiesKilled++;
+        AudioManager.Instance.PlaySFX("enemy_death");
         hud.UpdateEnemies(enemiesKilled, totalEnemies);
-    }
-
-    // DISPARADOR DE EFECTOS DE SONIDO
-    public void PlaySFX(string soundName)
-    {
-        var path = $"res://Media/Audio/{soundName}.wav";
-        var stream = GD.Load<AudioStream>(path);
-        if (stream == null)
-        {
-            GD.PrintErr($"[GameManager] No se encontró el sonido: {path}");
-            return;
-        }
-
-        sfxPlayer.Stream = stream;
-        sfxPlayer.Play();
     }
 }

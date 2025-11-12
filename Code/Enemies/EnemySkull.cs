@@ -145,10 +145,12 @@ public partial class EnemySkull : CharacterBody2D
         if (currentHealth > 0)
         {
             animation.Play("Hurt");
+            AudioManager.Instance.PlaySFX("enemy_death");
         }
         else
         {
             animation.Play("Death");
+            AudioManager.Instance.PlaySFX("enemy_death");
             attackArea.Visible = false;
         }
     }

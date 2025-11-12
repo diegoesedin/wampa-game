@@ -19,11 +19,12 @@ boot_splash/fullsize=false
 boot_splash/use_filter=false
 boot_splash/image="uid://bq07go1iba8ft"
 config/icon="res://icon.svg"
-boot_splash/minimum_display_time=1000
+boot_splash/minimum_display_time=5000
 
 [autoload]
 
 SessionManager="*res://Code/SessionManager.cs"
+AudioManager="*res://Code/AudioManager.cs"
 
 [display]
 
