@@ -137,7 +137,6 @@ public partial class GameManager : Node2D
     private void OnEnemyDied()
     {
         enemiesKilled++;
-        AudioManager.Instance.PlaySFX("enemy_death");
         hud.UpdateEnemies(enemiesKilled, totalEnemies);
     }
 }

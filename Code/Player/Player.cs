@@ -371,7 +371,6 @@ public partial class Player : CharacterBody2D
     {
         isForcedAnimation = true;
         animation.Play("Mask");
-        AudioManager.Instance.PlaySFX("mask_pickup");
         blockPlayerControl = true;
         EmitSignal(nameof(MaskCollected));
     }
@@ -382,7 +381,6 @@ public partial class Player : CharacterBody2D
 
         isForcedAnimation = true;
         animation.Play("Dance");
-        AudioManager.Instance.PlaySFX("player_dance");
         blockPlayerControl = true;
         EmitSignal(nameof(LevelCompleted));
     }
