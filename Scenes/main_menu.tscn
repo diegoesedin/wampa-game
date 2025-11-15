@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dte636jdjrvlb"]
+[gd_scene load_steps=28 format=4 uid="uid://dte636jdjrvlb"]
 
 [ext_resource type="Texture2D" uid="uid://bi6ie1r3vbwjc" path="res://Art/UI Placeholder/button_rectangle_flat.png" id="1_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="1_vr1f0"]
 [ext_resource type="Texture2D" uid="uid://cwlr6p3ybaoae" path="res://Art/UI Placeholder/button_rectangle_depth_border.png" id="2_yhxw7"]
 [ext_resource type="Texture2D" uid="uid://moynt57jq32f" path="res://Art/UI Placeholder/check_square_color.png" id="3_trj04"]
-[ext_resource type="Texture2D" uid="uid://cbbrn56ds6v5b" path="res://Art/UI Placeholder/check_square_color_cross.png" id="4_16hvj"]
 [ext_resource type="Texture2D" uid="uid://bm0lhquslnjyv" path="res://Art/Sprites/chakana-export.png" id="4_vr1f0"]
 [ext_resource type="Script" uid="uid://d0qw7267umcnj" path="res://Code/Tools/LevelSelectButton.cs" id="5_vr1f0"]
 [ext_resource type="PackedScene" uid="uid://byefbn4qc6ud5" path="res://Scenes/Game Levels/lvl_01.tscn" id="6_trj04"]
@@ -11,6 +11,133 @@
 [ext_resource type="PackedScene" uid="uid://bgp3iiydc1ig7" path="res://Scenes/Game Levels/tutorial.tscn" id="7_vr1f0"]
 [ext_resource type="PackedScene" uid="uid://dxkiimqqlly0p" path="res://Scenes/Game Levels/lvl_03.tscn" id="8_vr1f0"]
 [ext_resource type="Script" uid="uid://bq4erb737xaw" path="res://Code/Tools/LevelInfoDisplay.cs" id="10_16hvj"]
+[ext_resource type="Texture2D" uid="uid://be5scinimx65g" path="res://Art/Sprites/laleyendadel.PNG" id="12_5egv6"]
+[ext_resource type="Texture2D" uid="uid://bq07go1iba8ft" path="res://Art/Sprites/WAMPAlogo.png" id="12_t1dhk"]
+[ext_resource type="AudioStream" uid="uid://cltvcmrasrls1" path="res://Media/Audio/intro-theme.tres" id="14_vtepg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t1dhk"]
+texture = ExtResource("1_vr1f0")
+1:3/0 = 0
+2:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+4:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+3:16/0 = 0
+4:16/0 = 0
+5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
+1:17/0 = 0
+2:17/0 = 0
+3:17/0 = 0
+4:17/0 = 0
+5:17/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+1:18/0 = 0
+2:18/0 = 0
+3:18/0 = 0
+4:18/0 = 0
+5:18/0 = 0
+6:18/0 = 0
+7:18/0 = 0
+8:18/0 = 0
+1:20/0 = 0
+2:20/0 = 0
+3:20/0 = 0
+4:20/0 = 0
+5:20/0 = 0
+6:20/0 = 0
+7:20/0 = 0
+8:20/0 = 0
+9:20/0 = 0
+2:21/0 = 0
+3:21/0 = 0
+4:21/0 = 0
+5:21/0 = 0
+6:21/0 = 0
+7:21/0 = 0
+8:21/0 = 0
+9:21/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5egv6"]
+sources/0 = SubResource("TileSetAtlasSource_t1dhk")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t1dhk"]
 texture = ExtResource("4_vr1f0")
@@ -19,13 +146,6 @@ axis_stretch_vertical = 2
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
 texture = ExtResource("3_trj04")
 modulate_color = Color(0.470588, 0.470588, 0.470588, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dy7ct"]
-texture = ExtResource("3_trj04")
-modulate_color = Color(1, 0.9, 0, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0o4t1"]
-texture = ExtResource("4_16hvj")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0k4wn"]
 texture = ExtResource("3_trj04")
@@ -37,6 +157,70 @@ modulate_color = Color(0.470588, 0.470588, 0.470588, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qe12f"]
 texture = ExtResource("3_trj04")
 modulate_color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[sub_resource type="Animation" id="Animation_vtepg"]
+resource_name = "rotate"
+length = 18.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_8dnnj"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wyh8j"]
+_data = {
+&"RESET": SubResource("Animation_8dnnj"),
+&"rotate": SubResource("Animation_vtepg")
+}
+
+[sub_resource type="Animation" id="Animation_5egv6"]
+resource_name = "scale"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.06, 0.06), Vector2(0.07, 0.07)]
+}
+
+[sub_resource type="Animation" id="Animation_m3bi6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.06, 0.06)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ujyyl"]
+_data = {
+&"RESET": SubResource("Animation_m3bi6"),
+&"scale": SubResource("Animation_5egv6")
+}
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -53,7 +237,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.062457, 0, 0.000810734, 1)
+color = Color(0.158573, 0.0183231, 0, 1)
+
+[node name="Background2" type="TileMapLayer" parent="ColorRect"]
+modulate = Color(0.364736, 0.085191, 0.00650362, 1)
+tile_map_data = PackedByteArray("AAABAAEAAAAHABQAAAABAAIAAAADABQAAAABAAMAAAAFABQAAAABAAQAAAACABUAAAABAAUAAAABABQAAAABAAYAAAAHABQAAAABAAcAAAAJABUAAAACAAEAAAAEABQAAAACAAIAAAACABUAAAACAAMAAAAIABQAAAACAAQAAAAFABQAAAACAAUAAAAEABQAAAACAAYAAAACABQAAAACAAcAAAAFABQAAAADAAEAAAABABQAAAADAAIAAAAGABUAAAADAAMAAAAFABQAAAADAAQAAAAIABUAAAADAAUAAAAIABQAAAADAAYAAAAJABQAAAADAAcAAAAGABUAAAAEAAEAAAAIABQAAAAEAAIAAAABABQAAAAEAAMAAAADABQAAAAEAAQAAAAEABUAAAAEAAUAAAAIABQAAAAEAAYAAAAFABUAAAAEAAcAAAAIABUAAAAFAAEAAAAEABQAAAAFAAIAAAADABUAAAAFAAMAAAACABUAAAAFAAQAAAAJABUAAAAFAAUAAAAFABQAAAAFAAYAAAAHABUAAAAFAAcAAAADABQAAAAGAAEAAAAGABUAAAAGAAIAAAACABQAAAAGAAMAAAAEABQAAAAGAAQAAAAFABQAAAAGAAUAAAADABUAAAAGAAYAAAAGABUAAAAGAAcAAAAJABUAAAAHAAEAAAACABQAAAAHAAIAAAACABQAAAAHAAMAAAAJABQAAAAHAAQAAAAIABUAAAAHAAUAAAAJABUAAAAHAAYAAAABABQAAAAHAAcAAAAJABQAAAAIAAEAAAAEABQAAAAIAAIAAAAIABQAAAAIAAMAAAAGABUAAAAIAAQAAAAJABUAAAAIAAUAAAAEABQAAAAIAAYAAAAJABQAAAAIAAcAAAAFABUAAAAJAAEAAAAFABUAAAAJAAIAAAAFABUAAAAJAAMAAAAIABQAAAAJAAQAAAADABUAAAAJAAUAAAABABQAAAAJAAYAAAAEABUAAAAJAAcAAAAJABQAAAAKAAEAAAAIABQAAAAKAAIAAAAEABQAAAAKAAMAAAAFABQAAAAKAAQAAAAIABUAAAAKAAUAAAAGABQAAAAKAAYAAAAJABUAAAAKAAcAAAAFABQAAAALAAEAAAAHABQAAAALAAIAAAADABUAAAALAAMAAAAFABUAAAALAAQAAAAHABQAAAALAAUAAAAFABQAAAALAAYAAAAIABUAAAALAAcAAAACABQAAAAMAAEAAAAGABUAAAAMAAIAAAAEABUAAAAMAAMAAAAGABQAAAAMAAQAAAAFABQAAAAMAAUAAAACABQAAAAMAAYAAAAGABUAAAAMAAcAAAAGABUAAAANAAEAAAADABQAAAANAAIAAAAFABQAAAANAAMAAAAHABQAAAANAAQAAAAHABUAAAANAAUAAAAGABUAAAANAAYAAAAFABUAAAANAAcAAAAGABUAAAAOAAEAAAAJABQAAAAOAAIAAAAGABQAAAAOAAMAAAAFABQAAAAOAAQAAAACABUAAAAOAAUAAAAEABQAAAAOAAYAAAABABQAAAAOAAcAAAACABUAAAAQAAEAAAADABQAAAAQAAIAAAAIABUAAAAQAAMAAAAFABQAAAAQAAQAAAAEABQAAAAQAAUAAAAFABUAAAAQAAYAAAAGABUAAAAQAAcAAAAFABQAAAAQAAgAAAAFABUAAAAQAAkAAAAIABUAAAARAAEAAAAEABQAAAARAAIAAAADABUAAAARAAMAAAAIABQAAAARAAQAAAAGABQAAAARAAUAAAACABQAAAARAAYAAAAHABQAAAARAAcAAAAIABUAAAARAAgAAAAJABUAAAARAAkAAAADABUAAAASAAEAAAAIABQAAAASAAIAAAABABQAAAASAAMAAAAIABUAAAASAAQAAAAFABUAAAASAAUAAAADABUAAAASAAYAAAAJABUAAAASAAcAAAAGABQAAAASAAgAAAAEABUAAAASAAkAAAADABQAAAATAAEAAAAEABUAAAATAAIAAAAGABUAAAATAAMAAAAJABQAAAATAAQAAAAHABQAAAATAAUAAAACABUAAAATAAYAAAAEABQAAAATAAcAAAABABQAAAATAAgAAAACABQAAAATAAkAAAAJABQAAAAUAAEAAAACABQAAAAUAAIAAAAHABUAAAAUAAMAAAAFABQAAAAUAAQAAAAIABUAAAAUAAUAAAAHABQAAAAUAAYAAAAHABUAAAAUAAcAAAADABQAAAAUAAgAAAAEABUAAAAUAAkAAAAEABQAAAAVAAEAAAAEABUAAAAVAAIAAAAFABQAAAAVAAMAAAACABUAAAAVAAQAAAAGABUAAAAVAAUAAAADABQAAAAVAAYAAAAJABQAAAAVAAcAAAAHABQAAAAVAAgAAAAFABUAAAAVAAkAAAACABQAAAAWAAEAAAAFABUAAAAWAAIAAAAGABQAAAAWAAMAAAAEABUAAAAWAAQAAAACABQAAAAWAAUAAAACABUAAAAWAAYAAAAIABQAAAAWAAcAAAACABUAAAAWAAgAAAAIABUAAAAWAAkAAAAGABQAAAAXAAEAAAADABUAAAAXAAIAAAAIABQAAAAXAAMAAAAJABUAAAAXAAQAAAAEABQAAAAXAAUAAAAIABUAAAAXAAYAAAAJABQAAAAXAAcAAAACABQAAAAXAAgAAAAJABQAAAAXAAkAAAADABQAAAAYAAEAAAABABQAAAAYAAIAAAADABQAAAAYAAMAAAAGABUAAAAYAAQAAAABABQAAAAYAAUAAAAFABQAAAAYAAYAAAAHABQAAAAYAAcAAAACABUAAAAYAAgAAAACABQAAAAYAAkAAAAJABQAAAAZAAEAAAACABUAAAAZAAIAAAAJABUAAAAZAAMAAAAHABQAAAAZAAQAAAAEABQAAAAZAAUAAAAHABUAAAAZAAYAAAAHABQAAAAZAAcAAAAFABUAAAAZAAgAAAAEABQAAAAZAAkAAAACABUAAAAaAAEAAAABABQAAAAaAAIAAAADABQAAAAaAAMAAAAHABQAAAAaAAQAAAACABUAAAAaAAUAAAAFABQAAAAaAAYAAAAEABUAAAAaAAcAAAADABUAAAAaAAgAAAAIABQAAAAaAAkAAAAHABQAAAAbAAEAAAACABQAAAAbAAIAAAAIABUAAAAbAAMAAAAEABUAAAAbAAQAAAACABQAAAAbAAUAAAAIABUAAAAbAAYAAAAHABUAAAAbAAcAAAABABQAAAAbAAgAAAAEABQAAAAbAAkAAAAJABUAAAAcAAEAAAAGABUAAAAcAAIAAAADABQAAAAcAAMAAAAGABQAAAAcAAQAAAAEABQAAAAcAAUAAAAGABQAAAAcAAYAAAAIABUAAAAcAAcAAAAEABUAAAAcAAgAAAAFABQAAAAcAAkAAAAJABQAAAABAAoAAAACABQAAAABAAsAAAAGABQAAAABAAwAAAACABQAAAABAA0AAAAJABQAAAABAA4AAAAEABQAAAABAA8AAAAFABQAAAACAAsAAAAJABQAAAACAAwAAAAGABQAAAACAA0AAAAHABUAAAACAA4AAAAHABUAAAACAA8AAAABABQAAAADAAoAAAAFABUAAAADAAsAAAAIABQAAAADAAwAAAAHABQAAAADAA0AAAABABQAAAADAA4AAAAHABUAAAADAA8AAAADABQAAAAEAAoAAAAEABQAAAAEAAsAAAAJABUAAAAEAAwAAAAIABUAAAAEAA0AAAAFABQAAAAEAA4AAAACABQAAAAEAA8AAAAHABQAAAAFAAoAAAAIABQAAAAFAAsAAAAGABQAAAAFAAwAAAAGABQAAAAFAA0AAAAHABQAAAAFAA4AAAAJABQAAAAFAA8AAAAJABQAAAAGAAoAAAAJABUAAAAGAAsAAAABABQAAAAGAAwAAAAHABQAAAAGAA0AAAAHABQAAAAGAA4AAAAGABUAAAAGAA8AAAAFABUAAAAHAAoAAAAIABUAAAAHAAsAAAACABQAAAAHAAwAAAAJABUAAAAHAA0AAAAFABUAAAAHAA4AAAAGABUAAAAHAA8AAAAIABQAAAAIAAoAAAAHABQAAAAIAAsAAAAEABUAAAAIAAwAAAAGABUAAAAIAA0AAAAFABUAAAAIAA4AAAABABQAAAAIAA8AAAAJABUAAAAJAAoAAAAFABUAAAAJAAsAAAAHABQAAAAJAAwAAAAEABQAAAAJAA0AAAAJABUAAAAJAA4AAAABABQAAAAJAA8AAAACABUAAAAKAAoAAAAGABQAAAAKAAsAAAAGABUAAAAKAAwAAAADABQAAAAKAA0AAAAJABQAAAAKAA4AAAADABQAAAAKAA8AAAACABUAAAALAAoAAAAIABUAAAALAAsAAAAFABUAAAALAAwAAAACABUAAAALAA0AAAAGABUAAAALAA4AAAAHABQAAAALAA8AAAADABQAAAAMAAoAAAAGABUAAAAMAAsAAAAFABUAAAAMAAwAAAAIABUAAAAMAA0AAAABABQAAAAMAA4AAAAIABQAAAAMAA8AAAAGABQAAAANAAoAAAAFABUAAAANAAsAAAADABUAAAANAAwAAAACABQAAAANAA0AAAACABUAAAANAA4AAAAGABUAAAANAA8AAAADABQAAAAOAAoAAAAFABUAAAAOAAsAAAAHABUAAAAOAAwAAAADABUAAAAOAA0AAAAEABUAAAAOAA4AAAACABQAAAAOAA8AAAAFABUAAAAPAAoAAAAEABUAAAAPAAsAAAAIABUAAAAPAAwAAAAIABQAAAAPAA0AAAAFABUAAAAPAA4AAAAGABUAAAAPAA8AAAAGABQAAAAQAAoAAAACABQAAAAQAAsAAAAIABQAAAAQAAwAAAAFABUAAAAQAA0AAAAFABUAAAAQAA4AAAAJABQAAAAQAA8AAAACABQAAAARAAoAAAAJABQAAAARAAsAAAACABQAAAARAAwAAAAHABQAAAARAA0AAAAEABUAAAARAA4AAAAGABQAAAARAA8AAAAGABUAAAASAAoAAAAFABQAAAASAAsAAAAEABUAAAASAAwAAAADABUAAAASAA0AAAACABQAAAASAA4AAAAEABUAAAASAA8AAAAGABUAAAATAAoAAAAHABQAAAATAAsAAAAHABQAAAATAAwAAAAGABUAAAATAA0AAAADABQAAAATAA4AAAADABUAAAATAA8AAAAFABUAAAAUAAoAAAAFABQAAAAUAAsAAAAJABUAAAAUAAwAAAAHABQAAAAUAA0AAAACABQAAAAUAA4AAAABABQAAAAUAA8AAAADABUAAAAVAAoAAAAHABQAAAAVAAsAAAAFABQAAAAVAAwAAAAEABQAAAAVAA0AAAAHABQAAAAVAA4AAAAJABUAAAAVAA8AAAAJABQAAAAWAAoAAAAEABUAAAAWAAsAAAAJABQAAAAWAAwAAAAFABQAAAAWAA0AAAAEABQAAAAWAA4AAAADABQAAAAWAA8AAAABABQAAAAXAAoAAAAGABQAAAAXAAsAAAAIABQAAAAXAAwAAAABABQAAAAXAA0AAAADABUAAAAXAA4AAAAEABQAAAAXAA8AAAAGABUAAAAYAAoAAAAEABUAAAAYAAsAAAABABQAAAAYAAwAAAAJABUAAAAYAA0AAAAFABUAAAAYAA4AAAAIABUAAAAYAA8AAAACABUAAAAZAAoAAAAEABUAAAAZAAsAAAAJABUAAAAZAAwAAAAEABUAAAAZAA0AAAAEABUAAAAZAA4AAAACABQAAAAZAA8AAAAJABUAAAAaAAoAAAAHABQAAAAaAAsAAAAHABUAAAAaAAwAAAADABQAAAAaAA0AAAAHABUAAAAaAA4AAAABABQAAAAaAA8AAAACABQAAAAbAAoAAAABABQAAAAbAAsAAAADABUAAAAbAAwAAAAIABUAAAAbAA0AAAAEABUAAAAbAA4AAAAFABUAAAAbAA8AAAAFABUAAAAcAAoAAAADABQAAAAcAAsAAAAJABUAAAAcAAwAAAADABQAAAAcAA0AAAAGABQAAAAcAA4AAAABABQAAAAcAA8AAAADABUAAAABAAgAAAAIABUAAAACAAgAAAAFABUAAAADAAgAAAAGABQAAAAEAAgAAAADABUAAAAFAAgAAAACABUAAAAGAAgAAAAGABQAAAAHAAgAAAAGABUAAAANAAgAAAACABQAAAAMAAgAAAAEABUAAAALAAgAAAAEABUAAAAKAAgAAAAGABQAAAAJAAgAAAABABQAAAAIAAgAAAAEABUAAAAOAAgAAAAEABQAAAABAAkAAAAEABQAAAACAAkAAAAJABQAAAADAAkAAAAHABUAAAAEAAkAAAAGABUAAAAFAAkAAAAGABQAAAAGAAkAAAAHABQAAAAHAAkAAAACABQAAAAIAAkAAAAJABUAAAAJAAkAAAAEABUAAAAKAAkAAAAEABUAAAALAAkAAAABABQAAAAMAAkAAAAFABQAAAANAAkAAAAIABUAAAAOAAkAAAAFABUAAAAPAAEAAAADABQAAAAPAAIAAAADABQAAAAPAAMAAAAFABUAAAAPAAQAAAAHABUAAAAPAAUAAAAGABQAAAAPAAYAAAAFABUAAAAPAAcAAAAFABQAAAAPAAgAAAAJABUAAAAPAAkAAAAFABQAAAACAAoAAAAHABQAAAA=")
+tile_set = SubResource("TileSet_5egv6")
+
+[node name="Background" type="TileMapLayer" parent="ColorRect"]
+modulate = Color(0.729412, 0.207843, 0.0313726, 1)
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAMAABABAAAAAAADAAcAABACAAAAAAAGAAYAAAADAAAAAAAGAAYAAAAEAAAAAAAGAAYAAAAFAAAAAAAGAAYAAAAGAAAAAAAGAAYAAAAHAAAAAAAGAAYAAAAIAAAAAAAGAAYAAAAJAAAAAAAGAAYAAAAKAAAAAAAGAAYAAAALAAAAAAAGAAYAAAAMAAAAAAAGAAYAAAANAAAAAAAGAAYAAAAOAAAAAAAGAAYAAAAPAAAAAAAGAAYAAAAQAAAAAAAGAAYAAAARAAAAAAAGAAYAAAASAAAAAAAGAAYAAAATAAAAAAAGAAYAAAAUAAAAAAAGAAYAAAAVAAAAAAAGAAYAAAAWAAAAAAAGAAYAAAAXAAAAAAAGAAYAAAAYAAAAAAAGAAYAAAAZAAAAAAAGAAYAAAAaAAAAAAAGAAYAAAAbAAAAAAAGAAYAAAAcAAAAAAADAAcAAAAdAAAAAAABAAMAAAAdAAEAAAADAAYAAAAdAAIAAAAHAAQAAAAdAAMAAAADAAYAAAAdAAQAAAADAAYAAAAdAAUAAAADAAYAAAAdAAYAAAADAAYAAAAdAAcAAAADAAYAAAAdAAgAAAADAAYAAAAdAAkAAAADAAYAAAAdAAoAAAADAAYAAAAdAAsAAAADAAYAAAAdAAwAAAADAAYAAAAdAA0AAAADAAYAAAAdAA4AAAADAAYAAAAdAA8AAAADAAYAAAAdABAAAAABAAMAACAcABAAAAADAAcAACAbABAAAAAFAAcAAAAaABAAAAAFAAcAAAAZABAAAAAFAAcAAAAYABAAAAAFAAcAAAAXABAAAAAFAAcAAAAWABAAAAAFAAcAAAAVABAAAAAFAAcAAAAUABAAAAAFAAcAAAATABAAAAAFAAcAAAASABAAAAAFAAcAAAARABAAAAAFAAcAAAAQABAAAAAFAAcAAAAPABAAAAAFAAcAAAAOABAAAAAFAAcAAAANABAAAAAFAAcAAAAMABAAAAAFAAcAAAALABAAAAAFAAcAAAAKABAAAAAFAAcAAAAJABAAAAAFAAcAAAAIABAAAAAFAAcAAAAHABAAAAAFAAcAAAAGABAAAAAFAAcAAAAFABAAAAAFAAcAAAAEABAAAAAFAAcAAAADABAAAAAFAAcAAAACABAAAAAFAAcAAAABABAAAAADAAcAADAAABAAAAABAAMAADAAAA8AAAADAAYAAAAAAA4AAAADAAYAAAAAAA0AAAADAAYAAAAAAAsAAAADAAYAAAAAAAoAAAADAAYAAAAAAAkAAAADAAYAAAAAAAgAAAADAAYAAAAAAAwAAAADAAYAAAAAAAcAAAADAAYAAAAAAAYAAAADAAYAAAAAAAUAAAADAAYAAAAAAAQAAAADAAYAAAAAAAMAAAADAAYAAAAAAAIAAAADAAYAAAAAAAEAAAADAAYAABA=")
+tile_set = SubResource("TileSet_5egv6")
 
 [node name="CenterPanel" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -80,6 +274,7 @@ patch_margin_right = 20
 patch_margin_bottom = 20
 
 [node name="LevelName" type="Label" parent="CenterPanel/Title"]
+modulate = Color(0.996078, 0.643137, 0.2, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,8 +327,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_glbon")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("7_vr1f0")
@@ -164,8 +357,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
@@ -179,8 +370,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 script = ExtResource("5_vr1f0")
 LevelScene = ExtResource("7_trj04")
@@ -192,8 +381,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
@@ -213,13 +400,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="Level_06" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -227,13 +413,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="x_07" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
@@ -247,13 +432,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="Level_08" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -261,13 +445,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="x_08" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
@@ -281,13 +464,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="Level_10" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -295,13 +477,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="Level_11" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
@@ -309,13 +490,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="x_09" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
@@ -341,13 +521,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_qe12f")
-theme_override_styles/hover = SubResource("StyleBoxTexture_dy7ct")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0o4t1")
 theme_override_styles/normal = SubResource("StyleBoxTexture_0k4wn")
 text = "
 "
 script = ExtResource("5_vr1f0")
 IsLocked = true
+LevelName = "???"
 
 [node name="x_12" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
 modulate = Color(0.14, 0.0224, 0.042, 0.552941)
@@ -383,30 +562,35 @@ offset_right = 82.0
 offset_bottom = 85.0
 
 [node name="HeartsLabel" type="Label" parent="LevelInfoDisplay/Stats"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 text = "❤️: 0"
 vertical_alignment = 1
 
 [node name="TimeLabel" type="Label" parent="LevelInfoDisplay/Stats"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 text = " ⏳ 00:00 "
 vertical_alignment = 1
 
 [node name="EnemiesLabel" type="Label" parent="LevelInfoDisplay/Stats"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 text = "💀: 0/0"
 vertical_alignment = 1
 
 [node name="MaskLabel" type="Label" parent="LevelInfoDisplay/Stats"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 text = "☀️: no"
 vertical_alignment = 1
 
 [node name="CoinsLabel" type="Label" parent="LevelInfoDisplay/Stats"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 5
 text = "💰: 00"
@@ -470,3 +654,32 @@ patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
+
+[node name="LaLeyendaDelWampa-Logo" type="Node2D" parent="."]
+
+[node name="Laleyendadel" type="Sprite2D" parent="LaLeyendaDelWampa-Logo"]
+position = Vector2(101, 148)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("12_5egv6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaLeyendaDelWampa-Logo/Laleyendadel"]
+libraries = {
+&"": SubResource("AnimationLibrary_wyh8j")
+}
+autoplay = "rotate"
+
+[node name="WampAlogo" type="Sprite2D" parent="LaLeyendaDelWampa-Logo"]
+position = Vector2(100, 147)
+scale = Vector2(0.06, 0.06)
+texture = ExtResource("12_t1dhk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaLeyendaDelWampa-Logo/WampAlogo"]
+libraries = {
+&"": SubResource("AnimationLibrary_ujyyl")
+}
+autoplay = "scale"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_vtepg")
+volume_db = -12.0
+autoplay = true

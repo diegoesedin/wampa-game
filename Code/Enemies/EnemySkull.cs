@@ -63,7 +63,10 @@ public partial class EnemySkull : CharacterBody2D
         {
             if (currentHealth <= 0 || isAttacking) return;
         
-            attackTimer -= (float)delta;
+            if (playerOnRange)
+            {
+                attackTimer -= (float)delta;      
+            }
 
             if (attackTimer <= 0)
             {
@@ -102,6 +105,7 @@ public partial class EnemySkull : CharacterBody2D
                             canShoot = false;
                             shootCooldownTimer = shootCooldown;
                             animation.Play("Shoot");
+                            AudioManager.Instance.PlaySFX("enemy_shoot");
                         }
                     }
                 
@@ -125,6 +129,7 @@ public partial class EnemySkull : CharacterBody2D
         attackArea.Monitoring = true;
         animation.Play("Shoot");
         weapon.Play("attack");
+        AudioManager.Instance.PlaySFX("enemy_attack"); 
         attackTimer = attackCooldown;
     }
 
