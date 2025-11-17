@@ -1,24 +1,65 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3ywxatckvm3q"]
+[gd_scene load_steps=8 format=3 uid="uid://d3ywxatckvm3q"]
 
 [ext_resource type="Script" uid="uid://dxelpjuo6vvyq" path="res://Code/Enemies/Projectile.cs" id="1_q35cw"]
 [ext_resource type="Texture2D" uid="uid://c1yl61s3jntr" path="res://Art/Sprites/EnemySkull/skull_tooth.png" id="2_ikdgj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_woftu"]
+radius = 8.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5enr"]
-atlas = ExtResource("2_ikdgj")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_bdvhq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vn0pr"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5enr")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="Animation" id="Animation_uq3g5"]
+resource_name = "flying"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [7.76672, 7.85398, 7.94125]
+}
+
+[sub_resource type="Animation" id="Animation_6n2fg"]
+resource_name = "rotate"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 7.27802, 7.85398, 7.76672]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2peqa"]
+_data = {
+&"RESET": SubResource("Animation_bdvhq"),
+&"fly": SubResource("Animation_uq3g5"),
+&"shoot": SubResource("Animation_6n2fg")
+}
 
 [node name="SkullProjectile" type="Node2D"]
 script = ExtResource("1_q35cw")
@@ -28,13 +69,20 @@ collision_layer = 4
 collision_mask = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, -1)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_woftu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.55, 0.55)
-sprite_frames = SubResource("SpriteFrames_vn0pr")
-autoplay = "default"
-frame_progress = 0.811953
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_ikdgj")
+offset = Vector2(0, 1.81818)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2peqa")
+}
+autoplay = "shoot"
 
 [connection signal="body_shape_entered" from="DetectionArea" to="." method="_OnDetectionAreaBodyShapeEntered"]
