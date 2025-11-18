@@ -1,6 +1,7 @@
-[gd_scene load_steps=51 format=3 uid="uid://cacvqa3hyf5bt"]
+[gd_scene load_steps=52 format=3 uid="uid://cacvqa3hyf5bt"]
 
 [ext_resource type="Script" uid="uid://i4j1oxu5ul1j" path="res://Code/HUD.cs" id="1_sd512"]
+[ext_resource type="Texture2D" uid="uid://bjhod1cv5i502" path="res://Art/Sprites/HUD_frame.png" id="2_fbb48"]
 [ext_resource type="Texture2D" uid="uid://sewr4gbdsbtj" path="res://Art/Sprites/Items/heart_full.png" id="2_jo1ms"]
 [ext_resource type="Texture2D" uid="uid://d3ld2g728mcsw" path="res://Art/Sprites/Items/heart_empty.png" id="2_psnte"]
 [ext_resource type="Texture2D" uid="uid://bu0miexfti0ox" path="res://Art/Sprites/EnemySkull/nSkull_death.png" id="4_b5b84"]
@@ -336,17 +337,24 @@ script = ExtResource("1_sd512")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -240.0
+offset_top = 25.0
+offset_bottom = -213.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HudFrame" type="Sprite2D" parent="."]
+modulate = Color(0.980392, 0.415686, 0.0392157, 1)
+position = Vector2(240, 41.5)
+texture = ExtResource("2_fbb48")
 
 [node name="TopBar" type="HBoxContainer" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -68.0
+offset_top = 26.0
 offset_right = 69.0
-offset_bottom = 30.0
+offset_bottom = 56.0
 grow_horizontal = 2
 theme_override_constants/separation = 10
 

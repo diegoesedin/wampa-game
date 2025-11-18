@@ -159,7 +159,7 @@ public partial class SessionManager : Node
     {
         // Lógica de desbloqueo - ajustar según tu estructura de niveles
         if (levelPath.Contains("tutorial")) return true;
-        if (levelPath.Contains("lvl_01")) return true;
+        if (levelPath.Contains("lvl_01")) return IsLevelCompleted("res://Scenes/Game Levels/tutorial.tscn");
         if (levelPath.Contains("lvl_02")) return IsLevelCompleted("res://Scenes/Game Levels/lvl_01.tscn");
         if (levelPath.Contains("lvl_03")) return IsLevelCompleted("res://Scenes/Game Levels/lvl_02.tscn");
         
