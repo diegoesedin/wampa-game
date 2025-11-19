@@ -38,7 +38,7 @@ public partial class HUD : CanvasLayer
     public void UpdateTime(float time)
     {
         if (timeLabel == null)
-        return;
+            return;
 
         int seconds = (int)time;
         int milliseconds = (int)((time - seconds) * 100);

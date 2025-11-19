@@ -1,9 +1,10 @@
-[gd_scene load_steps=52 format=3 uid="uid://cacvqa3hyf5bt"]
+[gd_scene load_steps=53 format=3 uid="uid://cacvqa3hyf5bt"]
 
 [ext_resource type="Script" uid="uid://i4j1oxu5ul1j" path="res://Code/HUD.cs" id="1_sd512"]
 [ext_resource type="Texture2D" uid="uid://bjhod1cv5i502" path="res://Art/Sprites/HUD_frame.png" id="2_fbb48"]
 [ext_resource type="Texture2D" uid="uid://sewr4gbdsbtj" path="res://Art/Sprites/Items/heart_full.png" id="2_jo1ms"]
 [ext_resource type="Texture2D" uid="uid://d3ld2g728mcsw" path="res://Art/Sprites/Items/heart_empty.png" id="2_psnte"]
+[ext_resource type="Script" uid="uid://b5u5ijr8iwsm0" path="res://Code/Tools/HudScroll.cs" id="3_o2vyp"]
 [ext_resource type="Texture2D" uid="uid://bu0miexfti0ox" path="res://Art/Sprites/EnemySkull/nSkull_death.png" id="4_b5b84"]
 [ext_resource type="Texture2D" uid="uid://3kudcnmt5e" path="res://Art/Sprites/Items/Sun_Mask.png" id="4_c3eba"]
 [ext_resource type="Texture2D" uid="uid://dla6122k41kwg" path="res://Art/Sprites/Items/coin.png" id="4_s3jbq"]
@@ -344,8 +345,13 @@ grow_vertical = 2
 
 [node name="HudFrame" type="Sprite2D" parent="."]
 modulate = Color(0.980392, 0.415686, 0.0392157, 1)
+texture_repeat = 2
 position = Vector2(240, 41.5)
 texture = ExtResource("2_fbb48")
+region_enabled = true
+region_rect = Rect2(0, 0, 479.955, 48.026)
+script = ExtResource("3_o2vyp")
+Speed = 25.0
 
 [node name="TopBar" type="HBoxContainer" parent="."]
 anchors_preset = 5
