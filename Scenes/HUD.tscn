@@ -347,21 +347,22 @@ grow_vertical = 2
 modulate = Color(0.980392, 0.415686, 0.0392157, 1)
 texture_repeat = 2
 position = Vector2(240, 41.5)
+scale = Vector2(0.815, 0.815)
 texture = ExtResource("2_fbb48")
 region_enabled = true
 region_rect = Rect2(0, 0, 479.955, 48.026)
 script = ExtResource("3_o2vyp")
-Speed = 25.0
 
 [node name="TopBar" type="HBoxContainer" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -68.0
-offset_top = 26.0
-offset_right = 69.0
-offset_bottom = 56.0
+offset_left = -78.5
+offset_top = 30.0
+offset_right = 78.5
+offset_bottom = 60.0
 grow_horizontal = 2
+scale = Vector2(0.75, 0.75)
 theme_override_constants/separation = 10
 
 [node name="HeartContainers" type="HBoxContainer" parent="TopBar"]

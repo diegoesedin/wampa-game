@@ -8,12 +8,12 @@ public partial class AudioManager : Node
     // -------------------- PLAYERS --------------------
     private AudioStreamPlayer musicPlayer;
     private List<AudioStreamPlayer> sfxPlayers = new List<AudioStreamPlayer>();
-    private const int SFX_POOL_SIZE = 8; // Número de canales simultáneos
+    private const int SFX_POOL_SIZE = 16; // Número de canales simultáneos
     
     // -------------------- VOLUMEN --------------------
-    [Export] private float masterVolume = 1.0f;
-    [Export] private float musicVolume = 0.7f;
-    [Export] private float sfxVolume = 0.8f;
+    [Export] private float masterVolume = 0.5f;
+    [Export] private float musicVolume = 0.3f;
+    [Export] private float sfxVolume = 0.5f;
     
     // -------------------- CACHE --------------------
     private Dictionary<string, AudioStream> audioCache = new Dictionary<string, AudioStream>();

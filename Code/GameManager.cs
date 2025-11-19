@@ -95,35 +95,47 @@ public partial class GameManager : Node2D
         maskCollected = true;
         hud.SetMaskCollected(maskCollected);
         
-        AudioManager.Instance.PlaySFX("mask_pickup");
+        AudioManager.Instance.PlayMusic("mask_pickup");
     }
 
     private void OnLevelCompleted()
+    { 
+    stopTimer = true;
+    
+    AudioManager.Instance.PlayMusic("level_complete");
+    
+    // GUARDAR STATS EN SESSION MANAGER
+    if (!string.IsNullOrEmpty(currentLevelPath))
     {
-        stopTimer = true;
+        SessionManager.Instance.SaveLevelStats(
+            currentLevelPath,
+            elapsedTime,
+            coinCount,
+            enemiesKilled,
+            totalEnemies,
+            maskCollected,
+            player.CurrentLives
+        );
         
-        AudioManager.Instance.PlaySFX("level_complete");
-        
-        // GUARDAR STATS EN SESSION MANAGER
-        if (!string.IsNullOrEmpty(currentLevelPath))
+        GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
+
+        // Chequea si ganó (agarrar todas las medallas)
+        if (SessionManager.Instance.HasPlayerWon())
         {
-            SessionManager.Instance.SaveLevelStats(
-                currentLevelPath,
-                elapsedTime,
-                coinCount,
-                enemiesKilled,
-                totalEnemies,
-                maskCollected,
-                player.CurrentLives
-            );
-            
-            GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
+            GD.Print("[GameManager] Todas las medallas obtenidas");
+            GetTree().CallDeferred("change_scene_to_file", "res://Scenes/VictoryScreen.tscn");
+            return;
         }
-        else
-        {
-            GD.PrintErr("[GameManager] currentLevelPath no configurado!");
-        }
+
+        // Si NO ganó el juego -> volver al menú normal
+        GetTree().CallDeferred("change_scene_to_file", "res://Scenes/main_menu.tscn");
     }
+    else
+    {
+        GD.PrintErr("[GameManager] currentLevelPath no configurado!");
+    }
+    }
+
 
     // EVENTOS DE MONEDAS
     private void OnCoinCollected()

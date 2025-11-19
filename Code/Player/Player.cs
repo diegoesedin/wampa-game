@@ -399,7 +399,7 @@ public partial class Player : CharacterBody2D
     {
         state = State.Frozen;
         animation.Play("Death");
-        AudioManager.Instance.PlaySFX("player_death");
+        AudioManager.Instance.PlayMusic("player_death");
         blockPlayerControl = true;
         
         EmitSignal(nameof(PlayerDied));

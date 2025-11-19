@@ -22,7 +22,7 @@ public partial class SessionManager : Node
     }
     
     // ==========================================================
-    // GUARDAR/CARGAR PROGRESO
+    // GUARDAR/CARGAR PROGRESO + VERIFICAR SI GANO
     // ==========================================================
     private const string SAVE_PATH = "user://progress.json";
     
@@ -93,6 +93,37 @@ public partial class SessionManager : Node
         
         GD.Print("[SessionManager] Progreso guardado");
     }
+
+    public bool HasPlayerWon()
+    {
+    
+    string[] levelPaths = new string[] // hay que ir agregando los path a manopla
+    {
+        "res://Scenes/Game Levels/tutorial.tscn",
+        "res://Scenes/Game Levels/lvl_01.tscn",
+        "res://Scenes/Game Levels/lvl_02.tscn",
+        "res://Scenes/Game Levels/lvl_03.tscn",
+    };
+
+    foreach (string path in levelPaths)
+    {
+        if (!levelsData.ContainsKey(path))
+            return false;
+
+        var d = levelsData[path];
+
+        bool allMedals =
+            d.HeartsMedalUnlocked &&
+            d.TimeMedalUnlocked &&
+            d.EnemiesMedalUnlocked &&
+            d.MaskMedalUnlocked;
+
+        if (!allMedals)
+            return false; // faltan medallas -> false
+    }
+
+    return true; // tiene todas las medallas de todos los niveles
+    }
     
     // ==========================================================
     // GESTIÓN DE NIVELES
@@ -121,11 +152,11 @@ public partial class SessionManager : Node
             level.BestTime = time;
         }
         
-        // MEDALLAS PERMANENTES - Una vez conseguidas, nunca se pierden
+        // MEDALLAS PERMANENTES 
         if (heartsRemaining == 3)
             level.HeartsMedalUnlocked = true;
         
-        if (time < 15f) // Ajusta este valor según tu juego
+        if (time < 15f) 
             level.TimeMedalUnlocked = true;
         
         if (enemiesKilled == totalEnemies && totalEnemies > 0)
@@ -147,7 +178,7 @@ public partial class SessionManager : Node
             return levelsData[levelPath];
         }
         
-        return new LevelData(); // Datos vacíos si nunca jugó
+        return new LevelData(); 
     }
     
     public bool IsLevelCompleted(string levelPath)
@@ -157,13 +188,13 @@ public partial class SessionManager : Node
     
     public bool IsLevelUnlocked(string levelPath)
     {
-        // Lógica de desbloqueo - ajustar según tu estructura de niveles
+        // Lógica de desbloqueo 
         if (levelPath.Contains("tutorial")) return true;
         if (levelPath.Contains("lvl_01")) return IsLevelCompleted("res://Scenes/Game Levels/tutorial.tscn");
         if (levelPath.Contains("lvl_02")) return IsLevelCompleted("res://Scenes/Game Levels/lvl_01.tscn");
         if (levelPath.Contains("lvl_03")) return IsLevelCompleted("res://Scenes/Game Levels/lvl_02.tscn");
         
-        // Por defecto desbloqueado (para testing)
+
         return true;
     }
     
@@ -190,7 +221,7 @@ public partial class SessionManager : Node
     }
     
     // ==========================================================
-    // RESET (para testing)
+    // RESET 
     // ==========================================================
     public void ResetProgress()
     {
@@ -218,14 +249,13 @@ public class LevelData
     public bool LastMaskCollected { get; set; } = false;
     public int LastHeartsRemaining { get; set; } = 0;
     
-    // Mejor tiempo (para referencia interna)
+    // Mejor tiempo
     public float BestTime { get; set; } = 0f;
     
-    // Medallas (permanentes - una vez conseguidas, para siempre)
+    // Medallas
     public bool HeartsMedalUnlocked { get; set; } = false;
     public bool TimeMedalUnlocked { get; set; } = false;
     public bool EnemiesMedalUnlocked { get; set; } = false;
     public bool MaskMedalUnlocked { get; set; } = false;
-    
     public bool Completed { get; set; } = false;
 }
