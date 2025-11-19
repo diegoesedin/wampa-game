@@ -9,7 +9,7 @@ public partial class IntroScene : Control
     {
         if (@event.IsPressed())
         {
-            GetTree().ChangeSceneToPacked(SceneToLoad);
+            GetTree().CallDeferred("change_scene_to_packed", SceneToLoad);
         }
     }
 }

@@ -126,14 +126,12 @@ public partial class GameManager : Node2D
             GetTree().CallDeferred("change_scene_to_file", "res://Scenes/VictoryScreen.tscn");
             return;
         }
-
-        // Si NO ganó el juego -> volver al menú normal
-        GetTree().CallDeferred("change_scene_to_file", "res://Scenes/main_menu.tscn");
     }
     else
     {
         GD.PrintErr("[GameManager] currentLevelPath no configurado!");
     }
+    
     }
 
 

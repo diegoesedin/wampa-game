@@ -464,6 +464,7 @@ public partial class Player : CharacterBody2D
     {
         if (Input.IsActionJustPressed("reset"))
             CallDeferred("ResetToMainMenu");
+            
     }
 
     private void ResetToMainMenu()
