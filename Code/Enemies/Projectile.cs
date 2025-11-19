@@ -6,10 +6,16 @@ public partial class Projectile : Node2D
     [Export] private double speed = 150;
     [Export] private float lifeSpanSeconds = 5;
 
+    private AnimationPlayer animation;
+
     public override void _Ready()
     {
         var area = GetNode<Area2D>("DetectionArea");
         area.BodyEntered += _OnDetectionAreaBodyShapeEntered;
+
+        animation = GetNode<AnimationPlayer>("AnimationPlayer");
+        animation.AnimationFinished += OnAnimationFinished;
+        animation.Play("shoot");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -32,6 +38,14 @@ public partial class Projectile : Node2D
             {
                 player.TakeDamage(1);
             }
+        }
+    }
+
+     private void OnAnimationFinished(StringName animName)
+    {
+        if (animName == "shoot")
+        {
+            animation.Play("fly");
         }
     }
 }
