@@ -23,6 +23,8 @@ public partial class EnemySkull : CharacterBody2D
     private float shootCooldownTimer = 1f;
     private float shootCooldown = 1f;
     private Marker2D projectileSpawn;
+    
+    private bool dead = false;
 
     [Signal] public delegate void EnemyDiedEventHandler();
 
@@ -51,12 +53,19 @@ public partial class EnemySkull : CharacterBody2D
 
     public override void _Process(double delta)
     {
+        if (dead) 
+            return;
+        
         // dependiendo de que lado está el jugador, flipeamos al enemigo
         if (raycastToPosition != null)
         {
-            var angle = GlobalPosition.AngleToPoint(raycastToPosition.GlobalPosition);
-            var scale = Mathf.Abs(angle) < Math.PI / 2 ? 1 : -1;
-            Scale = new Vector2(scale, 1);
+            var distance = GlobalPosition.DistanceTo(raycastToPosition.GlobalPosition);
+            if (distance > 25)
+            {
+                var angle = GlobalPosition.AngleToPoint(raycastToPosition.GlobalPosition);
+                var scale = Mathf.Abs(angle) < Math.PI / 2 ? 1 : -1;
+                Scale = new Vector2(scale, 1);
+            }
         }
         
         if (meeleEnemy)
@@ -154,6 +163,7 @@ public partial class EnemySkull : CharacterBody2D
         }
         else
         {
+            dead = true;
             animation.Play("Death");
             AudioManager.Instance.PlaySFX("enemy_death");
             attackArea.Visible = false;
@@ -167,7 +177,11 @@ public partial class EnemySkull : CharacterBody2D
             EmitSignal(nameof(EnemyDied));
             QueueFree();
         }
-        else if (animation.Animation == "Hurt")
+        
+        if (dead)
+            return;
+        
+        if (animation.Animation == "Hurt")
         {
             animation.Play("Idle");
         }

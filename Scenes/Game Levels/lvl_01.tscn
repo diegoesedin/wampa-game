@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://byefbn4qc6ud5"]
+[gd_scene load_steps=20 format=4 uid="uid://byefbn4qc6ud5"]
 
 [ext_resource type="PackedScene" uid="uid://c1xq008qlc83q" path="res://Scenes/game_manager.tscn" id="1_te52m"]
 [ext_resource type="PackedScene" uid="uid://cacvqa3hyf5bt" path="res://Scenes/HUD.tscn" id="2_2r1lj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d0s6wf4k0cr4p" path="res://Scenes/Items/sun_mask.tscn" id="6_jhvdk"]
 [ext_resource type="PackedScene" uid="uid://5570xkjchvrm" path="res://Scenes/Items/coin.tscn" id="7_16l12"]
 [ext_resource type="PackedScene" uid="uid://s1iv7pyyyyj7" path="res://Scenes/Items/Goal.tscn" id="9_yy3vv"]
+[ext_resource type="Script" uid="uid://becmlien0q5xv" path="res://Code/WorldBounds.cs" id="11_sdv08"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a835d"]
 texture = ExtResource("3_yy3vv")
@@ -518,6 +519,9 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 36
 sources/1 = SubResource("TileSetAtlasSource_ujohf")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emy5n"]
+size = Vector2(1201, 653)
+
 [node name="Level01" type="Node2D"]
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("player", "hud") instance=ExtResource("1_te52m")]
@@ -547,6 +551,9 @@ spriteFrame = 4
 
 [node name="traps" type="TileMapLayer" parent="TileMap Layers"]
 tile_set = SubResource("TileSet_ujohf")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(520, 456)
 
 [node name="Player" parent="." instance=ExtResource("5_ytgkf")]
 position = Vector2(520, 456)
@@ -744,3 +751,12 @@ position = Vector2(952, 402)
 
 [node name="Goal" parent="." instance=ExtResource("9_yy3vv")]
 position = Vector2(688, 370)
+
+[node name="WorldBounds" type="Area2D" parent="." node_paths=PackedStringArray("RespawnPoint")]
+collision_mask = 2
+script = ExtResource("11_sdv08")
+RespawnPoint = NodePath("../SpawnPoint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBounds"]
+position = Vector2(729.5, 569.5)
+shape = SubResource("RectangleShape2D_emy5n")
