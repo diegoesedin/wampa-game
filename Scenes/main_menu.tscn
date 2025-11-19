@@ -294,6 +294,14 @@ patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
 
+[node name="BackgroundColor" type="ColorRect" parent="CenterPanel/Panel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 167.0
+offset_bottom = 163.0
+color = Color(0.634754, 0.62897, 0.654422, 1)
+
 [node name="LevelGrid" type="GridContainer" parent="CenterPanel/Panel"]
 layout_mode = 1
 anchors_preset = 8
@@ -554,6 +562,13 @@ patch_margin_right = 20
 patch_margin_bottom = 20
 script = ExtResource("10_16hvj")
 
+[node name="BackgroundColor" type="ColorRect" parent="LevelInfoDisplay"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 92.0
+offset_bottom = 88.0
+color = Color(0.634754, 0.62897, 0.654422, 1)
+
 [node name="Stats" type="VBoxContainer" parent="LevelInfoDisplay"]
 layout_mode = 0
 offset_left = 12.0
@@ -654,6 +669,13 @@ patch_margin_left = 20
 patch_margin_top = 20
 patch_margin_right = 20
 patch_margin_bottom = 20
+
+[node name="BackgroundColor" type="ColorRect" parent="Leaderboard"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 92.0
+offset_bottom = 88.0
+color = Color(0.634754, 0.62897, 0.654422, 1)
 
 [node name="LaLeyendaDelWampa-Logo" type="Node2D" parent="."]
 

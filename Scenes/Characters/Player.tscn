@@ -598,7 +598,7 @@ radius = 6.45161
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 13
-safe_margin = 0.12
+safe_margin = 0.105
 script = ExtResource("1_b4kmf")
 SPEED = 150.0
 GRAVITY = 1400
