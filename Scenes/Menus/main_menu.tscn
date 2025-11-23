@@ -563,6 +563,7 @@ patch_margin_bottom = 20
 script = ExtResource("10_16hvj")
 
 [node name="BackgroundColor" type="ColorRect" parent="LevelInfoDisplay"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 92.0
@@ -671,6 +672,7 @@ patch_margin_right = 20
 patch_margin_bottom = 20
 
 [node name="BackgroundColor" type="ColorRect" parent="Leaderboard"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 92.0

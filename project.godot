@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="wampa"
-run/main_scene="uid://c1drstfvcxvfm"
+run/main_scene="uid://2uvvh1btsg6v"
 run/print_header=false
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0.133333, 0.0313726, 0, 1)

@@ -469,6 +469,6 @@ public partial class Player : CharacterBody2D
 
     private void ResetToMainMenu()
     {
-        GetTree().ChangeSceneToFile("res://Scenes/main_menu.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/Menus/main_menu.tscn");
     }
 }
