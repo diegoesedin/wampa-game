@@ -666,7 +666,7 @@ position = Vector2(537, 529)
 position = Vector2(408, 632)
 
 [node name="Goal" parent="." instance=ExtResource("9_g0biq")]
-position = Vector2(784, 689)
+position = Vector2(784, 684)
 
 [node name="WorldBounds" type="Area2D" parent="." node_paths=PackedStringArray("RespawnPoint")]
 position = Vector2(-463, 41)

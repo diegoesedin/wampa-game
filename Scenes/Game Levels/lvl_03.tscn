@@ -697,19 +697,31 @@ spriteFrame = 2
 position = Vector2(272, 286)
 curve = SubResource("Curve2D_6f4nm")
 speed = 75.0
-spriteFrame = 2
+spriteFrame = 4
+
+[node name="Center_Platform_05" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
+position = Vector2(304, 286)
+curve = SubResource("Curve2D_6f4nm")
+speed = 75.0
+spriteFrame = 4
+
+[node name="Center_Platform_06" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
+position = Vector2(240, 286)
+curve = SubResource("Curve2D_6f4nm")
+speed = 75.0
+spriteFrame = 4
 
 [node name="Center_Platform_03" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
 position = Vector2(288, 286)
 curve = SubResource("Curve2D_6f4nm")
 speed = 75.0
-spriteFrame = 2
+spriteFrame = 4
 
 [node name="Center_Platform_04" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
 position = Vector2(256, 286)
 curve = SubResource("Curve2D_6f4nm")
 speed = 75.0
-spriteFrame = 2
+spriteFrame = 4
 
 [node name="Bottom_Platform_00" parent="MovingPlatforms" instance=ExtResource("9_5yar0")]
 position = Vector2(-352, 463)
@@ -1012,6 +1024,15 @@ position = Vector2(272, 217)
 [node name="Coin69" parent="Coins" instance=ExtResource("8_6aip0")]
 position = Vector2(272, 265)
 
+[node name="Coin82" parent="Coins" instance=ExtResource("8_6aip0")]
+position = Vector2(272, 168)
+
+[node name="Coin83" parent="Coins" instance=ExtResource("8_6aip0")]
+position = Vector2(272, 144)
+
+[node name="Coin84" parent="Coins" instance=ExtResource("8_6aip0")]
+position = Vector2(272, 192)
+
 [node name="Coin70" parent="Coins" instance=ExtResource("8_6aip0")]
 position = Vector2(400, 241)
 
@@ -1061,7 +1082,7 @@ position = Vector2(848, 650)
 position = Vector2(272, 104)
 
 [node name="Goal" parent="." instance=ExtResource("8_0b73e")]
-position = Vector2(272, 300)
+position = Vector2(272, 295)
 
 [node name="EnemySkull" parent="." instance=ExtResource("6_rawbs")]
 position = Vector2(144, 330)

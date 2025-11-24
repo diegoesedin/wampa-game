@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dte636jdjrvlb"]
+[gd_scene load_steps=30 format=4 uid="uid://dte636jdjrvlb"]
 
 [ext_resource type="Texture2D" uid="uid://bi6ie1r3vbwjc" path="res://Art/UI Placeholder/button_rectangle_flat.png" id="1_cp0ys"]
 [ext_resource type="Texture2D" uid="uid://c5ldc47173fwy" path="res://Art/Sprites/Tiles/tiles_16x16.png" id="1_vr1f0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bgp3iiydc1ig7" path="res://Scenes/Game Levels/tutorial.tscn" id="7_vr1f0"]
 [ext_resource type="PackedScene" uid="uid://dxkiimqqlly0p" path="res://Scenes/Game Levels/lvl_03.tscn" id="8_vr1f0"]
 [ext_resource type="Script" uid="uid://bq4erb737xaw" path="res://Code/Tools/LevelInfoDisplay.cs" id="10_16hvj"]
+[ext_resource type="PackedScene" uid="uid://2uvvh1btsg6v" path="res://Scenes/Menus/start_menu.tscn" id="11_0xbgx"]
 [ext_resource type="Texture2D" uid="uid://be5scinimx65g" path="res://Art/Sprites/laleyendadel.PNG" id="12_5egv6"]
 [ext_resource type="Texture2D" uid="uid://bq07go1iba8ft" path="res://Art/Sprites/WAMPAlogo.png" id="12_t1dhk"]
 [ext_resource type="AudioStream" uid="uid://cltvcmrasrls1" path="res://Media/Audio/intro-theme.tres" id="14_vtepg"]
@@ -153,6 +154,10 @@ texture = ExtResource("3_trj04")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nlkkf"]
 texture = ExtResource("3_trj04")
 modulate_color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xbgx"]
+texture = ExtResource("3_trj04")
+modulate_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qe12f"]
 texture = ExtResource("3_trj04")
@@ -428,11 +433,18 @@ script = ExtResource("5_vr1f0")
 IsLocked = true
 LevelName = "???"
 
-[node name="x_07" type="TextureRect" parent="CenterPanel/Panel/LevelGrid"]
-modulate = Color(0.14, 0.0224, 0.042, 0.552941)
+[node name="exit" type="Button" parent="CenterPanel/Panel/LevelGrid"]
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
-texture = ExtResource("3_trj04")
-expand_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/focus = SubResource("StyleBoxTexture_t1dhk")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nlkkf")
+theme_override_styles/normal = SubResource("StyleBoxTexture_0xbgx")
+text = "
+"
+script = ExtResource("5_vr1f0")
+LevelScene = ExtResource("11_0xbgx")
+LevelName = "- Salir -"
 
 [node name="Level_07" type="Button" parent="CenterPanel/Panel/LevelGrid"]
 custom_minimum_size = Vector2(25, 25)
