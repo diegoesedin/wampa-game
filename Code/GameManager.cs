@@ -4,7 +4,8 @@ using System.Collections.Generic;
 public partial class GameManager : Node2D
 {
     public static GameManager Instance;
-
+    public RankingManager RankingManager { get; private set; }
+    
     [Export] public Player player { get; set; }
     [Export] public HUD hud { get; set; }
     [Export] private string currentLevelPath = "";
@@ -19,6 +20,7 @@ public partial class GameManager : Node2D
     public override void _Ready()
     {
         Instance = this;
+        RankingManager = new RankingManager();
 
         if (player == null)
         {
@@ -100,37 +102,43 @@ public partial class GameManager : Node2D
 
     private void OnLevelCompleted()
     { 
-    stopTimer = true;
+        stopTimer = true;
     
-    AudioManager.Instance.PlayMusic("level_complete");
+        AudioManager.Instance.PlayMusic("level_complete");
     
-    // GUARDAR STATS EN SESSION MANAGER
-    if (!string.IsNullOrEmpty(currentLevelPath))
-    {
-        SessionManager.Instance.SaveLevelStats(
-            currentLevelPath,
-            elapsedTime,
-            coinCount,
-            enemiesKilled,
-            totalEnemies,
-            maskCollected,
-            player.CurrentLives
-        );
-        
-        GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
-
-        // Chequea si ganó (agarrar todas las medallas)
-        if (SessionManager.Instance.HasPlayerWon())
+        // GUARDAR STATS EN SESSION MANAGER
+        if (!string.IsNullOrEmpty(currentLevelPath))
         {
-            GD.Print("[GameManager] Todas las medallas obtenidas");
-            GetTree().CallDeferred("change_scene_to_file", "res://Scenes/Menus/VictoryScreen.tscn");
-            return;
+            SessionManager.Instance.SaveLevelStats(
+                currentLevelPath,
+                elapsedTime,
+                coinCount,
+                enemiesKilled,
+                totalEnemies,
+                maskCollected,
+                player.CurrentLives
+            );
+        
+            GD.Print($"[GameManager] Nivel completado en {elapsedTime:F2}s");
+
+            if (SessionManager.Instance.HasPlayerAllLevelsCompleted())
+            {
+                GetTree().CallDeferred("change_scene_to_file", "res://Scenes/Menus/RankNameScreen.tscn");
+                return;
+            }
+
+            // Chequea si ganó (agarrar todas las medallas)
+            if (SessionManager.Instance.HasPlayerWon())
+            {
+                GD.Print("[GameManager] Todas las medallas obtenidas");
+                GetTree().CallDeferred("change_scene_to_file", "res://Scenes/Menus/VictoryScreen.tscn");
+                return;
+            }
         }
-    }
-    else
-    {
-        GD.PrintErr("[GameManager] currentLevelPath no configurado!");
-    }
+        else
+        {
+            GD.PrintErr("[GameManager] currentLevelPath no configurado!");
+        }
     
     }
 

@@ -8,6 +8,14 @@ public partial class SessionManager : Node
     // -------------------- DATOS DE NIVELES --------------------
     private Dictionary<string, LevelData> levelsData = new Dictionary<string, LevelData>();
     
+    private readonly string[] levelPaths =
+    [
+        "res://Scenes/Game Levels/tutorial.tscn",
+        "res://Scenes/Game Levels/lvl_01.tscn",
+        "res://Scenes/Game Levels/lvl_02.tscn",
+        "res://Scenes/Game Levels/lvl_03.tscn"
+    ];
+    
     // ==========================================================
     public override void _Ready()
     {
@@ -96,33 +104,66 @@ public partial class SessionManager : Node
 
     public bool HasPlayerWon()
     {
-    
-    string[] levelPaths = new string[] // hay que ir agregando los path a manopla
-    {
-        "res://Scenes/Game Levels/tutorial.tscn",
-        "res://Scenes/Game Levels/lvl_01.tscn",
-        "res://Scenes/Game Levels/lvl_02.tscn",
-        "res://Scenes/Game Levels/lvl_03.tscn",
-    };
+        foreach (string path in levelPaths)
+        {
+            if (!levelsData.ContainsKey(path))
+                return false;
 
-    foreach (string path in levelPaths)
-    {
-        if (!levelsData.ContainsKey(path))
-            return false;
+            var d = levelsData[path];
 
-        var d = levelsData[path];
+            bool allMedals =
+                d.HeartsMedalUnlocked &&
+                d.TimeMedalUnlocked &&
+                d.EnemiesMedalUnlocked &&
+                d.MaskMedalUnlocked;
 
-        bool allMedals =
-            d.HeartsMedalUnlocked &&
-            d.TimeMedalUnlocked &&
-            d.EnemiesMedalUnlocked &&
-            d.MaskMedalUnlocked;
+            if (!allMedals)
+                return false; // faltan medallas -> false
+        }
 
-        if (!allMedals)
-            return false; // faltan medallas -> false
+        return true; // tiene todas las medallas de todos los niveles
     }
 
-    return true; // tiene todas las medallas de todos los niveles
+    public bool HasPlayerAllLevelsCompleted()
+    {
+        foreach (string path in levelPaths)
+        {
+            if (!levelsData.ContainsKey(path))
+                return false;
+
+            var d = levelsData[path];
+
+            if (!d.Completed)
+                return false;
+        }
+
+        return true;
+    }
+
+    public int GetCalculatedScore()
+    {
+        int score = 0;
+        foreach (var level in levelsData.Values)
+        {
+            score += level.LastCoins;
+            score += level.LastEnemiesKilled;
+            score += level.LastHeartsRemaining;
+            
+            score -= (int)level.BestTime;
+
+            if (level.EnemiesMedalUnlocked)
+                score += 100;
+            
+            if (level.HeartsMedalUnlocked)
+                score += 100;
+            
+            if (level.MaskMedalUnlocked)
+                score += 100;
+            
+            if (level.TimeMedalUnlocked)
+                score += 100;
+        }
+        return score;
     }
     
     // ==========================================================
