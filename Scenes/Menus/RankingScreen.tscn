@@ -159,6 +159,7 @@ tile_set = SubResource("TileSet_icpl8")
 
 [node name="Title" type="Label" parent="."]
 modulate = Color(0.996078, 0.643137, 0.2, 1)
+layout_mode = 0
 offset_left = 142.0
 offset_top = 28.0
 offset_right = 341.0
